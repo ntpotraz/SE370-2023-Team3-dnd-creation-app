@@ -9,11 +9,27 @@ public class Stats {
   private Scanner k = new Scanner(System.in);
 
   public Stats() {
+    // Fills Ability Points with all 10s
+    for (int i = 0; i < 6; i++) {
+      setStat(i, 10);
+    }
+  }
+
+  // Fill Ability Points with a custom number
+  public Stats(int n) {
     // Fills both arrays with 0's
     for (int i = 0; i < 6; i++) {
-      statLevel[i] = 0;
-      statModifiers[i] = 0;
+      setStat(i, n);
     }
+  }
+
+  // Set Ability Points using a int array
+  public Stats(int[] stats) throws Exception {
+    if (stats.length != 6)
+      throw new Exception("Invalid length int array");
+
+    for (int i = 0; i < 6; i++)
+      setStat(i, stats[i]);
   }
 
   public Stats(boolean isStandard) {
