@@ -239,15 +239,12 @@ public class Stats {
   }
 
   public String toString() {
-    String output = "[\n\tStr: " + this.getStr() + ",\n\tDex: " + this.getDex() +
-        ",\n\tCon: " + this.getCon() + ",\n\tInt: " + this.getInt() +
-        ",\n\tWis: " + this.getWis() + ",\n\tCha: " + this.getCha() + "]\n";
-    output += "[\n\tStr Mod: " + this.getStrMod() +
-        ",\n\tDex Mod: " + this.getDexMod() +
-        ",\n\tCon Mod: " + this.getConMod() +
-        ",\n\tInt Mod: " + this.getIntMod() +
-        ",\n\tWis Mod: " + this.getWisMod() +
-        ",\n\tCha Mod: " + this.getChaMod() + "\n]\n";
+    String output = "\nStr: " + this.getStr() + " | " + this.getStrMod() +
+        "\nDex: " + this.getDex() + " | " + this.getDexMod() +
+        "\nCon: " + this.getCon() + " | " + this.getConMod() +
+        "\nInt: " + this.getInt() + " | " + this.getIntMod() +
+        "\nWis: " + this.getWis() + " | " + this.getWisMod() +
+        "\nCha: " + this.getCha() + " | " + this.getChaMod() + "\n";
 
     return output;
   }
