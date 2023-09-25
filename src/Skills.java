@@ -32,13 +32,8 @@ public class Skills {
     this(); // Calls the base constructor to setup the skillList field
     for (Skill skill : skillList) {
       int modifier = skill.getModifier();
-      // grabs the stat index of the current skill in the for loop and increases the
-      // modifer by it Right now it's adding the actual Stat level, so if Strength is
-      // at 19, it's adding 18 rather than the stat modifier of +4, but I don't know
-      // if we want to keep a list of Stat modifiers in the Character class or if we
-      // wanna calculate when needed
-      // Personally, think we should have two Int arrays, one for the Stat level and
-      // one for the Stat modifier
+      // grabs the stat index of the current skill in the for loop and increases
+      // the skill modifer by the int in the stats array with the same index
       switch (skill.getIndex()) {
         case 0:
           modifier += stats[0];
@@ -92,12 +87,13 @@ public class Skills {
 
   // Purely for testing purposes. Gonna leave it in for now cuz fuck it
   public static void main(String[] args) {
-    int str = 15;
-    int dex = 15;
-    int con = 15;
-    int intel = 15;
-    int wis = 15;
-    int cha = 15;
+    // The stat modifiers being read into the Skill list
+    int str = 2;
+    int dex = 3;
+    int con = 3;
+    int intel = 3;
+    int wis = 2;
+    int cha = 4;
     int[] stats = { str, dex, con, intel, wis, cha };
     ArrayList<String> prof = new ArrayList<String>();
     prof.add("arcana");
