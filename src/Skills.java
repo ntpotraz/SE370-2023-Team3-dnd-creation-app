@@ -72,15 +72,15 @@ public class Skills {
     }
   }
 
-  public ArrayList<Skill> getSkillList() {
+  public ArrayList<Skill> getSkills() {
     return skillList;
   }
 
   public String toString() {
     String output = "";
     for (Skill skill : skillList) {
-      output += "[" + skill.isProficient() + ", " + skill.getModifier() + ", " +
-          skill.getName() + ", " + skill.getIndex() + "]\n";
+      output += skill.isProficient() + " | " + skill.getModifier() + " | " +
+          skill.getName() + " | " + skill.getIndex() + "\n";
     }
     return output;
   }
