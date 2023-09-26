@@ -6,31 +6,31 @@ public class Skills {
 
   // Sets up the skills with a base case
   public Skills() {
-    skillList.add(new Skill(false, 0, "Athletics", 0));
-    skillList.add(new Skill(false, 0, "acrobatics", 1));
-    skillList.add(new Skill(false, 0, "sleight_of_hand", 1));
-    skillList.add(new Skill(false, 0, "stealth", 1));
-    skillList.add(new Skill(false, 0, "arcana", 3));
-    skillList.add(new Skill(false, 0, "history", 3));
-    skillList.add(new Skill(false, 0, "investigation", 3));
-    skillList.add(new Skill(false, 0, "nature", 3));
-    skillList.add(new Skill(false, 0, "religion", 3));
-    skillList.add(new Skill(false, 0, "animal_handling", 4));
-    skillList.add(new Skill(false, 0, "insight", 4));
-    skillList.add(new Skill(false, 0, "medicine", 4));
-    skillList.add(new Skill(false, 0, "perception", 4));
-    skillList.add(new Skill(false, 0, "survival", 4));
-    skillList.add(new Skill(false, 0, "deception", 5));
-    skillList.add(new Skill(false, 0, "intimidation", 5));
-    skillList.add(new Skill(false, 0, "performance", 5));
-    skillList.add(new Skill(false, 0, "persuasion", 5));
+    this.skillList.add(new Skill(false, 0, "athletics", 0));
+    this.skillList.add(new Skill(false, 0, "acrobatics", 1));
+    this.skillList.add(new Skill(false, 0, "sleight_of_hand", 1));
+    this.skillList.add(new Skill(false, 0, "stealth", 1));
+    this.skillList.add(new Skill(false, 0, "arcana", 3));
+    this.skillList.add(new Skill(false, 0, "history", 3));
+    this.skillList.add(new Skill(false, 0, "investigation", 3));
+    this.skillList.add(new Skill(false, 0, "nature", 3));
+    this.skillList.add(new Skill(false, 0, "religion", 3));
+    this.skillList.add(new Skill(false, 0, "animal_handling", 4));
+    this.skillList.add(new Skill(false, 0, "insight", 4));
+    this.skillList.add(new Skill(false, 0, "medicine", 4));
+    this.skillList.add(new Skill(false, 0, "perception", 4));
+    this.skillList.add(new Skill(false, 0, "survival", 4));
+    this.skillList.add(new Skill(false, 0, "deception", 5));
+    this.skillList.add(new Skill(false, 0, "intimidation", 5));
+    this.skillList.add(new Skill(false, 0, "performance", 5));
+    this.skillList.add(new Skill(false, 0, "persuasion", 5));
   }
 
   // The intended constructor to call. Accepts an array of ints and an ArrayList
   // of strings
   public Skills(int[] stats, ArrayList<String> prof) {
     this(); // Calls the base constructor to setup the skillList field
-    for (Skill skill : skillList) {
+    for (Skill skill : this.skillList) {
       int modifier = skill.getModifier();
       // grabs the stat index of the current skill in the for loop and increases
       // the skill modifer by the int in the stats array with the same index
@@ -60,7 +60,7 @@ public class Skills {
       }
     }
 
-    for (Skill skill : skillList) {
+    for (Skill skill : this.skillList) {
       for (String p : prof) {
         if (skill.getName() == p.toLowerCase()) {
           skill.setProficient(true);
@@ -73,12 +73,34 @@ public class Skills {
   }
 
   public ArrayList<Skill> getSkills() {
-    return skillList;
+    return this.skillList;
+  }
+
+  public void addProficiency(String name) {
+    name = name.toLowerCase();
+    for (Skill skill : this.skillList) {
+      if (skill.getName() == name) {
+        skill.setProficient(true);
+        skill.setModifier(skill.getModifier() + 2);
+      }
+    }
+  }
+
+  public void addProficiency(ArrayList<String> names) {
+    for (String name : names) {
+      for (Skill skill : this.skillList) {
+        if (skill.getName() == name) {
+          name = name.toLowerCase();
+          skill.setProficient(true);
+          skill.setModifier(skill.getModifier() + 2);
+        }
+      }
+    }
   }
 
   public String toString() {
     String output = "";
-    for (Skill skill : skillList) {
+    for (Skill skill : this.skillList) {
       output += skill.isProficient() + " | " + skill.getModifier() + " | " +
           skill.getName() + " | " + skill.getIndex() + "\n";
     }
@@ -101,7 +123,20 @@ public class Skills {
 
     Skills testSkills = new Skills(stats, prof);
 
+    System.out.println("Before adding Persuasion");
     System.out.println(testSkills.toString());
+    testSkills.addProficiency("persuasion");
+    System.out.println("After adding Persuasion");
+    System.out.println(testSkills.toString());
+
+    ArrayList<String> multiProf = new ArrayList<>();
+    multiProf.add("performance");
+    multiProf.add("intimidation");
+    multiProf.add("deception");
+    testSkills.addProficiency(multiProf);
+    System.out.println("After adding ArrayList");
+    System.out.println(testSkills.toString());
+
   }
 }
 
