@@ -33,7 +33,6 @@ public class Stats {
   }
 
   public Stats(boolean isStandard) {
-    this();
     ArrayList<Integer> statArray = new ArrayList<>();
     // If player decides to use the standard set of scores
     if (isStandard) {
@@ -128,14 +127,14 @@ public class Stats {
 
   // Sets the character stat
   private void setStat(int stat, int level) {
-    statLevel[stat] = level;
+    this.statLevel[stat] = level;
     setMod(stat);
   }
 
   // Calculates what the stat modifier will be based on the stat level
   private void setMod(int stat) {
     int level;
-    switch (statLevel[stat]) {
+    switch (this.statLevel[stat]) {
       case 1:
         level = -5;
         break;
@@ -191,63 +190,74 @@ public class Stats {
         level = -10;
         break;
     }
-    statModifiers[stat] = level;
+    this.statModifiers[stat] = level;
+  }
+
+  public void modifyStats(int[] modifier) throws Exception {
+    if (modifier.length != 6)
+      throw new Exception("Modifier needs to be a int array of length 6");
+
+    int newStats[] = getStats();
+    for (int i = 0; i < 6; i++) {
+      newStats[i] += modifier[i];
+      setStat(i, newStats[i]);
+    }
   }
 
   public int[] getStats() {
-    return statLevel;
+    return this.statLevel;
   }
 
   public int[] getMods() {
-    return statModifiers;
+    return this.statModifiers;
   }
 
   public int getStr() {
-    return statLevel[0];
+    return this.statLevel[0];
   }
 
   public int getStrMod() {
-    return statModifiers[0];
+    return this.statModifiers[0];
   }
 
   public int getDex() {
-    return statLevel[1];
+    return this.statLevel[1];
   }
 
   public int getDexMod() {
-    return statModifiers[1];
+    return this.statModifiers[1];
   }
 
   public int getCon() {
-    return statLevel[2];
+    return this.statLevel[2];
   }
 
   public int getConMod() {
-    return statModifiers[2];
+    return this.statModifiers[2];
   }
 
   public int getInt() {
-    return statLevel[3];
+    return this.statLevel[3];
   }
 
   public int getIntMod() {
-    return statModifiers[3];
+    return this.statModifiers[3];
   }
 
   public int getWis() {
-    return statLevel[4];
+    return this.statLevel[4];
   }
 
   public int getWisMod() {
-    return statModifiers[4];
+    return this.statModifiers[4];
   }
 
   public int getCha() {
-    return statLevel[5];
+    return this.statLevel[5];
   }
 
   public int getChaMod() {
-    return statModifiers[5];
+    return this.statModifiers[5];
   }
 
   public void closeScanner() {
@@ -265,9 +275,12 @@ public class Stats {
     return output;
   }
 
-  public static void main(String[] args) {
-    Stats testStats = new Stats(false);
-
-    System.out.println(testStats.toString());
+  public static void main(String[] args) throws Exception {
+    int stats[] = { 15, 14, 13, 12, 10, 8 };
+    int modifier[] = { 10, 10, 10, 10, 10, 10 };
+    Stats testStats = new Stats(stats);
+    System.out.printf("\nStats before modifier: %s", testStats.toString());
+    testStats.modifyStats(modifier);
+    System.out.printf("\nStats after modifier: %s", testStats.toString());
   }
 }
