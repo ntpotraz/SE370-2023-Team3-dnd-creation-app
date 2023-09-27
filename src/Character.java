@@ -38,39 +38,31 @@ public class Character {
   // can use getStats() to get the int array of stats
   // and use getMods() to get the int array of ablility score modifiers
   // Can also use getStr() or getStrMod(), etc, for a specific score
-  public Stats getStats() {
-    return this.abilityScores;
-  }
+  public Stats getStats() { return this.abilityScores; }
 
-  public Skills getSkills() {
-    return this.skillList;
-  }
+  public Skills getSkills() { return this.skillList; }
 
   public String getAbilityScoresString() {
     return this.abilityScores.toString();
   }
 
-  public String getSkillsString() {
-    return this.skillList.toString();
-  }
+  public String getSkillsString() { return this.skillList.toString(); }
 
   class Race {
 
     String ageRange;
-    ArrayList<String> proficiencies = new ArrayList<String>(); // Index 0 = Armor, 1 = Weapons, = 2 = Tools
+    ArrayList<String> proficiencies =
+        new ArrayList<String>(); // Index 0 = Armor, 1 = Weapons, = 2 = Tools
     int statMods[] = new int[6];
 
-    enum Size {
-      SMALL,
-      MEDIUM
-    }
+    enum Size { SMALL, MEDIUM }
 
     // Temporary misc. traits for things like darkvision,
     // resistances, etc.
     ArrayList<String> traits = new ArrayList<String>();
 
     Race() {
-      int mods[] = { 2, 0, 2, 0, 2, 0 };
+      int mods[] = {2, 0, 2, 0, 2, 0};
       this.statMods = mods;
       this.proficiencies.add("Light Armor");
       this.proficiencies.add("Shortsword");
@@ -79,7 +71,7 @@ public class Character {
   }
 
   public static void main(String[] args) throws Exception {
-    int arr[] = { 11, 12, 13, 14, 15, 16 };
+    int arr[] = {11, 12, 13, 14, 15, 16};
     ArrayList<String> prof = new ArrayList<>();
     prof.add("medicine");
     prof.add("arcana");
