@@ -144,6 +144,8 @@ class DarkElf extends Elf {
 
 // Halfling v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
+// Halfling v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
+
 abstract class Halfling extends Race {
         Halfling() {
                 this.statMods[1] += 2;
