@@ -1,11 +1,11 @@
 import java.util.ArrayList;
                         //TODO getters and setters
 abstract class Race {   //TODO race specific questions
-    String ageRange;
-    int speed;
-    ArrayList<String> languages = new ArrayList<>();
-    ArrayList<String> proficiencies = new ArrayList<String>();  //Index 0 = Armor, 1 = Weapons, = 2 = Tools
-    int[] statMods = {0,0,0,0,0,0}; //Index 0 = strength, 1 = dexterity, 2 = constitution, 3 = intelligence, 4 = wisdom, 5 = charisma
+    private String ageRange;
+    private int speed;
+     ArrayList<String> languages = new ArrayList<>();
+     ArrayList<String> proficiencies = new ArrayList<String>();  //Index 0 = Armor, 1 = Weapons, = 2 = Tools
+    private int[] statMods = {0,0,0,0,0,0}; //Index 0 = strength, 1 = dexterity, 2 = constitution, 3 = intelligence, 4 = wisdom, 5 = charisma
     enum Size{
         SMALL,
         MEDIUM
@@ -19,11 +19,34 @@ abstract class Race {   //TODO race specific questions
         languages.add("Common, ");
     }
 
-
+    public String getAgeRange() {
+        return ageRange;
+    }
+    public void setAgeRange(String ageRange) {
+        this.ageRange = ageRange;
+    }
+    public int getSpeed() {
+        return speed;
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+    public int[] getStatMods() {
+        return statMods;
+    }
+    public void setStatMods(int index, int mod) {
+        this.statMods[index] += mod;
+    }
+    public void printStatMods(){
+        for(int i = 0;i<6;i++){
+            System.out.println(this.statMods[i]);
+        }
+    }
+    
 
     public static void main(String[] args) throws Exception {
         //Area for testing code
-
+        
     }
 }
 
@@ -42,10 +65,10 @@ Race classes are organized as follows:
 
 abstract class Dwarf extends Race{
     Dwarf(){
-        this.statMods[2] += 2;
-        speed = 25;
+        this.setStatMods(2,2);
+        this.setSpeed(25);
         Size size = Size.MEDIUM;
-        ageRange = "Dwarves mature at 50, and live to around 350.";
+        this.setAgeRange("Dwarves mature at 50, and live to around 350.");
         proficiencies.set(1, "Battleaxe, Handaxe, Throwing Hammer, Warhammer");
         //TODO choose one, proficiency in smith, brewer, or mason's tools
         this.languages.add("Dwarvish");
@@ -64,14 +87,14 @@ abstract class Dwarf extends Race{
 
 class HillDwarf extends Dwarf{
     HillDwarf(){
-        this.statMods[4] += 1;
+        this.setStatMods(4, 1);
     }
     int hillDwarfHP = 1;        //Note: hill dwarf is only class that adds 1 to hp
 }
 
 class MountainDwarf extends Dwarf{
     MountainDwarf(){
-        this.statMods[0] += 2;
+        this.setStatMods(0, 2);
         this.proficiencies.set(0,"Light armor, medium armor");
     }
 }
@@ -80,20 +103,20 @@ class MountainDwarf extends Dwarf{
 
 abstract class Elf extends Race{
     Elf(){
-        this.statMods[1] += 2;
-        speed = 30;
+        this.setStatMods(1, 2);
+        this.setSpeed(30);
         Size size = Size.MEDIUM;
-        ageRange = "Elves mature at 100, and live to around 750.";
+        this.setAgeRange("Elves mature at 100, and live to around 750.");
         //TODO: Keen Senses, gives proficiency in perception
         this.languages.add("Elvish");
         this.traits.add("- Darkvision: Accustom ed to twilit forests and the night\n" +
                 "sky, you have superior vision in dark and dim conditions.\n" +
                 "You can see in dim light within 60 feet of you as if it\n" +
                 "were bright light, and in darkness as if it were dim light.\n" +
-                "You can’t discern color in darkness, only shades of gray");
+                "You can't discern color in darkness, only shades of gray");
         this.traits.add("- Fey Ancestry: You have advantage on saving throws\n" +
-                "against being charmed, and magic can’t put you to sleep.");
-        this.traits.add("- Trance: Elves don’t need to sleep. Instead, they\n" +
+                "against being charmed, and magic can't put you to sleep.");
+        this.traits.add("- Trance: Elves don't need to sleep. Instead, they\n" +
                 "meditate deeply, remaining semiconscious, for 4\n" +
                 "hours a day. (The Common word for such meditation\n" +
                 "is “trance.”) While meditating, you can dream after a\n" +
@@ -108,7 +131,7 @@ abstract class Elf extends Race{
 
 class HighElf extends Elf{
     HighElf(){
-        this.statMods[3] = +1;
+        this.setStatMods(3, 1);
         this.proficiencies.set(1,"Longsword, Shortsword, Shortbow, Longbow");
 
         //TODO: Cantrip: choose one cantrip from the wizard spell list
@@ -118,8 +141,8 @@ class HighElf extends Elf{
 
 class WoodElf extends Elf{
     WoodElf(){
-        this.statMods[4] += 1;
-        this.speed = 35;
+        this.setStatMods(4, 1);
+        this.setSpeed(35);
         this.proficiencies.set(1,"Longsword, Shortsword, Shortbow, Longbow");
         this.traits.add("- Mask of the Wild: You can attempt to hide even when\n" +
                 "you are only lightly obscured by foliage, heavy rain,\n" +
@@ -130,7 +153,7 @@ class WoodElf extends Elf{
 
 class DarkElf extends Elf{
     DarkElf(){
-        this.statMods[5] += 1;
+        this.setStatMods(5, 1);
         this.proficiencies.set(1, "Rapiers, Shortswords, Hand Crossbows");
         this.traits.add("- Superior Darkvision Your darkvision has a\n" +
                 "radius of 120 feet.");
@@ -150,10 +173,10 @@ class DarkElf extends Elf{
 
 abstract class Halfling extends Race{
     Halfling(){
-        this.statMods[1] += 2;
-        speed = 25;
+        this.setStatMods(1, 2);
+        this.setSpeed(25);
         Size size = Size.SMALL;
-        ageRange = "Halflings mature at 20, and live to around 200,";
+        this.setAgeRange("Halflings mature at 20, and live to around 200,");
         this.languages.add("Halfling");
         this.traits.add("- Lucky: When you roll a 1 on an attack roll, ability\r\n" + //
                 "check, or saving throw, you can reroll the die and must\r\n" + //
@@ -167,7 +190,7 @@ abstract class Halfling extends Race{
 
 class Lightfoot extends Halfling{
     Lightfoot(){
-        this.statMods[5] += 1;
+        this.setStatMods(5, 1);
         this.traits.add("Naturally Stealthy. You can attempt to hide even\r\n" + //
                 "when you are obscured only by a creature that is at least\r\n" + //
                 "one size larger than you");
@@ -176,7 +199,7 @@ class Lightfoot extends Halfling{
 
 class Stout extends Halfling{
     Stout(){
-        this.statMods[2] += 1;
+        this.setStatMods(2, 1);
         this.traits.add("Stout Resilience. You have advantage on saving\r\n" + //
                 "throws against poison, and you have resistance\r\n" + //
                 "against poison damage");
@@ -188,11 +211,11 @@ class Stout extends Halfling{
 class Human extends Race{
     Human(){
         for(int i = 0;i<6;i++){
-            this.statMods[i] += 1;
+            this.setStatMods(i, 1);
         }
-        speed = 30;
+        this.setSpeed(30);
         Size size = Size.MEDIUM;
-        this.ageRange = "Humans mature at 18, and live to around 80.";
+        this.setAgeRange("Humans mature at 18, and live to around 80.");
         //TODO languages are common, and pick one of your choosing
     }
 }
@@ -204,11 +227,11 @@ class Human extends Race{
 class Dragonborn extends Race{
     Dragonborn(){
 
-        this.statMods[0] += 2;
-        this.statMods[5] += 1;
+        this.setStatMods(0, 2);
+        this.setStatMods(5, 1);
         Size size = Size.MEDIUM;
-        this.speed = 30;
-        this.ageRange = "Dragonborn mature at 15, and live to around 80.";
+        this.setSpeed(30);
+        this.setAgeRange("Dragonborn mature at 15, and live to around 80.");
         this.languages.add("Draconic");
         this.traits.add("- Breath Weapon: You can use your action to exhale\r\n" + //
                 "destructive energy. Your draconic ancestry determines\r\n" + //
@@ -233,10 +256,10 @@ class Dragonborn extends Race{
 
 abstract class Gnome extends Race{
     Gnome(){
-        this.statMods[3] += 2;
-        this.speed = 25;
+        this.setStatMods(3, 2);
+        this.setSpeed(25);
         Size size = Size.SMALL;
-        this.ageRange = "Gnomes mature at 18, and live to around 350-500.";
+        this.setAgeRange("Gnomes mature at 18, and live to around 350-500.");
         this.languages.add("Gnomish");
         this.traits.add("- Darkvision: Accustomed to life underground, you have\r\n" + //
                 "superior vision in dark and dim conditions. You can\r\n" + //
@@ -251,7 +274,7 @@ abstract class Gnome extends Race{
 
 class ForestGnome extends Gnome{
     ForestGnome(){
-        this.statMods[1] += 1;
+        this.setStatMods(1, 1);
 
         //TODO: adds minor illusion to spell list
 
@@ -265,7 +288,7 @@ class ForestGnome extends Gnome{
 
 class RockGnome extends Gnome{
     RockGnome(){
-        this.statMods[2] += 1;
+        this.setStatMods(2, 1);
         this.traits.add("- Artificer's Lore: Whenever you make an Intelligence\r\n" + //
                 "(History) check related to magic items, alchemical\r\n" + //
                 "objects, or technological devices, you can add twice your\r\n" + //
@@ -305,11 +328,11 @@ class RockGnome extends Gnome{
 
 class HalfElf extends Race{
     HalfElf(){
-        this.statMods[5] += 2;
+        this.setStatMods(5, 2);
         //TODO: choose 2 other stats, cannot be the same, increase by 1
-        this.speed = 30;
+        this.setSpeed(30);
         Size size = Size.MEDIUM;
-        this.ageRange = "Half Elves mature at 18, and live to around 180.";
+        this.setAgeRange("Half Elves mature at 18, and live to around 180.");
         //TODO: gain proficiency in 2 skills of your choice
         this.languages.add("Elvish, ");
         //TODO: languages are common, elvish, and one of your choice
@@ -328,11 +351,11 @@ class HalfElf extends Race{
 class HalfOrc extends Race{
     HalfOrc(){
 
-        this.statMods[0] += 2;
-        this.statMods[2] += 1;
-        this.speed = 30;
+        this.setStatMods(0, 2);
+        this.setStatMods(2, 1);
+        this.setSpeed(30);
         Size size = Size.MEDIUM;
-        this.ageRange = "Half Orcs mature at 14, and live to around 75.";
+        this.setAgeRange("Half Orcs mature at 14, and live to around 75.");
         //TODO add proficiency in meanacing
         this.languages.add("Orc");
         this.traits.add("- Darkvision: Thanks to your orc blood, you have\r\n" + //
@@ -355,11 +378,11 @@ class HalfOrc extends Race{
 
 class Tiefling extends Race{
     Tiefling(){
-        this.statMods[3] += 1;
-        this.statMods[5] += 2;
-        this.ageRange = "Tieflings mature at 18, and live to around 90.";
+        this.setStatMods(3, 1);
+        this.setStatMods(5, 2);
+        this.setAgeRange("Tieflings mature at 18, and live to around 90.");
         Size size = Size.MEDIUM;
-        this.speed = 30;
+        this.setSpeed(30);
         this.languages.add("Infernal");
         this.traits.add("- Darkvision: Thanks to your infernal heritage, you\r\n" + //
                 "have superior vision in dark and dim conditions. You\r\n" + //
