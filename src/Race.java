@@ -1,24 +1,31 @@
 import java.util.ArrayList;
+import java.util.Scanner;
                         //TODO getters and setters
 abstract class Race {   //TODO race specific questions
     private String ageRange;
     private int speed;
-     ArrayList<String> languages = new ArrayList<>();
-     ArrayList<String> proficiencies = new ArrayList<String>();  //Index 0 = Armor, 1 = Weapons, = 2 = Tools
+    private ArrayList<String> languages = new ArrayList<>();
+    private ArrayList<String> proficiencies = new ArrayList<>();  //Index 0 = Armor, 1 = Weapons, = 2 = Tools
     private int[] statMods = {0,0,0,0,0,0}; //Index 0 = strength, 1 = dexterity, 2 = constitution, 3 = intelligence, 4 = wisdom, 5 = charisma
-    enum Size{
+    public enum Size{
         SMALL,
         MEDIUM
     }
-    ArrayList<String> traits = new ArrayList<String>();     //Temporary misc. traits for things like darkvision, resistances, etc.
-
+    private Size size;
+    private ArrayList<String> traits = new ArrayList<>();     //Temporary misc. traits for things like darkvision, resistances, etc.
+    
     Race(){
         proficiencies.add("");
         proficiencies.add("");
         proficiencies.add("");
         languages.add("Common, ");
+        setSize("MEDIUM");
+        setSpeed(30);
     }
 
+    public void raceQuestions(){
+        //Generic raceQuestions function to be overloaded
+    }
     public String getAgeRange() {
         return ageRange;
     }
@@ -42,6 +49,46 @@ abstract class Race {   //TODO race specific questions
             System.out.println(this.statMods[i]);
         }
     }
+    public Size getSize() {
+        return size;
+    }
+    public void setSize(String size) {
+        if(size == "MEDIUM"){
+            this.size = Size.MEDIUM;
+        }
+        else if(size == "SMALL"){
+            this.size = Size.SMALL;
+        }
+        else{
+            System.out.println("A size error has been made.");
+        }
+    }
+    public void printSize(){
+        System.out.println(this.getSize());
+    }
+    public ArrayList<String> getLanguages() {
+        return languages;
+    }
+    public void setLanguages(String language) {
+        this.languages.add(language);
+    }
+    public ArrayList<String> getProficiencies() {
+        return proficiencies;
+    }
+    public void setProficiencies(int index, String proficiency) {
+        this.proficiencies.set(index, proficiency);
+    }
+    public ArrayList<String> getTraits() {
+        return traits;
+    }
+    public void setTraits(String trait) {
+        this.traits.add(trait);
+    }
+    public void printTraits(){
+        for(int i = 0;i<this.traits.size();i++){
+            System.out.println(this.traits.get(i));
+        }
+    }
     
 
     public static void main(String[] args) throws Exception {
@@ -59,6 +106,7 @@ Race classes are organized as follows:
 - proficiencies
 - languages
 - misc. traits
+- raceQuestions function
  */
 
 //Dwarf   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
@@ -67,21 +115,25 @@ abstract class Dwarf extends Race{
     Dwarf(){
         this.setStatMods(2,2);
         this.setSpeed(25);
-        Size size = Size.MEDIUM;
         this.setAgeRange("Dwarves mature at 50, and live to around 350.");
-        proficiencies.set(1, "Battleaxe, Handaxe, Throwing Hammer, Warhammer");
+        this.setProficiencies(1, "Battleaxe, Handaxe, Throwing Hammer, Warhammer");
         //TODO choose one, proficiency in smith, brewer, or mason's tools
-        this.languages.add("Dwarvish");
-        this.traits.add("- Darkvision: Accustomed to life underground, you\r\n" +
+        this.setLanguages("Dwarvish");
+        this.setTraits("- Darkvision: Accustomed to life underground, you\r\n" +
                 "have superior vision in dark and dim conditions. You\r\n" +
                 "can see in dim light within 60 feet of you as if it were\r\n" +
                 "bright light, and in darkness as if it were dim light. You\r\n" +
                 "can't discern color in darkness, only shades of gray.");
-        this.traits.add("- Dwarven Resilience: You have advantage on saving\r\n" +
+        this.setTraits("- Dwarven Resilience: You have advantage on saving\r\n" +
                 "throws against poison, and you have resistance against\r\n" +
                 "poison damage.");
     }
+    public void raceQuestions(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose one tool proficiency in smithing, brewing, or masonry.");
+        String input = scan.nextLine();
 
+    }
 
 }
 
@@ -95,7 +147,7 @@ class HillDwarf extends Dwarf{
 class MountainDwarf extends Dwarf{
     MountainDwarf(){
         this.setStatMods(0, 2);
-        this.proficiencies.set(0,"Light armor, medium armor");
+        this.setProficiencies(0,"Light armor, medium armor");
     }
 }
 
@@ -104,19 +156,17 @@ class MountainDwarf extends Dwarf{
 abstract class Elf extends Race{
     Elf(){
         this.setStatMods(1, 2);
-        this.setSpeed(30);
-        Size size = Size.MEDIUM;
         this.setAgeRange("Elves mature at 100, and live to around 750.");
         //TODO: Keen Senses, gives proficiency in perception
-        this.languages.add("Elvish");
-        this.traits.add("- Darkvision: Accustom ed to twilit forests and the night\n" +
+        this.setLanguages("Elvish");
+        this.setTraits("- Darkvision: Accustom ed to twilit forests and the night\n" +
                 "sky, you have superior vision in dark and dim conditions.\n" +
                 "You can see in dim light within 60 feet of you as if it\n" +
                 "were bright light, and in darkness as if it were dim light.\n" +
                 "You can't discern color in darkness, only shades of gray");
-        this.traits.add("- Fey Ancestry: You have advantage on saving throws\n" +
+        this.setTraits("- Fey Ancestry: You have advantage on saving throws\n" +
                 "against being charmed, and magic can't put you to sleep.");
-        this.traits.add("- Trance: Elves don't need to sleep. Instead, they\n" +
+        this.setTraits("- Trance: Elves don't need to sleep. Instead, they\n" +
                 "meditate deeply, remaining semiconscious, for 4\n" +
                 "hours a day. (The Common word for such meditation\n" +
                 "is “trance.”) While meditating, you can dream after a\n" +
@@ -132,7 +182,7 @@ abstract class Elf extends Race{
 class HighElf extends Elf{
     HighElf(){
         this.setStatMods(3, 1);
-        this.proficiencies.set(1,"Longsword, Shortsword, Shortbow, Longbow");
+        this.setProficiencies(1,"Longsword, Shortsword, Shortbow, Longbow");
 
         //TODO: Cantrip: choose one cantrip from the wizard spell list
         //TODO: Extra Language: choose 1 language to learn
@@ -143,8 +193,8 @@ class WoodElf extends Elf{
     WoodElf(){
         this.setStatMods(4, 1);
         this.setSpeed(35);
-        this.proficiencies.set(1,"Longsword, Shortsword, Shortbow, Longbow");
-        this.traits.add("- Mask of the Wild: You can attempt to hide even when\n" +
+        this.setProficiencies(1,"Longsword, Shortsword, Shortbow, Longbow");
+        this.setTraits("- Mask of the Wild: You can attempt to hide even when\n" +
                 "you are only lightly obscured by foliage, heavy rain,\n" +
                 "falling snow, mist, and other natural phenomena.");
 
@@ -154,14 +204,14 @@ class WoodElf extends Elf{
 class DarkElf extends Elf{
     DarkElf(){
         this.setStatMods(5, 1);
-        this.proficiencies.set(1, "Rapiers, Shortswords, Hand Crossbows");
-        this.traits.add("- Superior Darkvision Your darkvision has a\n" +
+        this.setProficiencies(1, "Rapiers, Shortswords, Hand Crossbows");
+        this.setTraits("- Superior Darkvision Your darkvision has a\n" +
                 "radius of 120 feet.");
-        this.traits.add("- Sunlight Sensitivity: You have disadvantage on attack\n" +
+        this.setTraits("- Sunlight Sensitivity: You have disadvantage on attack\n" +
                 "rolls and on Wisdom (Perception) checks that rely on\n" +
                 "sight when you, the target of your attack, or whatever\n" +
                 "you are trying to perceive is in direct sunlight.");
-        this.traits.add("- Drow Magic: You know the dancing lights cantrip.\n" +
+        this.setTraits("- Drow Magic: You know the dancing lights cantrip.\n" +
                 "When you reach 3rd level, you can cast the faerie fire\n" +
                 "spell once per day. When you reach 5th level, you can\n" +
                 "also cast the darkness spell once per day. Charisma is\n" +        //TODO: this trait adds dancing lights to the players spell list
@@ -175,15 +225,15 @@ abstract class Halfling extends Race{
     Halfling(){
         this.setStatMods(1, 2);
         this.setSpeed(25);
-        Size size = Size.SMALL;
+        this.setSize("SMALL");
         this.setAgeRange("Halflings mature at 20, and live to around 200,");
-        this.languages.add("Halfling");
-        this.traits.add("- Lucky: When you roll a 1 on an attack roll, ability\r\n" + //
+        this.setLanguages("Halfling");
+        this.setTraits("- Lucky: When you roll a 1 on an attack roll, ability\r\n" + //
                 "check, or saving throw, you can reroll the die and must\r\n" + //
                 "use the new roll");
-        this.traits.add("- Brave: You have advantage on saving throws against\r\n" + //
+        this.setTraits("- Brave: You have advantage on saving throws against\r\n" + //
                 "being frightened.");
-        this.traits.add("- Halfling Nimbleness: You can move through the\r\n" + //
+        this.setTraits("- Halfling Nimbleness: You can move through the\r\n" + //
                 "space of any creature that is of a size larger than yours");
     }
 }
@@ -191,7 +241,7 @@ abstract class Halfling extends Race{
 class Lightfoot extends Halfling{
     Lightfoot(){
         this.setStatMods(5, 1);
-        this.traits.add("Naturally Stealthy. You can attempt to hide even\r\n" + //
+        this.setTraits("Naturally Stealthy. You can attempt to hide even\r\n" + //
                 "when you are obscured only by a creature that is at least\r\n" + //
                 "one size larger than you");
     }
@@ -200,7 +250,7 @@ class Lightfoot extends Halfling{
 class Stout extends Halfling{
     Stout(){
         this.setStatMods(2, 1);
-        this.traits.add("Stout Resilience. You have advantage on saving\r\n" + //
+        this.setTraits("Stout Resilience. You have advantage on saving\r\n" + //
                 "throws against poison, and you have resistance\r\n" + //
                 "against poison damage");
     }
@@ -213,8 +263,6 @@ class Human extends Race{
         for(int i = 0;i<6;i++){
             this.setStatMods(i, 1);
         }
-        this.setSpeed(30);
-        Size size = Size.MEDIUM;
         this.setAgeRange("Humans mature at 18, and live to around 80.");
         //TODO languages are common, and pick one of your choosing
     }
@@ -229,11 +277,9 @@ class Dragonborn extends Race{
 
         this.setStatMods(0, 2);
         this.setStatMods(5, 1);
-        Size size = Size.MEDIUM;
-        this.setSpeed(30);
         this.setAgeRange("Dragonborn mature at 15, and live to around 80.");
-        this.languages.add("Draconic");
-        this.traits.add("- Breath Weapon: You can use your action to exhale\r\n" + //
+        this.setLanguages("Draconic");
+        this.setTraits("- Breath Weapon: You can use your action to exhale\r\n" + //
                 "destructive energy. Your draconic ancestry determines\r\n" + //
                 "the size, shape, and damage type of the exhalation.\r\n" + //
                 "When you use your breath weapon, each creature in\r\n" + //
@@ -245,7 +291,7 @@ class Dragonborn extends Race{
                 "as much damage on a successful one. The damage\r\n" + //
                 "increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6\r\n" + //
                 "at 16th level");
-        this.traits.add("- Damage Resistance: You have resistance to the\r\n" + //
+        this.setTraits("- Damage Resistance: You have resistance to the\r\n" + //
                 "damage type associated with your draconic ancestry.");
 
         //TODO: Decision for draconic ancestry
@@ -258,15 +304,15 @@ abstract class Gnome extends Race{
     Gnome(){
         this.setStatMods(3, 2);
         this.setSpeed(25);
-        Size size = Size.SMALL;
+        this.setSize("SMALL");
         this.setAgeRange("Gnomes mature at 18, and live to around 350-500.");
-        this.languages.add("Gnomish");
-        this.traits.add("- Darkvision: Accustomed to life underground, you have\r\n" + //
+        this.setLanguages("Gnomish");
+        this.setTraits("- Darkvision: Accustomed to life underground, you have\r\n" + //
                 "superior vision in dark and dim conditions. You can\r\n" + //
                 "see in dim light within 60 feet of you as if it were bright\r\n" + //
                 "light, and in darkness as if it were dim light. You can't\r\n" + //
                 "discern color in darkness, only shades of gray");
-        this.traits.add("- Gnome Cunning: You have advantage on all\r\n" + //
+        this.setTraits("- Gnome Cunning: You have advantage on all\r\n" + //
                 "Intelligence, Wisdom , and Charisma saving throws\r\n" + //
                 "against magic");
     }
@@ -278,7 +324,7 @@ class ForestGnome extends Gnome{
 
         //TODO: adds minor illusion to spell list
 
-        this.traits.add("- Speak with Small Beasts: Through sounds and\r\n" + //
+        this.setTraits("- Speak with Small Beasts: Through sounds and\r\n" + //
                 "gestures, you can communicate simple ideas with Small\r\n" + //
                 "or smaller beasts. Forest gnomes love animals and often\r\n" + //
                 "keep squirrels, badgers, rabbits, moles, woodpeckers,\r\n" + //
@@ -289,12 +335,13 @@ class ForestGnome extends Gnome{
 class RockGnome extends Gnome{
     RockGnome(){
         this.setStatMods(2, 1);
-        this.traits.add("- Artificer's Lore: Whenever you make an Intelligence\r\n" + //
+        this.setProficiencies(2,"Artisian's tools");
+        this.setTraits("- Artificer's Lore: Whenever you make an Intelligence\r\n" + //
                 "(History) check related to magic items, alchemical\r\n" + //
                 "objects, or technological devices, you can add twice your\r\n" + //
                 "proficiency bonus, instead of any proficiency bonus you\r\n" + //
                 "normally apply");
-        this.traits.add("- Tinker: You have proficiency with artisan's tools\r\n" + //
+        this.setTraits("- Tinker: You have proficiency with artisan's tools\r\n" + //
                 "(tinker's tools). Using those tools, you can spend 1\r\n" + //
                 "hour and 10 gp worth of materials to construct a Tiny\r\n" + //
                 "clockwork device (AC 5, 1 hp). The device ceases\r\n" + //
@@ -307,7 +354,7 @@ class RockGnome extends Gnome{
                 "following options:\r\n" + //
                 "Clockwork Toy. This toy is a clockwork animal, monster,\r\n" + //
                 "or person, such as a frog, mouse, bird, dragon, or\r\n" + //
-                "soldier. When placed on the ground, the toy m oves\r\n" + //
+                "soldier. When placed on the ground, the toy moves\r\n" + //
                 "5 feet across the ground on each of your turns in a\r\n" + //
                 "random direction. It makes noises as appropriate\r\n" + //
                 "to the creature it represents.\r\n" + //
@@ -320,7 +367,6 @@ class RockGnome extends Gnome{
                 "The box stops playing when it\r\n" + //
                 "reaches the song's end or\r\n" + //
                 "when it is closed.");
-        this.proficiencies.set(2,"Artisian's tools");
     }
 }
 
@@ -329,20 +375,34 @@ class RockGnome extends Gnome{
 class HalfElf extends Race{
     HalfElf(){
         this.setStatMods(5, 2);
-        //TODO: choose 2 other stats, cannot be the same, increase by 1
-        this.setSpeed(30);
-        Size size = Size.MEDIUM;
         this.setAgeRange("Half Elves mature at 18, and live to around 180.");
         //TODO: gain proficiency in 2 skills of your choice
-        this.languages.add("Elvish, ");
+        this.setLanguages("Elvish, ");
         //TODO: languages are common, elvish, and one of your choice
-        this.traits.add("- Darkvision: Thanks to your elf blood, you have\r\n" + //
+        this.setTraits("- Darkvision: Thanks to your elf blood, you have\r\n" + //
                 "superior vision in dark and dim conditions. You can\r\n" + //
                 "see in dim light within 60 feet of you as if it were bright\r\n" + //
                 "light, and in darkness as if it were dim light. You can't\r\n" + //
                 "discern color in darkness, only shades of gray");
-        this.traits.add("- Fey Ancestry: You have advantage on saving throws\r\n" + //
+        this.setTraits("- Fey Ancestry: You have advantage on saving throws\r\n" + //
                 "against being charmed, and magic can't put you to sleep");
+    }
+    public void raceQuestions(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Pick first stat to increase by 1.");
+        int index = scan.nextInt();
+        this.chooseStats(index);
+        System.out.println("Pick second stat to increase by 1.");
+        int index2 = scan.nextInt();
+        while(index == index2){
+            System.out.println("You cannot pick the same stat twice. Pick again.");
+            index2 = scan.nextInt();
+        }
+        this.chooseStats(index2);
+        scan.close();
+    }
+    public void chooseStats(int index){
+        this.getStatMods()[index] += 1;
     }
 }
 
@@ -353,21 +413,19 @@ class HalfOrc extends Race{
 
         this.setStatMods(0, 2);
         this.setStatMods(2, 1);
-        this.setSpeed(30);
-        Size size = Size.MEDIUM;
         this.setAgeRange("Half Orcs mature at 14, and live to around 75.");
         //TODO add proficiency in meanacing
-        this.languages.add("Orc");
-        this.traits.add("- Darkvision: Thanks to your orc blood, you have\r\n" + //
+        this.setLanguages("Orc");
+        this.setTraits("- Darkvision: Thanks to your orc blood, you have\r\n" + //
                 "superior vision in dark and dim conditions. You can\r\n" + //
-                "see in dim light within 60 feet of you as if it w ere bright\r\n" + //
+                "see in dim light within 60 feet of you as if it were bright\r\n" + //
                 "light, and in darkness as if it were dim light. You can't\r\n" + //
                 "discern color in darkness, only shades of gray");
-        this.traits.add("- Relentless Endurance: When you are reduced to\r\n" + //
+        this.setTraits("- Relentless Endurance: When you are reduced to\r\n" + //
                 "0 hit points but not killed outright, you can drop to 1 hit\r\n" + //
                 "point instead. You can't use this feature again until you\r\n" + //
                 "finish a long rest.");
-        this.traits.add("- Savage Attacks: When you score a critical hit with\r\n" + //
+        this.setTraits("- Savage Attacks: When you score a critical hit with\r\n" + //
                 "a melee weapon attack, you can roll one of the weapon's\r\n" + //
                 "damage dice one additional time and add it to the extra\r\n" + //
                 "damage of the critical hit");
@@ -381,17 +439,15 @@ class Tiefling extends Race{
         this.setStatMods(3, 1);
         this.setStatMods(5, 2);
         this.setAgeRange("Tieflings mature at 18, and live to around 90.");
-        Size size = Size.MEDIUM;
-        this.setSpeed(30);
-        this.languages.add("Infernal");
-        this.traits.add("- Darkvision: Thanks to your infernal heritage, you\r\n" + //
+        this.setLanguages("Infernal");
+        this.setTraits("- Darkvision: Thanks to your infernal heritage, you\r\n" + //
                 "have superior vision in dark and dim conditions. You\r\n" + //
                 "can see in dim light within 60 feet of you as if it were\r\n" + //
                 "bright light, and in darkness as if it were dim light. You\r\n" + //
                 "can't discern color in darkness, only shades of gray");
-        this.traits.add("Hellish Resistance. You have resistance\r\n" + //
+        this.setTraits("Hellish Resistance. You have resistance\r\n" + //
                 "to fire damage");
-        this.traits.add("- Infernal Legacy: You know the thaumaturgy cantrip.\r\n" + //
+        this.setTraits("- Infernal Legacy: You know the thaumaturgy cantrip.\r\n" + //
                 "Once you reach 3rd level, you can cast the hellish\r\n" + //               //TODO trait adds thamaturgy spell
                 "rebuke spell once per day as a 2nd-level spell. Once you\r\n" + //
                 "reach 5th level, you can also cast the darkness spell\r\n" + //
