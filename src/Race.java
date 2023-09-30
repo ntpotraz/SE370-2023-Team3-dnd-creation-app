@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
-                        //TODO getters and setters
+//TODO getters and setters
 abstract class Race {   //TODO race specific questions
     private String ageRange;
     private int speed;
@@ -13,7 +14,8 @@ abstract class Race {   //TODO race specific questions
     }
     private Size size;
     private ArrayList<String> traits = new ArrayList<>();     //Temporary misc. traits for things like darkvision, resistances, etc.
-    
+    private ArrayList<String> skills = new ArrayList<>();
+
     Race(){
         proficiencies.add("");
         proficiencies.add("");
@@ -26,6 +28,7 @@ abstract class Race {   //TODO race specific questions
     public void raceQuestions(){
         //Generic raceQuestions function to be overloaded
     }
+    //getters and setters vvv
     public String getAgeRange() {
         return ageRange;
     }
@@ -78,6 +81,11 @@ abstract class Race {   //TODO race specific questions
     public void setProficiencies(int index, String proficiency) {
         this.proficiencies.set(index, proficiency);
     }
+    public void printProficiencies(){
+        for(int i = 0;i<3;i++){
+            System.out.print(this.getProficiencies().get(i));
+        }
+    }
     public ArrayList<String> getTraits() {
         return traits;
     }
@@ -89,11 +97,19 @@ abstract class Race {   //TODO race specific questions
             System.out.println(this.traits.get(i));
         }
     }
-    
+
+    public ArrayList<String> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(String input) {
+        this.skills.add(input);
+    }
 
     public static void main(String[] args) throws Exception {
         //Area for testing code
-        
+        Dragonborn test = new Dragonborn();
+        test.raceQuestions();
     }
 }
 
@@ -116,8 +132,7 @@ abstract class Dwarf extends Race{
         this.setStatMods(2,2);
         this.setSpeed(25);
         this.setAgeRange("Dwarves mature at 50, and live to around 350.");
-        this.setProficiencies(1, "Battleaxe, Handaxe, Throwing Hammer, Warhammer");
-        //TODO choose one, proficiency in smith, brewer, or mason's tools
+        this.setProficiencies(1, "Battleaxe, Handaxe, Throwing Hammer, Warhammer, ");
         this.setLanguages("Dwarvish");
         this.setTraits("- Darkvision: Accustomed to life underground, you\r\n" +
                 "have superior vision in dark and dim conditions. You\r\n" +
@@ -130,10 +145,28 @@ abstract class Dwarf extends Race{
     }
     public void raceQuestions(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Choose one tool proficiency in smithing, brewing, or masonry.");
-        String input = scan.nextLine();
+        System.out.println("Choose one tool proficiency in smithing(s), brewing(b), or masonry(m).");
+        Boolean correctString = false;
+        while(correctString == false){
+            String input = scan.nextLine();
+            if(Objects.equals(input, "s")){
+                this.setProficiencies(2,"Smithing Tools");
+                correctString = true;
+            }
+            else if(Objects.equals(input, "b")){
+                this.setProficiencies(2, "Brewing Tools");
+                correctString = true;
+            }
+            else if(Objects.equals(input, "m")){
+                this.setProficiencies(2,"Masons Tools");
+                correctString = true;
+            }
+            else{
+                System.out.println("That isn't an option. Try again.");
+            }
+        }
+        }
 
-    }
 
 }
 
@@ -157,7 +190,7 @@ abstract class Elf extends Race{
     Elf(){
         this.setStatMods(1, 2);
         this.setAgeRange("Elves mature at 100, and live to around 750.");
-        //TODO: Keen Senses, gives proficiency in perception
+        this.setSkills("perception");
         this.setLanguages("Elvish");
         this.setTraits("- Darkvision: Accustom ed to twilit forests and the night\n" +
                 "sky, you have superior vision in dark and dim conditions.\n" +
@@ -174,7 +207,6 @@ abstract class Elf extends Race{
                 "have become reflexive through years of practice. After\n" +
                 "resting in this way, you gain the same benefit that a\n" +
                 "human does from 8 hours of sleep.");
-
 
     }
 }
@@ -266,6 +298,11 @@ class Human extends Race{
         this.setAgeRange("Humans mature at 18, and live to around 80.");
         //TODO languages are common, and pick one of your choosing
     }
+    public void raceQuestions(){
+        System.out.println("What additional language would you like to learn? Your options are:");
+        System.out.println("Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
+        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+    }
 }
 
 //TODO: Optional, add in variant human
@@ -295,6 +332,17 @@ class Dragonborn extends Race{
                 "damage type associated with your draconic ancestry.");
 
         //TODO: Decision for draconic ancestry
+    }
+    public void raceQuestions(){
+        System.out.println("What is your Draconic Ancestry?");      //Make draconic ancestry matrix
+        String[][] rows = {{"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"}, {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"},
+                {"5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)"}};
+        for(int i = 0;i<10;i++){
+            System.out.print(rows[0][i] + "; ");
+            System.out.print(rows[1][i] + "; ");
+            System.out.print(rows[2][i] + "\n");
+        }
+
     }
 }
 
@@ -414,7 +462,7 @@ class HalfOrc extends Race{
         this.setStatMods(0, 2);
         this.setStatMods(2, 1);
         this.setAgeRange("Half Orcs mature at 14, and live to around 75.");
-        //TODO add proficiency in meanacing
+        this.setSkills("intimidation");
         this.setLanguages("Orc");
         this.setTraits("- Darkvision: Thanks to your orc blood, you have\r\n" + //
                 "superior vision in dark and dim conditions. You can\r\n" + //
