@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
-//TODO getters and setters
-abstract class Race {   //TODO race specific questions
+
+abstract class Race {   //TODO decisions that add spells
     private String ageRange;
     private int speed;
     private ArrayList<String> languages = new ArrayList<>();
@@ -75,6 +75,13 @@ abstract class Race {   //TODO race specific questions
     public void setLanguages(String language) {
         this.languages.add(language);
     }
+    public void printLanguages(){
+        System.out.print("Languages: ");
+        for(int i = 0;i<this.languages.size();i++){
+            System.out.print(this.getLanguages().get(i));
+        }
+        System.out.print("\n");
+    }
     public ArrayList<String> getProficiencies() {
         return proficiencies;
     }
@@ -105,11 +112,16 @@ abstract class Race {   //TODO race specific questions
     public void setSkills(String input) {
         this.skills.add(input);
     }
+    public void printSkills(){
+        System.out.println("Skill Proficiencies:");
+        for(int i = 0;i<this.skills.size();i++){
+            System.out.println(this.skills.get(i));
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         //Area for testing code
-        Dragonborn test = new Dragonborn();
-        test.raceQuestions();
+        
     }
 }
 
@@ -165,6 +177,7 @@ abstract class Dwarf extends Race{
                 System.out.println("That isn't an option. Try again.");
             }
         }
+        scan.close();
         }
 
 
@@ -217,7 +230,15 @@ class HighElf extends Elf{
         this.setProficiencies(1,"Longsword, Shortsword, Shortbow, Longbow");
 
         //TODO: Cantrip: choose one cantrip from the wizard spell list
-        //TODO: Extra Language: choose 1 language to learn
+    }
+    public void raceQuestions(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("What additional language would you like to learn? Pre-existing languages are:");
+        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
+        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        String input = scan.nextLine();
+        this.setLanguages(input);
+        scan.close();
     }
 }
 
@@ -296,12 +317,15 @@ class Human extends Race{
             this.setStatMods(i, 1);
         }
         this.setAgeRange("Humans mature at 18, and live to around 80.");
-        //TODO languages are common, and pick one of your choosing
     }
     public void raceQuestions(){
-        System.out.println("What additional language would you like to learn? Your options are:");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("What additional language would you like to learn? Pre-existing languages are:");
         System.out.println("Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
         "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        String input = scan.nextLine();
+        this.setLanguages(input);
+        scan.close();
     }
 }
 
@@ -331,18 +355,54 @@ class Dragonborn extends Race{
         this.setTraits("- Damage Resistance: You have resistance to the\r\n" + //
                 "damage type associated with your draconic ancestry.");
 
-        //TODO: Decision for draconic ancestry
     }
     public void raceQuestions(){
+        Scanner scan = new Scanner(System.in);
         System.out.println("What is your Draconic Ancestry?");      //Make draconic ancestry matrix
         String[][] rows = {{"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"}, {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"},
                 {"5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)"}};
         for(int i = 0;i<10;i++){
-            System.out.print(rows[0][i] + "; ");
-            System.out.print(rows[1][i] + "; ");
-            System.out.print(rows[2][i] + "\n");
+            System.out.print(rows[0][i] + " | ");
+            System.out.print(rows[1][i] + " | ");
+            System.out.print(rows[2][i] + "\n" + "\n");
         }
-
+        String input = scan.nextLine();
+        input = input.toLowerCase();
+        switch(input){
+            case "black":
+            this.setTraits("- Black Draconic Ancestry: Your breath weapon and resistance is acid.");
+            break;
+            case "blue":
+            this.setTraits("- Blue Draconic Ancestry: Your breath weapon and resistance is lightning.");
+            break;
+            case "brass":
+            this.setTraits("- Brass Draconic Ancestry: Your breath weapon and resistance is fire.");
+            break;
+            case "bronze":
+            this.setTraits("- Bronze Draconic Ancestry: Your breath weapon and resistance is lightning.");
+            break;
+            case "copper":
+            this.setTraits("- Copper Draconic Ancestry: Your breath weapon and resistance is acid.");
+            break;
+            case "gold":
+            this.setTraits("- Gold Draconic Ancestry: Your breath weapon and resistance is fire.");
+            break;
+            case "green":
+            this.setTraits("- Green Draconic Ancestry: Your breath weapon and resistance is poison.");
+            break;
+            case "red":
+            this.setTraits("- Red Draconic Ancestry: Your breath weapon and resistance is red.");
+            break;
+            case "silver":
+            this.setTraits("- Silver Draconic Ancestry: Your breath weapon and resistance is cold.");
+            break;
+            case "white":
+            this.setTraits("- White Draconic Ancestry: Your breath weapon and resistance is cold.");
+            break;
+            default:
+            break;
+        }
+        scan.close();
     }
 }
 
@@ -424,9 +484,7 @@ class HalfElf extends Race{
     HalfElf(){
         this.setStatMods(5, 2);
         this.setAgeRange("Half Elves mature at 18, and live to around 180.");
-        //TODO: gain proficiency in 2 skills of your choice
         this.setLanguages("Elvish, ");
-        //TODO: languages are common, elvish, and one of your choice
         this.setTraits("- Darkvision: Thanks to your elf blood, you have\r\n" + //
                 "superior vision in dark and dim conditions. You can\r\n" + //
                 "see in dim light within 60 feet of you as if it were bright\r\n" + //
@@ -437,6 +495,7 @@ class HalfElf extends Race{
     }
     public void raceQuestions(){
         Scanner scan = new Scanner(System.in);
+        //Increases 2 different stats by 1
         System.out.println("Pick first stat to increase by 1.");
         int index = scan.nextInt();
         this.chooseStats(index);
@@ -447,10 +506,46 @@ class HalfElf extends Race{
             index2 = scan.nextInt();
         }
         this.chooseStats(index2);
+
+        //Chooses a language
+        scan.nextLine();
+        System.out.println("What additional language would you like to learn? Pre-existing languages are:");
+        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
+        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        String input = scan.nextLine();
+        this.setLanguages(input);
+
+        //Chooses 2 skills to become proficient in
+        System.out.println("Possible skills are:");
+        System.out.println("Athletics, Acrobatics, Sleight of Hand, Stealth, Arcana, History, Investigation, Nature,\n" + 
+        "Religion, Animal Handling, Insight, Medicine, Perception, Survival, Deception, Intimidation, Performance, and Persuasion.");
+        System.out.println("Pick first skill to become proficient in.");
+        String skill1 = scan.nextLine();
+        skill1 = skill1.toLowerCase();
+        skill1 = skillUnderline(skill1);
+        this.setSkills(skill1);
+        System.out.println("Pick second skill to become proficient in.");
+        String skill2 = scan.nextLine();
+        skill2 = skill2.toLowerCase();
+        skill2 = skillUnderline(skill2);
+        this.setSkills(skill2);
         scan.close();
     }
     public void chooseStats(int index){
         this.getStatMods()[index] += 1;
+    }
+    public String skillUnderline(String skill){
+        switch(skill){
+            case "sleight of hand":
+            skill = "sleight_of_hand";
+            break;
+            case "animal handling":
+            skill = "animal_handling";
+            break;
+            default:
+            break;
+        }
+        return skill;
     }
 }
 
