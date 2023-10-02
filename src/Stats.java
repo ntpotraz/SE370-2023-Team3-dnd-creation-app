@@ -107,20 +107,20 @@ public class Stats {
   // Checks to see if the stat has already been entered
   public int containsValue(int index) {
     switch (index) {
-    case 0:
-      return getStr();
-    case 1:
-      return getDex();
-    case 2:
-      return getCon();
-    case 3:
-      return getInt();
-    case 4:
-      return getWis();
-    case 5:
-      return getCha();
-    default:
-      break;
+      case 0:
+        return getStr();
+      case 1:
+        return getDex();
+      case 2:
+        return getCon();
+      case 3:
+        return getInt();
+      case 4:
+        return getWis();
+      case 5:
+        return getCha();
+      default:
+        break;
     }
     return 0;
   }
@@ -135,60 +135,60 @@ public class Stats {
   private void setMod(int stat) {
     int level;
     switch (this.statLevel[stat]) {
-    case 1:
-      level = -5;
-      break;
-    case 2:
-    case 3:
-      level = -4;
-      break;
-    case 4:
-    case 5:
-      level = -3;
-      break;
-    case 6:
-    case 7:
-      level = -2;
-      break;
-    case 8:
-    case 9:
-      level = -1;
-      break;
-    case 10:
-    case 11:
-      level = 0;
-      break;
-    case 12:
-    case 13:
-      level = 1;
-      break;
-    case 14:
-    case 15:
-      level = 2;
-      break;
-    case 16:
-    case 17:
-      level = 3;
-      break;
-    case 18:
-    case 19:
-      level = 4;
-      break;
-    case 20:
-    case 21:
-      level = 5;
-      break;
-    case 22:
-    case 23:
-      level = 6;
-      break;
-    case 24:
-    case 25:
-      level = 7;
-      break;
-    default:
-      level = -10;
-      break;
+      case 1:
+        level = -5;
+        break;
+      case 2:
+      case 3:
+        level = -4;
+        break;
+      case 4:
+      case 5:
+        level = -3;
+        break;
+      case 6:
+      case 7:
+        level = -2;
+        break;
+      case 8:
+      case 9:
+        level = -1;
+        break;
+      case 10:
+      case 11:
+        level = 0;
+        break;
+      case 12:
+      case 13:
+        level = 1;
+        break;
+      case 14:
+      case 15:
+        level = 2;
+        break;
+      case 16:
+      case 17:
+        level = 3;
+        break;
+      case 18:
+      case 19:
+        level = 4;
+        break;
+      case 20:
+      case 21:
+        level = 5;
+        break;
+      case 22:
+      case 23:
+        level = 6;
+        break;
+      case 24:
+      case 25:
+        level = 7;
+        break;
+      default:
+        level = -10;
+        break;
     }
     this.statModifiers[stat] = level;
   }
@@ -204,50 +204,80 @@ public class Stats {
     }
   }
 
-  public int[] getStats() { return this.statLevel; }
+  public int[] getStats() {
+    return this.statLevel;
+  }
 
-  public int[] getMods() { return this.statModifiers; }
+  public int[] getMods() {
+    return this.statModifiers;
+  }
 
-  public int getStr() { return this.statLevel[0]; }
+  public int getStr() {
+    return this.statLevel[0];
+  }
 
-  public int getStrMod() { return this.statModifiers[0]; }
+  public int getStrMod() {
+    return this.statModifiers[0];
+  }
 
-  public int getDex() { return this.statLevel[1]; }
+  public int getDex() {
+    return this.statLevel[1];
+  }
 
-  public int getDexMod() { return this.statModifiers[1]; }
+  public int getDexMod() {
+    return this.statModifiers[1];
+  }
 
-  public int getCon() { return this.statLevel[2]; }
+  public int getCon() {
+    return this.statLevel[2];
+  }
 
-  public int getConMod() { return this.statModifiers[2]; }
+  public int getConMod() {
+    return this.statModifiers[2];
+  }
 
-  public int getInt() { return this.statLevel[3]; }
+  public int getInt() {
+    return this.statLevel[3];
+  }
 
-  public int getIntMod() { return this.statModifiers[3]; }
+  public int getIntMod() {
+    return this.statModifiers[3];
+  }
 
-  public int getWis() { return this.statLevel[4]; }
+  public int getWis() {
+    return this.statLevel[4];
+  }
 
-  public int getWisMod() { return this.statModifiers[4]; }
+  public int getWisMod() {
+    return this.statModifiers[4];
+  }
 
-  public int getCha() { return this.statLevel[5]; }
+  public int getCha() {
+    return this.statLevel[5];
+  }
 
-  public int getChaMod() { return this.statModifiers[5]; }
+  public int getChaMod() {
+    return this.statModifiers[5];
+  }
 
-  public void closeScanner() { k.close(); }
+  public void closeScanner() {
+    k.close();
+  }
 
   public String toString() {
     String output = "\nStr: " + this.getStr() + " | " + this.getStrMod() +
-                    "\nDex: " + this.getDex() + " | " + this.getDexMod() +
-                    "\nCon: " + this.getCon() + " | " + this.getConMod() +
-                    "\nInt: " + this.getInt() + " | " + this.getIntMod() +
-                    "\nWis: " + this.getWis() + " | " + this.getWisMod() +
-                    "\nCha: " + this.getCha() + " | " + this.getChaMod() + "\n";
+        "\nDex: " + this.getDex() + " | " + this.getDexMod() +
+        "\nCon: " + this.getCon() + " | " + this.getConMod() +
+        "\nInt: " + this.getInt() + " | " + this.getIntMod() +
+        "\nWis: " + this.getWis() + " | " + this.getWisMod() +
+        "\nCha: " + this.getCha() + " | " + this.getChaMod() + "\n";
 
     return output;
   }
 
   public static void main(String[] args) throws Exception {
-    int stats[] = {15, 14, 13, 12, 10, 8};
-    int modifier[] = {10, 10, 10, 10, 10, 10};
+    int stats[] = { 15, 14, 13, 12, 10, 8 };
+    int modifier[] = { 10, 10, 10, 10, 10, 10 };
     Stats testStats = new Stats(stats);
     System.out.printf("\nStats before modifier: %s", testStats.toString());
     testStats.modifyStats(modifier);

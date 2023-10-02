@@ -2,21 +2,25 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-abstract class Race {   //TODO decisions that add spells
+abstract class Race { // TODO decisions that add spells
     private String ageRange;
     private int speed;
     private ArrayList<String> languages = new ArrayList<>();
-    private ArrayList<String> proficiencies = new ArrayList<>();  //Index 0 = Armor, 1 = Weapons, = 2 = Tools
-    private int[] statMods = {0,0,0,0,0,0}; //Index 0 = strength, 1 = dexterity, 2 = constitution, 3 = intelligence, 4 = wisdom, 5 = charisma
-    public enum Size{
+    private ArrayList<String> proficiencies = new ArrayList<>(); // Index 0 = Armor, 1 = Weapons, = 2 = Tools
+    private int[] statMods = { 0, 0, 0, 0, 0, 0 }; // Index 0 = strength, 1 = dexterity, 2 = constitution, 3 =
+                                                   // intelligence, 4 = wisdom, 5 = charisma
+
+    public enum Size {
         SMALL,
         MEDIUM
     }
+
     private Size size;
-    private ArrayList<String> traits = new ArrayList<>();     //Temporary misc. traits for things like darkvision, resistances, etc.
+    private ArrayList<String> traits = new ArrayList<>(); // Temporary misc. traits for things like darkvision,
+                                                          // resistances, etc.
     private ArrayList<String> skills = new ArrayList<>();
 
-    Race(){
+    Race() {
         proficiencies.add("");
         proficiencies.add("");
         proficiencies.add("");
@@ -26,82 +30,131 @@ abstract class Race {   //TODO decisions that add spells
         this.raceQuestions();
     }
 
-    public void raceQuestions(){
-        //Generic raceQuestions function to be overloaded
+    public static Race createRace(String type) {
+        type = type.toLowerCase();
+        switch (type) {
+            case "hilldwarf":
+                return new HillDwarf();
+            case "mountaindwarf":
+                return new MountainDwarf();
+            case "highelf":
+                return new HighElf();
+            case "woodelf":
+                return new WoodElf();
+            case "darkelf":
+                return new DarkElf();
+            case "lightfoot":
+                return new Lightfoot();
+            case "stout":
+                return new Stout();
+            case "human":
+                return new Human();
+            case "dragonborn":
+                return new Dragonborn();
+            case "forestgnome":
+                return new ForestGnome();
+            case "rockgnome":
+                return new RockGnome();
+            case "halfelf":
+                return new HalfElf();
+            case "halforc":
+                return new HalfOrc();
+            case "tiefling":
+                return new Tiefling();
+            default:
+                return new Human();
+        }
     }
-    //getters and setters vvv
+
+    // getters and setters vvv
     public String getAgeRange() {
         return ageRange;
     }
+
     public void setAgeRange(String ageRange) {
         this.ageRange = ageRange;
     }
+
     public int getSpeed() {
         return speed;
     }
+
     public void setSpeed(int speed) {
         this.speed = speed;
     }
+
     public int[] getStatMods() {
         return statMods;
     }
+
     public void setStatMods(int index, int mod) {
         this.statMods[index] += mod;
     }
-    public void printStatMods(){
-        for(int i = 0;i<6;i++){
+
+    public void printStatMods() {
+        for (int i = 0; i < 6; i++) {
             System.out.println(this.statMods[i]);
         }
     }
+
     public Size getSize() {
         return size;
     }
+
     public void setSize(String size) {
-        if(size == "MEDIUM"){
+        if (size == "MEDIUM") {
             this.size = Size.MEDIUM;
-        }
-        else if(size == "SMALL"){
+        } else if (size == "SMALL") {
             this.size = Size.SMALL;
-        }
-        else{
+        } else {
             System.out.println("A size error has been made.");
         }
     }
-    public void printSize(){
+
+    public void printSize() {
         System.out.println(this.getSize());
     }
+
     public ArrayList<String> getLanguages() {
         return languages;
     }
+
     public void setLanguages(String language) {
         this.languages.add(language);
     }
-    public void printLanguages(){
+
+    public void printLanguages() {
         System.out.print("Languages: ");
-        for(int i = 0;i<this.languages.size();i++){
+        for (int i = 0; i < this.languages.size(); i++) {
             System.out.print(this.getLanguages().get(i));
         }
         System.out.print("\n");
     }
+
     public ArrayList<String> getProficiencies() {
         return proficiencies;
     }
+
     public void setProficiencies(int index, String proficiency) {
         this.proficiencies.set(index, proficiency);
     }
-    public void printProficiencies(){
-        for(int i = 0;i<3;i++){
+
+    public void printProficiencies() {
+        for (int i = 0; i < 3; i++) {
             System.out.print(this.getProficiencies().get(i));
         }
     }
+
     public ArrayList<String> getTraits() {
         return traits;
     }
+
     public void setTraits(String trait) {
         this.traits.add(trait);
     }
-    public void printTraits(){
-        for(int i = 0;i<this.traits.size();i++){
+
+    public void printTraits() {
+        for (int i = 0; i < this.traits.size(); i++) {
             System.out.println(this.traits.get(i));
         }
     }
@@ -113,36 +166,43 @@ abstract class Race {   //TODO decisions that add spells
     public void setSkills(String input) {
         this.skills.add(input);
     }
-    public void printSkills(){
+
+    public void printSkills() {
         System.out.println("Skill Proficiencies:");
-        for(int i = 0;i<this.skills.size();i++){
+        for (int i = 0; i < this.skills.size(); i++) {
             System.out.println(this.skills.get(i));
         }
     }
 
+    // Added this since 'this.raceQuestions()' was throwing an error in the
+    // constructor
+    public void raceQuestions() {
+        System.out.println("Race not selected");
+    }
+
     public static void main(String[] args) throws Exception {
-        //Area for testing code
-        
+        // Area for testing code
+
     }
 }
 
 /*
-Race classes are organized as follows:
-- stat changes
-- speed
-- size
-- age ranges
-- proficiencies
-- languages
-- misc. traits
-- raceQuestions function
+ * Race classes are organized as follows:
+ * - stat changes
+ * - speed
+ * - size
+ * - age ranges
+ * - proficiencies
+ * - languages
+ * - misc. traits
+ * - raceQuestions function
  */
 
-//Dwarf   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Dwarf v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-abstract class Dwarf extends Race{
-    Dwarf(){
-        this.setStatMods(2,2);
+abstract class Dwarf extends Race {
+    Dwarf() {
+        this.setStatMods(2, 2);
         this.setSpeed(25);
         this.setAgeRange("Dwarves mature at 50, and live to around 350.");
         this.setProficiencies(1, "Battleaxe, Handaxe, Throwing Hammer, Warhammer, ");
@@ -156,52 +216,50 @@ abstract class Dwarf extends Race{
                 "throws against poison, and you have resistance against\r\n" +
                 "poison damage.");
     }
-    public void raceQuestions(){
+
+    public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose one tool proficiency in smithing(s), brewing(b), or masonry(m).");
         Boolean correctString = false;
-        while(correctString == false){
+        while (correctString == false) {
             String input = scan.nextLine();
-            if(Objects.equals(input, "s")){
-                this.setProficiencies(2,"Smithing Tools");
+            if (Objects.equals(input, "s")) {
+                this.setProficiencies(2, "Smithing Tools");
                 correctString = true;
-            }
-            else if(Objects.equals(input, "b")){
+            } else if (Objects.equals(input, "b")) {
                 this.setProficiencies(2, "Brewing Tools");
                 correctString = true;
-            }
-            else if(Objects.equals(input, "m")){
-                this.setProficiencies(2,"Masons Tools");
+            } else if (Objects.equals(input, "m")) {
+                this.setProficiencies(2, "Masons Tools");
                 correctString = true;
-            }
-            else{
+            } else {
                 System.out.println("That isn't an option. Try again.");
             }
         }
         scan.close();
-        }
-
+    }
 
 }
 
-class HillDwarf extends Dwarf{
-    HillDwarf(){
+class HillDwarf extends Dwarf {
+    HillDwarf() {
         this.setStatMods(4, 1);
     }
-    int hillDwarfHP = 1;        //Note: hill dwarf is only class that adds 1 to hp
+
+    int hillDwarfHP = 1; // Note: hill dwarf is only class that adds 1 to hp
 }
 
-class MountainDwarf extends Dwarf{
-    MountainDwarf(){
+class MountainDwarf extends Dwarf {
+    MountainDwarf() {
         this.setStatMods(0, 2);
-        this.setProficiencies(0,"Light armor, medium armor");
+        this.setProficiencies(0, "Light armor, medium armor");
     }
 }
 
-//Elf   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Elf v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-abstract class Elf extends Race{
-    Elf(){
+abstract class Elf extends Race {
+    Elf() {
         this.setStatMods(1, 2);
         this.setAgeRange("Elves mature at 100, and live to around 750.");
         this.setSkills("perception");
@@ -225,29 +283,30 @@ abstract class Elf extends Race{
     }
 }
 
-class HighElf extends Elf{
-    HighElf(){
+class HighElf extends Elf {
+    HighElf() {
         this.setStatMods(3, 1);
-        this.setProficiencies(1,"Longsword, Shortsword, Shortbow, Longbow");
+        this.setProficiencies(1, "Longsword, Shortsword, Shortbow, Longbow");
 
-        //TODO: Cantrip: choose one cantrip from the wizard spell list
+        // TODO: Cantrip: choose one cantrip from the wizard spell list
     }
-    public void raceQuestions(){
+
+    public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
         System.out.println("What additional language would you like to learn? Pre-existing languages are:");
-        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
-        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
+                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
         String input = scan.nextLine();
         this.setLanguages(input);
         scan.close();
     }
 }
 
-class WoodElf extends Elf{
-    WoodElf(){
+class WoodElf extends Elf {
+    WoodElf() {
         this.setStatMods(4, 1);
         this.setSpeed(35);
-        this.setProficiencies(1,"Longsword, Shortsword, Shortbow, Longbow");
+        this.setProficiencies(1, "Longsword, Shortsword, Shortbow, Longbow");
         this.setTraits("- Mask of the Wild: You can attempt to hide even when\n" +
                 "you are only lightly obscured by foliage, heavy rain,\n" +
                 "falling snow, mist, and other natural phenomena.");
@@ -255,8 +314,8 @@ class WoodElf extends Elf{
     }
 }
 
-class DarkElf extends Elf{
-    DarkElf(){
+class DarkElf extends Elf {
+    DarkElf() {
         this.setStatMods(5, 1);
         this.setProficiencies(1, "Rapiers, Shortswords, Hand Crossbows");
         this.setTraits("- Superior Darkvision Your darkvision has a\n" +
@@ -268,15 +327,16 @@ class DarkElf extends Elf{
         this.setTraits("- Drow Magic: You know the dancing lights cantrip.\n" +
                 "When you reach 3rd level, you can cast the faerie fire\n" +
                 "spell once per day. When you reach 5th level, you can\n" +
-                "also cast the darkness spell once per day. Charisma is\n" +        //TODO: this trait adds dancing lights to the players spell list
+                "also cast the darkness spell once per day. Charisma is\n" + // TODO: this trait adds dancing lights to
+                                                                             // the players spell list
                 "your spellcasting ability for these spells.");
     }
 }
 
-//Halfling   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Halfling v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-abstract class Halfling extends Race{
-    Halfling(){
+abstract class Halfling extends Race {
+    Halfling() {
         this.setStatMods(1, 2);
         this.setSpeed(25);
         this.setSize("SMALL");
@@ -292,8 +352,8 @@ abstract class Halfling extends Race{
     }
 }
 
-class Lightfoot extends Halfling{
-    Lightfoot(){
+class Lightfoot extends Halfling {
+    Lightfoot() {
         this.setStatMods(5, 1);
         this.setTraits("Naturally Stealthy. You can attempt to hide even\r\n" + //
                 "when you are obscured only by a creature that is at least\r\n" + //
@@ -301,8 +361,8 @@ class Lightfoot extends Halfling{
     }
 }
 
-class Stout extends Halfling{
-    Stout(){
+class Stout extends Halfling {
+    Stout() {
         this.setStatMods(2, 1);
         this.setTraits("Stout Resilience. You have advantage on saving\r\n" + //
                 "throws against poison, and you have resistance\r\n" + //
@@ -310,32 +370,33 @@ class Stout extends Halfling{
     }
 }
 
-//Human   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Human v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-class Human extends Race{
-    Human(){
-        for(int i = 0;i<6;i++){
+class Human extends Race {
+    Human() {
+        for (int i = 0; i < 6; i++) {
             this.setStatMods(i, 1);
         }
         this.setAgeRange("Humans mature at 18, and live to around 80.");
     }
-    public void raceQuestions(){
+
+    public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
         System.out.println("What additional language would you like to learn? Pre-existing languages are:");
-        System.out.println("Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
-        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        System.out.println("Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
+                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
         String input = scan.nextLine();
         this.setLanguages(input);
         scan.close();
     }
 }
 
-//TODO: Optional, add in variant human
+// TODO: Optional, add in variant human
 
-//Dragonborn   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Dragonborn v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-class Dragonborn extends Race{
-    Dragonborn(){
+class Dragonborn extends Race {
+    Dragonborn() {
 
         this.setStatMods(0, 2);
         this.setStatMods(5, 1);
@@ -357,60 +418,65 @@ class Dragonborn extends Race{
                 "damage type associated with your draconic ancestry.");
 
     }
-    public void raceQuestions(){
+
+    public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("What is your Draconic Ancestry?");      //Make draconic ancestry matrix
-        String[][] rows = {{"Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White"}, {"Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold"},
-                {"5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)"}};
-        for(int i = 0;i<10;i++){
+        System.out.println("What is your Draconic Ancestry?"); // Make draconic ancestry matrix
+        String[][] rows = { { "Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White" },
+                { "Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold" },
+                { "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)",
+                        "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "15ft cone (Con save)",
+                        "15ft cone (Con save)", "15ft cone (Con save)", "15ft cone (Con save)",
+                        "15ft cone (Con save)" } };
+        for (int i = 0; i < 10; i++) {
             System.out.print(rows[0][i] + " | ");
             System.out.print(rows[1][i] + " | ");
             System.out.print(rows[2][i] + "\n" + "\n");
         }
         String input = scan.nextLine();
         input = input.toLowerCase();
-        switch(input){
+        switch (input) {
             case "black":
-            this.setTraits("- Black Draconic Ancestry: Your breath weapon and resistance is acid.");
-            break;
+                this.setTraits("- Black Draconic Ancestry: Your breath weapon and resistance is acid.");
+                break;
             case "blue":
-            this.setTraits("- Blue Draconic Ancestry: Your breath weapon and resistance is lightning.");
-            break;
+                this.setTraits("- Blue Draconic Ancestry: Your breath weapon and resistance is lightning.");
+                break;
             case "brass":
-            this.setTraits("- Brass Draconic Ancestry: Your breath weapon and resistance is fire.");
-            break;
+                this.setTraits("- Brass Draconic Ancestry: Your breath weapon and resistance is fire.");
+                break;
             case "bronze":
-            this.setTraits("- Bronze Draconic Ancestry: Your breath weapon and resistance is lightning.");
-            break;
+                this.setTraits("- Bronze Draconic Ancestry: Your breath weapon and resistance is lightning.");
+                break;
             case "copper":
-            this.setTraits("- Copper Draconic Ancestry: Your breath weapon and resistance is acid.");
-            break;
+                this.setTraits("- Copper Draconic Ancestry: Your breath weapon and resistance is acid.");
+                break;
             case "gold":
-            this.setTraits("- Gold Draconic Ancestry: Your breath weapon and resistance is fire.");
-            break;
+                this.setTraits("- Gold Draconic Ancestry: Your breath weapon and resistance is fire.");
+                break;
             case "green":
-            this.setTraits("- Green Draconic Ancestry: Your breath weapon and resistance is poison.");
-            break;
+                this.setTraits("- Green Draconic Ancestry: Your breath weapon and resistance is poison.");
+                break;
             case "red":
-            this.setTraits("- Red Draconic Ancestry: Your breath weapon and resistance is red.");
-            break;
+                this.setTraits("- Red Draconic Ancestry: Your breath weapon and resistance is red.");
+                break;
             case "silver":
-            this.setTraits("- Silver Draconic Ancestry: Your breath weapon and resistance is cold.");
-            break;
+                this.setTraits("- Silver Draconic Ancestry: Your breath weapon and resistance is cold.");
+                break;
             case "white":
-            this.setTraits("- White Draconic Ancestry: Your breath weapon and resistance is cold.");
-            break;
+                this.setTraits("- White Draconic Ancestry: Your breath weapon and resistance is cold.");
+                break;
             default:
-            break;
+                break;
         }
         scan.close();
     }
 }
 
-//Gnome   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Gnome v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-abstract class Gnome extends Race{
-    Gnome(){
+abstract class Gnome extends Race {
+    Gnome() {
         this.setStatMods(3, 2);
         this.setSpeed(25);
         this.setSize("SMALL");
@@ -427,11 +493,11 @@ abstract class Gnome extends Race{
     }
 }
 
-class ForestGnome extends Gnome{
-    ForestGnome(){
+class ForestGnome extends Gnome {
+    ForestGnome() {
         this.setStatMods(1, 1);
 
-        //TODO: adds minor illusion to spell list
+        // TODO: adds minor illusion to spell list
 
         this.setTraits("- Speak with Small Beasts: Through sounds and\r\n" + //
                 "gestures, you can communicate simple ideas with Small\r\n" + //
@@ -441,10 +507,10 @@ class ForestGnome extends Gnome{
     }
 }
 
-class RockGnome extends Gnome{
-    RockGnome(){
+class RockGnome extends Gnome {
+    RockGnome() {
         this.setStatMods(2, 1);
-        this.setProficiencies(2,"Artisian's tools");
+        this.setProficiencies(2, "Artisian's tools");
         this.setTraits("- Artificer's Lore: Whenever you make an Intelligence\r\n" + //
                 "(History) check related to magic items, alchemical\r\n" + //
                 "objects, or technological devices, you can add twice your\r\n" + //
@@ -479,10 +545,10 @@ class RockGnome extends Gnome{
     }
 }
 
-//HalfElf   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// HalfElf v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-class HalfElf extends Race{
-    HalfElf(){
+class HalfElf extends Race {
+    HalfElf() {
         this.setStatMods(5, 2);
         this.setAgeRange("Half Elves mature at 18, and live to around 180.");
         this.setLanguages("Elvish, ");
@@ -494,32 +560,34 @@ class HalfElf extends Race{
         this.setTraits("- Fey Ancestry: You have advantage on saving throws\r\n" + //
                 "against being charmed, and magic can't put you to sleep");
     }
-    public void raceQuestions(){
+
+    public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
-        //Increases 2 different stats by 1
+        // Increases 2 different stats by 1
         System.out.println("Pick first stat to increase by 1.");
         int index = scan.nextInt();
         this.chooseStats(index);
         System.out.println("Pick second stat to increase by 1.");
         int index2 = scan.nextInt();
-        while(index == index2){
+        while (index == index2) {
             System.out.println("You cannot pick the same stat twice. Pick again.");
             index2 = scan.nextInt();
         }
         this.chooseStats(index2);
 
-        //Chooses a language
+        // Chooses a language
         scan.nextLine();
         System.out.println("What additional language would you like to learn? Pre-existing languages are:");
-        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
-        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
+                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
         String input = scan.nextLine();
         this.setLanguages(input);
 
-        //Chooses 2 skills to become proficient in
+        // Chooses 2 skills to become proficient in
         System.out.println("Possible skills are:");
-        System.out.println("Athletics, Acrobatics, Sleight of Hand, Stealth, Arcana, History, Investigation, Nature,\n" + 
-        "Religion, Animal Handling, Insight, Medicine, Perception, Survival, Deception, Intimidation, Performance, and Persuasion.");
+        System.out.println("Athletics, Acrobatics, Sleight of Hand, Stealth, Arcana, History, Investigation, Nature,\n"
+                +
+                "Religion, Animal Handling, Insight, Medicine, Perception, Survival, Deception, Intimidation, Performance, and Persuasion.");
         System.out.println("Pick first skill to become proficient in.");
         String skill1 = scan.nextLine();
         skill1 = skill1.toLowerCase();
@@ -532,28 +600,30 @@ class HalfElf extends Race{
         this.setSkills(skill2);
         scan.close();
     }
-    public void chooseStats(int index){
+
+    public void chooseStats(int index) {
         this.getStatMods()[index] += 1;
     }
-    public String skillUnderline(String skill){
-        switch(skill){
+
+    public String skillUnderline(String skill) {
+        switch (skill) {
             case "sleight of hand":
-            skill = "sleight_of_hand";
-            break;
+                skill = "sleight_of_hand";
+                break;
             case "animal handling":
-            skill = "animal_handling";
-            break;
+                skill = "animal_handling";
+                break;
             default:
-            break;
+                break;
         }
         return skill;
     }
 }
 
-//HalfOrc   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// HalfOrc v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-class HalfOrc extends Race{
-    HalfOrc(){
+class HalfOrc extends Race {
+    HalfOrc() {
 
         this.setStatMods(0, 2);
         this.setStatMods(2, 1);
@@ -576,10 +646,10 @@ class HalfOrc extends Race{
     }
 }
 
-//Tiefling   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+// Tiefling v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
-class Tiefling extends Race{
-    Tiefling(){
+class Tiefling extends Race {
+    Tiefling() {
         this.setStatMods(3, 1);
         this.setStatMods(5, 2);
         this.setAgeRange("Tieflings mature at 18, and live to around 90.");
@@ -592,7 +662,7 @@ class Tiefling extends Race{
         this.setTraits("Hellish Resistance. You have resistance\r\n" + //
                 "to fire damage");
         this.setTraits("- Infernal Legacy: You know the thaumaturgy cantrip.\r\n" + //
-                "Once you reach 3rd level, you can cast the hellish\r\n" + //               //TODO trait adds thamaturgy spell
+                "Once you reach 3rd level, you can cast the hellish\r\n" + // //TODO trait adds thamaturgy spell
                 "rebuke spell once per day as a 2nd-level spell. Once you\r\n" + //
                 "reach 5th level, you can also cast the darkness spell\r\n" + //
                 "once per day. Charisma is your spellcasting ability for\r\n" + //

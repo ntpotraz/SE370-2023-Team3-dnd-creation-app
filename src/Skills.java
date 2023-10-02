@@ -6,24 +6,24 @@ public class Skills {
 
   // Sets up the skills with a base case
   public Skills() {
-    this.skillList.add(new Skill(false, 0, "athletics", 0));
     this.skillList.add(new Skill(false, 0, "acrobatics", 1));
-    this.skillList.add(new Skill(false, 0, "sleight_of_hand", 1));
-    this.skillList.add(new Skill(false, 0, "stealth", 1));
-    this.skillList.add(new Skill(false, 0, "arcana", 3));
-    this.skillList.add(new Skill(false, 0, "history", 3));
-    this.skillList.add(new Skill(false, 0, "investigation", 3));
-    this.skillList.add(new Skill(false, 0, "nature", 3));
-    this.skillList.add(new Skill(false, 0, "religion", 3));
     this.skillList.add(new Skill(false, 0, "animal_handling", 4));
-    this.skillList.add(new Skill(false, 0, "insight", 4));
-    this.skillList.add(new Skill(false, 0, "medicine", 4));
-    this.skillList.add(new Skill(false, 0, "perception", 4));
-    this.skillList.add(new Skill(false, 0, "survival", 4));
+    this.skillList.add(new Skill(false, 0, "arcana", 3));
+    this.skillList.add(new Skill(false, 0, "athletics", 0));
     this.skillList.add(new Skill(false, 0, "deception", 5));
+    this.skillList.add(new Skill(false, 0, "history", 3));
+    this.skillList.add(new Skill(false, 0, "insight", 4));
     this.skillList.add(new Skill(false, 0, "intimidation", 5));
+    this.skillList.add(new Skill(false, 0, "investigation", 3));
+    this.skillList.add(new Skill(false, 0, "medicine", 4));
+    this.skillList.add(new Skill(false, 0, "nature", 3));
+    this.skillList.add(new Skill(false, 0, "perception", 4));
     this.skillList.add(new Skill(false, 0, "performance", 5));
     this.skillList.add(new Skill(false, 0, "persuasion", 5));
+    this.skillList.add(new Skill(false, 0, "religion", 3));
+    this.skillList.add(new Skill(false, 0, "sleight_of_hand", 1));
+    this.skillList.add(new Skill(false, 0, "stealth", 1));
+    this.skillList.add(new Skill(false, 0, "survival", 4));
   }
 
   // The intended constructor to call. Accepts an array of ints and an ArrayList
