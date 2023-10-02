@@ -23,6 +23,7 @@ abstract class Race {   //TODO decisions that add spells
         languages.add("Common, ");
         setSize("MEDIUM");
         setSpeed(30);
+        this.raceQuestions();
     }
 
     public void raceQuestions(){
