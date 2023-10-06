@@ -35,12 +35,21 @@ abstract class Background {         //TODO: 13 backgrounds
     public void setLanguages(String language) {
         this.languages.add(language);
     }
+    public void addLanguage(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose a language to learn Pre-existing languages are:");
+        System.out.println("Common, Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
+                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        String input = scan.nextLine();
+        this.setLanguages(input);
+        scan.close();
+    }
 
     //TODO: Space for getters and setters for equipment(Damien)
 
     public static void main(String[] args) {
-    //Area for testing code
-        
+        //Area for testing code
+
     }
 }
 
@@ -48,8 +57,8 @@ abstract class Background {         //TODO: 13 backgrounds
 Backgrounds are organized as follows:
     - proficiencies
     - skills
-    - languages
     - equipment
+    - languages
     - questions
  */
 
@@ -61,16 +70,9 @@ class Acolyte extends Background{
         this.questions();
     }
     public void questions(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Pick 2 languages to learn. Pre-existing languages are:");
-        System.out.println("Common, Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
-        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
-        String input = scan.nextLine();
-        this.setLanguages(input);
-        System.out.println("What is your second language?");
-        input = scan.nextLine();
-        this.setLanguages(input);
-        scan.close();
+        System.out.println("You learn 2 languages.");
+        this.addLanguage();
+        this.addLanguage();
     }
 }
 
@@ -126,9 +128,7 @@ class FolkHero extends Background{
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose one type of artisan's tools to be proficient in.");
         String tool = scan.nextLine();
-        System.out.println("Choose one type of land mount/vehicle to be proficient in.");
-        String mount = scan.nextLine();
-        this.setProficiencies(2, tool + ", " + mount);
+        this.setProficiencies(2, tool + "Land Vehicles");
         scan.close();
     }
 }
@@ -145,12 +145,97 @@ class GuildArtisan extends Background{
         System.out.println("Choose one type of artisan's tools to be proficient in.");
         String input = scan.nextLine();
         this.setProficiencies(2, input);
-        System.out.println("Choose one language to learn. Pre-existing languages are:");
-        System.out.println("Common, Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n"+
-        "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
-        input = scan.nextLine();
-        this.setLanguages(input);
+        this.addLanguage();
         scan.close();
     }
 }
 
+class Hermit extends Background{
+    Hermit(){
+        this.setProficiencies(2,"Herbalism kit");
+        this.setSkills("medicine");
+        this.setSkills("religion");
+    //TODO: equipment(Damien)
+        this.addLanguage();
+    }
+}
+
+class Noble extends Background{
+    Noble(){
+        this.setSkills("history");
+        this.setSkills("persuasion");
+        //TODO: equipment(Damien)
+        this.questions();
+    }
+    public void questions(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose one type of gaming set you are proficient in.");
+        String input = scan.nextLine();
+        this.setProficiencies(2,input);
+        this.addLanguage();
+        scan.close();
+    }
+}
+
+class OutLander extends Background{
+    OutLander(){
+        this.setSkills("athletics");
+        this.setSkills("survival");
+        //TODO: equipment(Damien)
+        this.questions();
+    }
+    public void questions(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose a musical instrument to be proficient in.");
+        String input = scan.nextLine();
+        this.setProficiencies(2,input);
+        this.addLanguage();
+    }
+}
+
+class Sage extends Background{
+    Sage(){
+        this.setSkills("arcana");
+        this.setSkills("history");
+        //TODO: equipment(Damien)
+    }
+    public void questions(){
+        System.out.println("You learn 2 languages.");
+        this.addLanguage();
+        this.addLanguage();
+    }
+}
+
+class Sailor extends Background{
+    Sailor(){
+        this.setProficiencies(2,"Navigator's tools, water vehicles");
+        this.setSkills("athletics");
+        this.setSkills("perception");
+        //TODO: equipment(Damien)
+    }
+}
+
+class Soldier extends Background{
+    Soldier(){
+        this.setSkills("athletics");
+        this.setSkills("intimidation");
+        //TODO: equipment(Damien)
+        this.questions();
+    }
+    public void questions(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Choose one type of gaming set you are proficient in.");
+        String input = scan.nextLine();
+        this.setProficiencies(2, "Land vehicles, " + input);
+        scan.close();
+    }
+}
+
+class Urchin extends Background{
+    Urchin(){
+        this.setProficiencies(2,"Disguise kit, Thieves' tools");
+        this.setSkills("sleight_of_hand");
+        this.setSkills("stealth");
+        //TODO: equipment(Damien)
+    }
+}
