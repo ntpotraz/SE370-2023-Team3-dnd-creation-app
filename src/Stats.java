@@ -278,7 +278,7 @@ public class Stats {
   public static void main(String[] args) throws Exception {
     int stats[] = { 15, 14, 13, 12, 10, 8 };
     int modifier[] = { 10, 10, 10, 10, 10, 10 };
-    Stats testStats = new Stats(stats);
+    Stats testStats = new Stats(false);
     System.out.printf("\nStats before modifier: %s", testStats.toString());
     testStats.modifyStats(modifier);
     System.out.printf("\nStats after modifier: %s", testStats.toString());
