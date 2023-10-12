@@ -1,10 +1,6 @@
 [
     {
         "name": "Acid Splash",
-        "source": "PHB",
-        "page": 211,
-        "srd": true,
-        "basicRules": true,
         "level": 0,
         "school": "C",
         "time": [
@@ -47,21 +43,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "miscTags": [
-            "SCL",
-            "SGT"
-        ],
-        "areaTags": [
-            "ST",
-            "MT"
         ]
     },
     {
         "name": "Alarm",
-        "source": "PHB",
-        "page": 211,
-        "srd": true,
         "level": 1,
         "school": "A",
         "time": [
@@ -98,16 +83,10 @@
             "You set an alarm against unwanted intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot cube. Until the spell ends, an alarm alerts you whenever a Tiny or larger creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is mental or audible.",
             "A mental alarm alerts you with a ping in your mind if you are within 1 mile of the warded area. This ping awakens you if you are sleeping.",
             "An audible alarm produces the sound of a hand bell for 10 seconds within 60 feet."
-        ],
-        "areaTags": [
-            "C"
         ]
     },
     {
         "name": "Animal Friendship",
-        "source": "PHB",
-        "page": 212,
-        "srd": true,
         "level": 1,
         "school": "E",
         "time": [
@@ -157,18 +136,10 @@
         ],
         "affectsCreatureType": [
             "beast"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Armor of Agathys",
-        "source": "PHB",
-        "page": 215,
         "level": 1,
         "school": "A",
         "time": [
@@ -211,15 +182,10 @@
         ],
         "damageInflict": [
             "cold"
-        ],
-        "miscTags": [
-            "THP"
         ]
     },
     {
         "name": "Arms of Hadar",
-        "source": "PHB",
-        "page": 215,
         "level": 1,
         "school": "C",
         "time": [
@@ -261,16 +227,10 @@
         ],
         "savingThrow": [
             "strength"
-        ],
-        "areaTags": [
-            "S"
         ]
     },
     {
         "name": "Bane",
-        "source": "PHB",
-        "page": 216,
-        "srd": true,
         "level": 1,
         "school": "E",
         "time": [
@@ -315,18 +275,10 @@
         ],
         "savingThrow": [
             "charisma"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "MT"
         ]
     },
     {
         "name": "Blade Ward",
-        "source": "PHB",
-        "page": 218,
         "level": 0,
         "school": "A",
         "time": [
@@ -365,16 +317,6 @@
     },
     {
         "name": "Bless",
-        "source": "PHB",
-        "page": 219,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 50
-            }
-        ],
         "level": 1,
         "school": "E",
         "time": [
@@ -416,23 +358,10 @@
                     "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
                 ]
             }
-        ],
-        "areaTags": [
-            "MT"
         ]
     },
     {
         "name": "Burning Hands",
-        "source": "PHB",
-        "page": 220,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 51
-            }
-        ],
         "level": 1,
         "school": "V",
         "time": [
@@ -475,27 +404,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "miscTags": [
-            "OBJ"
-        ],
-        "areaTags": [
-            "N"
-        ],
-        "hasFluffImages": true
+        ]
     },
     {
         "name": "Charm Person",
-        "source": "PHB",
-        "page": 221,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 51
-            }
-        ],
         "level": 1,
         "school": "E",
         "time": [
@@ -544,19 +456,10 @@
         ],
         "affectsCreatureType": [
             "humanoid"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Chill Touch",
-        "source": "PHB",
-        "page": 221,
-        "srd": true,
         "level": 0,
         "school": "N",
         "time": [
@@ -604,18 +507,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "SCL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Chromatic Orb",
-        "source": "PHB",
-        "page": 221,
         "level": 1,
         "school": "V",
         "time": [
@@ -666,19 +561,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Color Spray",
-        "source": "PHB",
-        "page": 222,
-        "srd": true,
         "level": 1,
         "school": "I",
         "time": [
@@ -723,23 +609,10 @@
         ],
         "conditionInflict": [
             "blinded"
-        ],
-        "areaTags": [
-            "N"
         ]
     },
     {
         "name": "Command",
-        "source": "PHB",
-        "page": 223,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 51
-            }
-        ],
         "level": 1,
         "school": "E",
         "time": [
@@ -835,18 +708,10 @@
             "monstrosity",
             "ooze",
             "plant"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Compelled Duel",
-        "source": "PHB",
-        "page": 224,
         "level": 1,
         "school": "E",
         "time": [
@@ -881,26 +746,10 @@
         ],
         "savingThrow": [
             "wisdom"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Comprehend Languages",
-        "source": "PHB",
-        "page": 224,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 52
-            }
-        ],
         "level": 1,
         "school": "D",
         "time": [
@@ -939,9 +788,6 @@
     },
     {
         "name": "Create or Destroy Water",
-        "source": "PHB",
-        "page": 229,
-        "srd": true,
         "level": 1,
         "school": "T",
         "time": [
@@ -992,26 +838,10 @@
                     "When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st."
                 ]
             }
-        ],
-        "miscTags": [
-            "PRM"
-        ],
-        "areaTags": [
-            "C"
         ]
     },
     {
         "name": "Cure Wounds",
-        "source": "PHB",
-        "page": 230,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 52
-            }
-        ],
         "level": 1,
         "school": "V",
         "time": [
@@ -1060,26 +890,10 @@
             "monstrosity",
             "ooze",
             "plant"
-        ],
-        "miscTags": [
-            "HL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Dancing Lights",
-        "source": "PHB",
-        "page": 230,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 52
-            }
-        ],
         "level": 0,
         "school": "V",
         "time": [
@@ -1113,17 +927,10 @@
         "entries": [
             "You create up to four torch-sized lights within range, making them appear as torches, lanterns, or glowing orbs that hover in the air for the duration. You can also combine the four lights into one glowing vaguely humanoid form of Medium size. Whichever form you choose, each light sheds dim light in a 10-foot radius.",
             "As a bonus action on your turn, you can move the lights up to 60 feet to a new spot within range. A light must be within 20 feet of another light created by this spell, and a light winks out if it exceeds the spell's range."
-        ],
-        "miscTags": [
-            "LGT",
-            "UBA"
         ]
     },
     {
         "name": "Detect Evil and Good",
-        "source": "PHB",
-        "page": 231,
-        "srd": true,
         "level": 1,
         "school": "D",
         "time": [
@@ -1167,16 +974,6 @@
     },
     {
         "name": "Detect Magic",
-        "source": "PHB",
-        "page": 231,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 52
-            }
-        ],
         "level": 1,
         "school": "D",
         "time": [
@@ -1215,9 +1012,6 @@
     },
     {
         "name": "Detect Poison and Disease",
-        "source": "PHB",
-        "page": 231,
-        "srd": true,
         "level": 1,
         "school": "D",
         "time": [
@@ -1257,10 +1051,6 @@
     },
     {
         "name": "Disguise Self",
-        "source": "PHB",
-        "page": 233,
-        "srd": true,
-        "basicRules": true,
         "level": 1,
         "school": "I",
         "time": [
@@ -1295,15 +1085,10 @@
         ],
         "abilityCheck": [
             "intelligence"
-        ],
-        "miscTags": [
-            "SGT"
         ]
     },
     {
         "name": "Dissonant Whispers",
-        "source": "PHB",
-        "page": 234,
         "level": 1,
         "school": "E",
         "time": [
@@ -1344,16 +1129,10 @@
         ],
         "savingThrow": [
             "wisdom"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Divine Favor",
-        "source": "PHB",
-        "page": 234,
-        "srd": true,
         "level": 1,
         "school": "V",
         "time": [
@@ -1387,16 +1166,10 @@
         ],
         "damageInflict": [
             "radiant"
-        ],
-        "miscTags": [
-            "AAD"
         ]
     },
     {
         "name": "Druidcraft",
-        "source": "PHB",
-        "page": 236,
-        "srd": true,
         "level": 0,
         "school": "T",
         "time": [
@@ -1436,10 +1209,6 @@
     },
     {
         "name": "Eldritch Blast",
-        "source": "PHB",
-        "page": 237,
-        "srd": true,
-        "basicRules": true,
         "level": 0,
         "school": "V",
         "time": [
@@ -1473,19 +1242,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "SCL"
-        ],
-        "areaTags": [
-            "ST",
-            "MT"
         ]
     },
     {
         "name": "Ensnaring Strike",
-        "source": "PHB",
-        "page": 237,
         "level": 1,
         "school": "C",
         "time": [
@@ -1541,9 +1301,6 @@
     },
     {
         "name": "Entangle",
-        "source": "PHB",
-        "page": 238,
-        "srd": true,
         "level": 1,
         "school": "C",
         "time": [
@@ -1586,16 +1343,10 @@
         ],
         "abilityCheck": [
             "strength"
-        ],
-        "areaTags": [
-            "Q"
         ]
     },
     {
         "name": "Expeditious Retreat",
-        "source": "PHB",
-        "page": 238,
-        "srd": true,
         "level": 1,
         "school": "T",
         "time": [
@@ -1626,17 +1377,10 @@
         ],
         "entries": [
             "This spell allows you to move at an incredible pace. When you cast this spell, and then as a bonus action on each of your turns until the spell ends, you can take the {@action Dash} action."
-        ],
-        "miscTags": [
-            "UBA"
         ]
     },
     {
         "name": "Faerie Fire",
-        "source": "PHB",
-        "page": 239,
-        "srd": true,
-        "basicRules": true,
         "level": 1,
         "school": "V",
         "time": [
@@ -1671,20 +1415,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "miscTags": [
-            "ADV",
-            "LGT"
-        ],
-        "areaTags": [
-            "C"
         ]
     },
     {
         "name": "False Life",
-        "source": "PHB",
-        "page": 239,
-        "srd": true,
         "level": 1,
         "school": "N",
         "time": [
@@ -1724,22 +1458,10 @@
                     "When you cast this spell using a spell slot of 2nd level or higher, you gain 5 additional temporary hit points for each slot level above 1st."
                 ]
             }
-        ],
-        "miscTags": [
-            "THP"
         ]
     },
     {
         "name": "Feather Fall",
-        "source": "PHB",
-        "page": 239,
-        "srd": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 53
-            }
-        ],
         "level": 1,
         "school": "T",
         "time": [
@@ -1771,16 +1493,10 @@
         ],
         "entries": [
             "Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If the creature lands before the spell ends, it takes no falling damage and can land on its feet, and the spell ends for that creature."
-        ],
-        "areaTags": [
-            "MT"
         ]
     },
     {
         "name": "Find Familiar",
-        "source": "PHB",
-        "page": 240,
-        "srd": true,
         "level": 1,
         "school": "C",
         "time": [
@@ -1821,19 +1537,10 @@
             "While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as an action, you can see through your familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses that the familiar has. During this time, you are {@condition deafened||deaf} and {@condition blinded||blind} with regard to your own senses.",
             "You can't have more than one familiar at a time. If you cast this spell while you already have a familiar, you instead cause it to adopt a new form. Choose one of the forms from the above list. Your familiar transforms into the chosen creature.",
             "Finally, when you cast a spell with a range of touch, your familiar can deliver the spell as if it had cast the spell. Your familiar must be within 100 feet of you, and it must use its reaction to deliver the spell when you cast it. If the spell requires an attack roll, you use your attack modifier for the roll."
-        ],
-        "miscTags": [
-            "PRM",
-            "SGT",
-            "SMN"
         ]
     },
     {
         "name": "Fire Bolt",
-        "source": "PHB",
-        "page": 242,
-        "srd": true,
-        "basicRules": true,
         "level": 0,
         "school": "V",
         "time": [
@@ -1876,20 +1583,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "OBJ",
-            "SCL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Fog Cloud",
-        "source": "PHB",
-        "page": 243,
-        "srd": true,
         "level": 1,
         "school": "C",
         "time": [
@@ -1930,18 +1627,10 @@
                     "When you cast this spell using a spell slot of 2nd level or higher, the radius of the fog increases by 20 feet for each slot level above 1st."
                 ]
             }
-        ],
-        "miscTags": [
-            "OBS"
-        ],
-        "areaTags": [
-            "S"
         ]
     },
     {
         "name": "Friends",
-        "source": "PHB",
-        "page": 244,
         "level": 0,
         "school": "E",
         "time": [
@@ -1972,19 +1661,10 @@
         ],
         "entries": [
             "For the duration, you have advantage on all Charisma checks directed at one creature of your choice that isn't hostile toward you. When the spell ends, the creature realizes that you used magic to influence its mood and becomes hostile toward you. A creature prone to violence might attack you. Another creature might seek retribution in other ways (at the DM's discretion), depending on the nature of your interaction with it."
-        ],
-        "miscTags": [
-            "ADV"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Goodberry",
-        "source": "PHB",
-        "page": 246,
-        "srd": true,
         "level": 1,
         "school": "T",
         "time": [
@@ -2012,16 +1692,10 @@
         "entries": [
             "Up to ten berries appear in your hand and are infused with magic for the duration. A creature can use its action to eat one berry. Eating a berry restores 1 hit point, and the berry provides enough nourishment to sustain a creature for one day.",
             "The berries lose their potency if they have not been consumed within 24 hours of the casting of this spell."
-        ],
-        "miscTags": [
-            "HL"
         ]
     },
     {
         "name": "Grease",
-        "source": "PHB",
-        "page": 246,
-        "srd": true,
         "level": 1,
         "school": "C",
         "time": [
@@ -2060,23 +1734,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "areaTags": [
-            "Q"
         ]
     },
     {
         "name": "Guidance",
-        "source": "PHB",
-        "page": 248,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 54
-            }
-        ],
         "level": 0,
         "school": "D",
         "time": [
@@ -2107,23 +1768,10 @@
         ],
         "entries": [
             "You touch one willing creature. Once before the spell ends, the target can roll a {@dice d4} and add the number rolled to one ability check of its choice. It can roll the die before or after making the ability check. The spell then ends."
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Guiding Bolt",
-        "source": "PHB",
-        "page": 248,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 54
-            }
-        ],
         "level": 1,
         "school": "V",
         "time": [
@@ -2169,18 +1817,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "ADV"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Hail of Thorns",
-        "source": "PHB",
-        "page": 249,
         "level": 1,
         "school": "C",
         "time": [
@@ -2225,23 +1865,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "areaTags": [
-            "S"
         ]
     },
     {
         "name": "Healing Word",
-        "source": "PHB",
-        "page": 250,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 54
-            }
-        ],
         "level": 1,
         "school": "V",
         "time": [
@@ -2290,20 +1917,10 @@
             "monstrosity",
             "ooze",
             "plant"
-        ],
-        "miscTags": [
-            "HL",
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Hellish Rebuke",
-        "source": "PHB",
-        "page": 250,
-        "srd": true,
         "level": 1,
         "school": "V",
         "time": [
@@ -2346,19 +1963,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Heroism",
-        "source": "PHB",
-        "page": 250,
-        "srd": true,
         "level": 1,
         "school": "E",
         "time": [
@@ -2401,18 +2009,10 @@
         ],
         "conditionImmune": [
             "frightened"
-        ],
-        "miscTags": [
-            "THP"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Hex",
-        "source": "PHB",
-        "page": 251,
         "level": 1,
         "school": "E",
         "time": [
@@ -2459,20 +2059,10 @@
         ],
         "damageInflict": [
             "necrotic"
-        ],
-        "miscTags": [
-            "SGT",
-            "UBA"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Hunter's Mark",
-        "source": "PHB",
-        "page": 251,
-        "srd": true,
         "level": 1,
         "school": "D",
         "time": [
@@ -2515,29 +2105,10 @@
         ],
         "abilityCheck": [
             "wisdom"
-        ],
-        "miscTags": [
-            "AAD",
-            "ADV",
-            "SGT",
-            "UBA"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Identify",
-        "source": "PHB",
-        "page": 252,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 54
-            }
-        ],
         "level": 1,
         "school": "D",
         "time": [
@@ -2571,19 +2142,10 @@
         "entries": [
             "You choose one object that you must touch throughout the casting of the spell. If it is a magic item or some other magic-imbued object, you learn its properties and how to use them, whether it requires attunement to use, and how many charges it has, if any. You learn whether any spells are affecting the item and what they are. If the item was created by a spell, you learn which spell created it.",
             "If you instead touch a creature throughout the casting, you learn what spells, if any, are currently affecting it."
-        ],
-        "miscTags": [
-            "OBJ"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Illusory Script",
-        "source": "PHB",
-        "page": 252,
-        "srd": true,
         "level": 1,
         "school": "I",
         "time": [
@@ -2627,16 +2189,6 @@
     },
     {
         "name": "Inflict Wounds",
-        "source": "PHB",
-        "page": 253,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 55
-            }
-        ],
         "level": 1,
         "school": "N",
         "time": [
@@ -2677,16 +2229,10 @@
         ],
         "spellAttack": [
             "M"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Jump",
-        "source": "PHB",
-        "page": 254,
-        "srd": true,
         "level": 1,
         "school": "T",
         "time": [
@@ -2717,23 +2263,10 @@
         ],
         "entries": [
             "You touch a creature. The creature's {@book jump distance|phb|8|Jumping} is tripled until the spell ends."
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Light",
-        "source": "PHB",
-        "page": 255,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 55
-            }
-        ],
         "level": 0,
         "school": "V",
         "time": [
@@ -2767,17 +2300,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "miscTags": [
-            "LGT",
-            "OBJ"
         ]
     },
     {
         "name": "Longstrider",
-        "source": "PHB",
-        "page": 256,
-        "srd": true,
         "level": 1,
         "school": "T",
         "time": [
@@ -2817,23 +2343,10 @@
                     "When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
                 ]
             }
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Mage Armor",
-        "source": "PHB",
-        "page": 256,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 56
-            }
-        ],
         "level": 1,
         "school": "A",
         "time": [
@@ -2864,26 +2377,10 @@
         ],
         "entries": [
             "You touch a willing creature who isn't wearing armor, and a protective magical force surrounds it until the spell ends. The target's base AC becomes 13 + its Dexterity modifier. The spell ends if the target dons armor or if you dismiss the spell as an action."
-        ],
-        "miscTags": [
-            "MAC"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Mage Hand",
-        "source": "PHB",
-        "page": 256,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 56
-            }
-        ],
         "level": 0,
         "school": "C",
         "time": [
@@ -2916,23 +2413,10 @@
             "A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration or until you dismiss it as an action. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.",
             "You can use your action to control the hand. You can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. You can move the hand up to 30 feet each time you use it.",
             "The hand can't attack, activate magic items, or carry more than 10 pounds."
-        ],
-        "miscTags": [
-            "OBJ"
         ]
     },
     {
         "name": "Magic Missile",
-        "source": "PHB",
-        "page": 257,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 57
-            }
-        ],
         "level": 1,
         "school": "V",
         "time": [
@@ -2971,21 +2455,10 @@
         ],
         "damageInflict": [
             "force"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST",
-            "MT"
-        ],
-        "hasFluffImages": true
+        ]
     },
     {
         "name": "Mending",
-        "source": "PHB",
-        "page": 259,
-        "srd": true,
         "level": 0,
         "school": "T",
         "time": [
@@ -3013,16 +2486,10 @@
         "entries": [
             "This spell repairs a single break or tear in an object you touch, such as broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage.",
             "This spell can physically repair a magic item or construct, but the spell can't restore magic to such an object."
-        ],
-        "miscTags": [
-            "OBJ"
         ]
     },
     {
         "name": "Message",
-        "source": "PHB",
-        "page": 259,
-        "srd": true,
         "level": 0,
         "school": "T",
         "time": [
@@ -3055,17 +2522,10 @@
         "entries": [
             "You point your finger toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.",
             "You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks the spell. The spell doesn't have to follow a straight line and can travel freely around corners or through openings."
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Minor Illusion",
-        "source": "PHB",
-        "page": 260,
-        "srd": true,
-        "basicRules": true,
         "level": 0,
         "school": "I",
         "time": [
@@ -3106,10 +2566,6 @@
     },
     {
         "name": "Poison Spray",
-        "source": "PHB",
-        "page": 266,
-        "srd": true,
-        "basicRules": true,
         "level": 0,
         "school": "C",
         "time": [
@@ -3152,27 +2608,10 @@
         ],
         "savingThrow": [
             "constitution"
-        ],
-        "miscTags": [
-            "SCL",
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Prestidigitation",
-        "source": "PHB",
-        "page": 267,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 57
-            }
-        ],
         "level": 0,
         "school": "T",
         "time": [
@@ -3216,16 +2655,10 @@
                 ]
             },
             "If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action."
-        ],
-        "miscTags": [
-            "OBJ"
         ]
     },
     {
         "name": "Produce Flame",
-        "source": "PHB",
-        "page": 269,
-        "srd": true,
         "level": 0,
         "school": "C",
         "time": [
@@ -3272,20 +2705,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "LGT",
-            "SCL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Protection from Evil and Good",
-        "source": "PHB",
-        "page": 270,
-        "srd": true,
         "level": 1,
         "school": "A",
         "time": [
@@ -3329,19 +2752,10 @@
             "fey",
             "fiend",
             "undead"
-        ],
-        "miscTags": [
-            "ADV"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Purify Food and Drink",
-        "source": "PHB",
-        "page": 270,
-        "srd": true,
         "level": 1,
         "school": "T",
         "time": [
@@ -3371,23 +2785,10 @@
         },
         "entries": [
             "All nonmagical food and drink within a 5-foot-radius sphere centered on a point of your choice within range is purified and rendered free of poison and disease."
-        ],
-        "areaTags": [
-            "S"
         ]
     },
     {
         "name": "Ray of Frost",
-        "source": "PHB",
-        "page": 271,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 58
-            }
-        ],
         "level": 0,
         "school": "V",
         "time": [
@@ -3430,18 +2831,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "miscTags": [
-            "SCL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Ray of Sickness",
-        "source": "PHB",
-        "page": 271,
         "level": 1,
         "school": "N",
         "time": [
@@ -3489,23 +2882,10 @@
         ],
         "savingThrow": [
             "constitution"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Resistance",
-        "source": "PHB",
-        "page": 272,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 58
-            }
-        ],
         "level": 0,
         "school": "A",
         "time": [
@@ -3537,23 +2917,10 @@
         ],
         "entries": [
             "You touch one willing creature. Once before the spell ends, the target can roll a {@dice d4} and add the number rolled to one saving throw of its choice. It can roll the die before or after making the saving throw. The spell then ends."
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Sacred Flame",
-        "source": "PHB",
-        "page": 272,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 58
-            }
-        ],
         "level": 0,
         "school": "V",
         "time": [
@@ -3596,28 +2963,10 @@
         ],
         "savingThrow": [
             "dexterity"
-        ],
-        "miscTags": [
-            "SCL",
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
-        ],
-        "hasFluffImages": true
+        ]
     },
     {
         "name": "Sanctuary",
-        "source": "PHB",
-        "page": 272,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 58
-            }
-        ],
         "level": 1,
         "school": "A",
         "time": [
@@ -3653,15 +3002,10 @@
         ],
         "savingThrow": [
             "wisdom"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Searing Smite",
-        "source": "PHB",
-        "page": 274,
         "level": 1,
         "school": "V",
         "time": [
@@ -3706,23 +3050,10 @@
         ],
         "savingThrow": [
             "constitution"
-        ],
-        "miscTags": [
-            "AAD"
         ]
     },
     {
         "name": "Shield",
-        "source": "PHB",
-        "page": 275,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 59
-            }
-        ],
         "level": 1,
         "school": "A",
         "time": [
@@ -3753,23 +3084,10 @@
         ],
         "entries": [
             "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from {@spell magic missile}."
-        ],
-        "miscTags": [
-            "MAC"
         ]
     },
     {
         "name": "Shield of Faith",
-        "source": "PHB",
-        "page": 275,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 59
-            }
-        ],
         "level": 1,
         "school": "A",
         "time": [
@@ -3802,19 +3120,10 @@
         ],
         "entries": [
             "A shimmering field appears and surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration."
-        ],
-        "miscTags": [
-            "MAC"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Shillelagh",
-        "source": "PHB",
-        "page": 275,
-        "srd": true,
         "level": 0,
         "school": "T",
         "time": [
@@ -3849,16 +3158,6 @@
     },
     {
         "name": "Shocking Grasp",
-        "source": "PHB",
-        "page": 275,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 59
-            }
-        ],
         "level": 0,
         "school": "V",
         "time": [
@@ -3900,20 +3199,10 @@
         ],
         "spellAttack": [
             "M"
-        ],
-        "miscTags": [
-            "SCL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Silent Image",
-        "source": "PHB",
-        "page": 276,
-        "srd": true,
-        "basicRules": true,
         "level": 1,
         "school": "I",
         "time": [
@@ -3955,16 +3244,6 @@
     },
     {
         "name": "Sleep",
-        "source": "PHB",
-        "page": 276,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 59
-            }
-        ],
         "level": 1,
         "school": "E",
         "time": [
@@ -4026,17 +3305,10 @@
             "ooze",
             "plant",
             "undead"
-        ],
-        "areaTags": [
-            "S"
         ]
     },
     {
         "name": "Spare the Dying",
-        "source": "PHB",
-        "page": 277,
-        "srd": true,
-        "basicRules": true,
         "level": 0,
         "school": "N",
         "time": [
@@ -4076,16 +3348,10 @@
             "monstrosity",
             "ooze",
             "plant"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Speak with Animals",
-        "source": "PHB",
-        "page": 277,
-        "srd": true,
         "level": 1,
         "school": "D",
         "time": [
@@ -4125,9 +3391,6 @@
     },
     {
         "name": "Tasha's Hideous Laughter",
-        "source": "PHB",
-        "page": 280,
-        "srd": "Hideous Laughter",
         "level": 1,
         "school": "E",
         "time": [
@@ -4168,19 +3431,10 @@
         ],
         "savingThrow": [
             "wisdom"
-        ],
-        "miscTags": [
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Tenser's Floating Disk",
-        "source": "PHB",
-        "page": 282,
-        "srd": "Floating Disk",
         "level": 1,
         "school": "C",
         "time": [
@@ -4217,23 +3471,10 @@
             "This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration, and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground.",
             "The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. It can move across uneven terrain, up or down stairs, slopes and the like, but it can't cross an elevation change of 10 feet or more. For example, the disk can't move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom.",
             "If you move more than 100 feet from the disk (typically because it can't move around an obstacle to follow you), the spell ends."
-        ],
-        "miscTags": [
-            "SGT"
         ]
     },
     {
         "name": "Thaumaturgy",
-        "source": "PHB",
-        "page": 282,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 61
-            }
-        ],
         "level": 0,
         "school": "T",
         "time": [
@@ -4280,8 +3521,6 @@
     },
     {
         "name": "Thorn Whip",
-        "source": "PHB",
-        "page": 282,
         "level": 0,
         "school": "T",
         "time": [
@@ -4325,19 +3564,10 @@
         ],
         "spellAttack": [
             "M"
-        ],
-        "miscTags": [
-            "FMV",
-            "SCL"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Thunderous Smite",
-        "source": "PHB",
-        "page": 282,
         "level": 1,
         "school": "V",
         "time": [
@@ -4376,24 +3606,10 @@
         ],
         "savingThrow": [
             "strength"
-        ],
-        "miscTags": [
-            "AAD",
-            "FMV"
         ]
     },
     {
         "name": "Thunderwave",
-        "source": "PHB",
-        "page": 282,
-        "srd": true,
-        "basicRules": true,
-        "otherSources": [
-            {
-                "source": "RMR",
-                "page": 61
-            }
-        ],
         "level": 1,
         "school": "V",
         "time": [
@@ -4436,20 +3652,10 @@
         ],
         "savingThrow": [
             "constitution"
-        ],
-        "miscTags": [
-            "FMV",
-            "OBJ"
-        ],
-        "areaTags": [
-            "C"
         ]
     },
     {
         "name": "True Strike",
-        "source": "PHB",
-        "page": 284,
-        "srd": true,
         "level": 0,
         "school": "D",
         "time": [
@@ -4480,19 +3686,10 @@
         ],
         "entries": [
             "You extend your hand and point a finger at a target in range. Your magic grants you a brief insight into the target's defenses. On your next turn, you gain advantage on your first attack roll against the target, provided that this spell hasn't ended."
-        ],
-        "miscTags": [
-            "ADV"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Unseen Servant",
-        "source": "PHB",
-        "page": 284,
-        "srd": true,
         "level": 1,
         "school": "C",
         "time": [
@@ -4529,16 +3726,10 @@
             "This spell creates an {@condition invisible}, mindless, shapeless, Medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 hit point, and a Strength of 2, and it can't attack. If it drops to 0 hit points, the spell ends.",
             "Once on each of your turns as a bonus action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human servant could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring wine. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.",
             "If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends."
-        ],
-        "miscTags": [
-            "UBA"
         ]
     },
     {
         "name": "Vicious Mockery",
-        "source": "PHB",
-        "page": 285,
-        "srd": true,
         "level": 0,
         "school": "E",
         "time": [
@@ -4580,19 +3771,10 @@
         ],
         "savingThrow": [
             "wisdom"
-        ],
-        "miscTags": [
-            "SCL",
-            "SGT"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Witch Bolt",
-        "source": "PHB",
-        "page": 289,
         "level": 1,
         "school": "V",
         "time": [
@@ -4640,15 +3822,10 @@
         ],
         "spellAttack": [
             "R"
-        ],
-        "areaTags": [
-            "ST"
         ]
     },
     {
         "name": "Wrathful Smite",
-        "source": "PHB",
-        "page": 289,
         "level": 1,
         "school": "V",
         "time": [
@@ -4690,9 +3867,6 @@
         ],
         "abilityCheck": [
             "wisdom"
-        ],
-        "miscTags": [
-            "AAD"
         ]
     }
 ]

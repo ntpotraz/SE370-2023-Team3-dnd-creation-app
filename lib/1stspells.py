@@ -1,6 +1,6 @@
 import json
 
-with open('spells.json', 'r') as json_file:
+with open('PHBspells.json', 'r') as json_file:
     data = json.load(json_file)
 spellList = []
 
