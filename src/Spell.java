@@ -1,5 +1,3 @@
-import java.util.MissingFormatArgumentException;
-
 public class Spell {
     public enum DamageType {
         PSYCHIC,
