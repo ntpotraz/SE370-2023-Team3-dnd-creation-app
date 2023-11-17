@@ -1,11 +1,13 @@
+package se370.group3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Job {
     private int baseHP;
-    //to be added to finalHP in character class while calculating final stats
+    // to be added to finalHP in character class while calculating final stats
     ArrayList<String> proficienciesTypes = new ArrayList<String>();
-    //Arraylist index 0 = armor, 1 = weapons, 2 = tools
+    // Arraylist index 0 = armor, 1 = weapons, 2 = tools
     ArrayList<String> skills = new ArrayList<String>();
 
     private Boolean strengthSV;
@@ -28,31 +30,31 @@ public class Job {
         charismaSV = false;
     }
 
-    int getBaseHP(){
+    int getBaseHP() {
         return baseHP;
     }
 
-    Boolean getStr(){
+    Boolean getStr() {
         return strengthSV;
     }
 
-    Boolean getDex(){
+    Boolean getDex() {
         return dexteritySV;
     }
 
-    Boolean getCon(){
+    Boolean getCon() {
         return constitutionSV;
     }
 
-    Boolean getInt(){
+    Boolean getInt() {
         return intelligenceSV;
     }
 
-    Boolean getWis(){
+    Boolean getWis() {
         return wisdomSV;
     }
 
-    Boolean getCha(){
+    Boolean getCha() {
         return charismaSV;
     }
 
@@ -64,10 +66,8 @@ public class Job {
         return proficienciesTypes;
     }
 
-    class Barbarian extends Job{
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Barbarian(){
+        void Barbarian() {
             strengthSV = true;
             constitutionSV = true;
             baseHP = 12;
@@ -75,16 +75,15 @@ public class Job {
             proficienciesTypes.set(1, "simple weapons, martial weapons");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of the following skills that you'd like,\nAnimal Handling, Athletics, Intimidation, Nature, Perception, Survival:\n");
+            System.out.printf(
+                    "Type the first of the following skills that you'd like,\nAnimal Handling, Athletics, Intimidation, Nature, Perception, Survival:\n");
             skills.add(input.nextLine());
-            System.out.printf("Type the second of the following skills that you'd like,\n*Animal Handling, Athletics, Intimidation, Nature, Perception, Survival:\n");
+            System.out.printf(
+                    "Type the second of the following skills that you'd like,\n*Animal Handling, Athletics, Intimidation, Nature, Perception, Survival:\n");
             skills.add(input.nextLine());
         }
 
-
-
-
-        //Class Abilities   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
+        // Class Abilities v v v v v v v v v v v v v v v v v v v v
 
         String rage = "In battle, you fight with primal ferocity. On your turn,\r\n" + //
                 "you can enter a rage as a bonus action.\r\n" + //
@@ -98,12 +97,9 @@ public class Job {
                 "in the Rage Damage colum n of the Barbarian table.\r\n" + //
                 "- You have resistance to bludgeoning, piercing, and\r\n" + //
                 "slashing damage.";
-    }
 
-    class Bard extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Bard() {
+        void Bard() {
             dexteritySV = true;
             charismaSV = true;
             baseHP = 8;
@@ -119,12 +115,9 @@ public class Job {
             System.out.printf("Type the third skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Cleric extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Cleric() {
+        void Cleric() {
             wisdomSV = true;
             charismaSV = true;
             baseHP = 8;
@@ -138,31 +131,27 @@ public class Job {
             skills.add(input.nextLine());
 
         }
-    }
 
-    class Druid extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Druid() {
+      void Druid() {
             intelligenceSV = true;
             wisdomSV = true;
             baseHP = 8;
             proficienciesTypes.set(0, "light armor, medium armor, shields");
-            proficienciesTypes.set(1, "clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears");
+            proficienciesTypes.set(1,
+                    "clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears");
             proficienciesTypes.set(2, "Herbalism kit");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nArcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nArcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Fighter extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Fighter() {
+    void Fighter() {
             strengthSV = true;
             constitutionSV = true;
             baseHP = 10;
@@ -170,18 +159,16 @@ public class Job {
             proficienciesTypes.set(1, "Simple weapons, martial weapons");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nAcrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nAcrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
 
         }
-    }
 
-    class Monk extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Monk() {
+    void Monk() {
             dexteritySV = true;
             strengthSV = true;
             baseHP = 8;
@@ -189,17 +176,15 @@ public class Job {
             proficienciesTypes.set(2, "Choose one type of artisan’s tools or one musical instrument");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nAcrobatics, Athletics, History, Insight, Religion, and Stealth:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nAcrobatics, Athletics, History, Insight, Religion, and Stealth:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Paladin extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Paladin() {
+    void Paladin() {
             wisdomSV = true;
             charismaSV = true;
             baseHP = 10;
@@ -207,17 +192,15 @@ public class Job {
             proficienciesTypes.set(1, "simple weapons, martial weapons");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nAthletics, Insight, Intimidation, Medicine, Persuasion, and Religion:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nAthletics, Insight, Intimidation, Medicine, Persuasion, and Religion:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Ranger extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Ranger() {
+    void Ranger() {
             dexteritySV = true;
             strengthSV = true;
             baseHP = 10;
@@ -225,19 +208,17 @@ public class Job {
             proficienciesTypes.set(1, "Simple weapons, martial weapons");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of three skills,\nAnimal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival\n");
+            System.out.printf(
+                    "Type the first of three skills,\nAnimal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the third skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Rogue extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Rogue() {
+    void Rogue() {
             dexteritySV = true;
             intelligenceSV = true;
             baseHP = 8;
@@ -246,7 +227,8 @@ public class Job {
             proficienciesTypes.set(2, "Thieves’ tools");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of four skills,\nAcrobatics, Athletics, Deception. Insight, Intimidation, Investigation, Perception, Performance. Persuasion, Sleight of Hand, and Stealth\n");
+            System.out.printf(
+                    "Type the first of four skills,\nAcrobatics, Athletics, Deception. Insight, Intimidation, Investigation, Perception, Performance. Persuasion, Sleight of Hand, and Stealth\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
@@ -255,30 +237,24 @@ public class Job {
             System.out.printf("Type the fourth skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Sorcerer extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Sorcerer() {
+    void Sorcerer() {
             dexteritySV = true;
             constitutionSV = true;
             baseHP = 6;
             proficienciesTypes.set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nArcana, Deception, Insight, Intimidation, Persuasion, and Religion:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nArcana, Deception, Insight, Intimidation, Persuasion, and Religion:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
         }
-        }
 
 
-    class Warlock extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
-
-        Warlock() {
+    void Warlock() {
             wisdomSV = true;
             charismaSV = true;
             baseHP = 8;
@@ -286,27 +262,26 @@ public class Job {
             proficienciesTypes.set(1, "Simple weapons");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nArcana, Deception, History, Intimidation, Investigation, Nature, and Religion:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nArcana, Deception, History, Intimidation, Investigation, Nature, and Religion:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
         }
-    }
 
-    class Wizard extends Job {
-        //Constructor   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v   v
 
-        Wizard() {
+    void Wizard() {
             wisdomSV = true;
             intelligenceSV = true;
             baseHP = 6;
             proficienciesTypes.set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
             Scanner input = new Scanner(System.in);
-            System.out.printf("Type the first of two skills,\nArcana, History, Insight, Investigation, Medicine, and Religion:\n");
+            System.out.printf(
+                    "Type the first of two skills,\nArcana, History, Insight, Investigation, Medicine, and Religion:\n");
             skills.add(input.nextLine());
             System.out.printf("Type the second skill:\n");
             skills.add(input.nextLine());
         }
-    }
+
 }
