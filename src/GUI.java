@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class GUI {
 
@@ -12,10 +15,15 @@ public class GUI {
     private JPanel characterPanel, abilitiesPanel, spellsPanel,  equipmentPanel;
     private JPanel[] panels;
     private int currentPanelIndex;
+
+    private ArrayList<String> availableScores = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+    private JComboBox<String>[] comboBoxes; // Array to hold references to all JComboBoxes
     public GUI() {
         frame = new JFrame(); //create initial panel
 
-        // Get the screen size
+        comboBoxes = new JComboBox[6]; // Initialize the array for 6 abilities
+
+    // Get the screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize.width, screenSize.height);
 
@@ -110,16 +118,22 @@ public class GUI {
             ind.gridx = 0; ind.gridy = 0;
 
             JLabel label = new JLabel(abilities[i]);
-            label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 16)); // Set font size to 16, for example
+            label.setFont(new Font(label.getFont().getName(), label.getFont().getStyle(), 16));
+            abilityPanel.add(label, ind);
 
-            abilityPanel.add(label, ind); // Add the label to the panel
+            comboBoxes[i] = new JComboBox<>(availableScores.toArray(new String[0]));
+            comboBoxes[i].setPreferredSize(new Dimension(150, 30));
+            comboBoxes[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateAvailableScores();
+                }
+            });
 
-            JComboBox<String> comboBox = new JComboBox<>(rollDiceResult); // Create a new combo box with shared model
-            comboBox.setPreferredSize(new Dimension(150, 30));
             ind.gridy = 1;
-            abilityPanel.add(comboBox, ind); // Add the combo box
+            abilityPanel.add(comboBoxes[i], ind);
 
-            abi.gridx = i % 3; abi.gridy = i / 3; // Arrange in a grid
+            abi.gridx = i % 3; abi.gridy = i / 3;
             abilitiesPanel.add(abilityPanel, abi);
         }
 
@@ -187,23 +201,30 @@ public class GUI {
         c.gridx = 1; c.gridy = 2;
         createNextButton(panel, c);
 
-        // JTextArea to display selected options
+        // JTextArea to display selected cantrips
+        JTextArea cantripSB = new JTextArea(5, 20); //selected SB
+        cantripSB.setEditable(false);
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+        cantripSB.setBorder(border);
+
+        // JTextArea to display selected lvl 1 spells
         JTextArea spellBook = new JTextArea(5, 20);
         spellBook.setEditable(false);
-        Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
         spellBook.setBorder(border);
 
         // add spellbook (text area) and subtitle ("Spellbook") to Book panel to main panel
         s.gridx = 0; s.gridy = 0;
         Book.add(new JLabel("Spellbook"),s);
         s.gridy = 1;
+        Book.add(cantripSB, s);
+        s.gridy = 2;
         Book.add(spellBook, s);
 
         // add dropdown menus for selecting spells and add them to the Spell panel
-        //Dropdown menu for "Other"
+        //Dropdown menu for "Cantrips"
         s.gridx = 0; s.gridy = 0;
         s.insets = new Insets(5, 5, 5, 5);
-        Spells.add(createDropdownMenu(new String[]{"Option 1", "Option 2", "Option 3"}, "Other", spellBook), s);
+        Spells.add(createDropdownMenu(new String[]{"Option 1", "Option 2", "Option 3"}, "Cantrips", cantripSB), s);
 
         //Dropdown menu for "Lvl 1 Spells"
         s.gridy = 1;
@@ -243,26 +264,32 @@ public class GUI {
         createNextButton(panel, c);
 
         //JTextArea to display selected options
-        JTextArea inv = new JTextArea(5, 20); //inv (inventory) will display all the armor and weapons selected
-        inv.setEditable(false);
+        JTextArea weapInv = new JTextArea(5, 20); //inv (inventory) will display all the armor and weapons selected
+        weapInv.setEditable(false);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-        inv.setBorder(border);
+        weapInv.setBorder(border);
+
+        JTextArea equipInv = new JTextArea(5, 20); //inv (inventory) will display all the armor and weapons selected
+        equipInv.setEditable(false);
+        equipInv.setBorder(border);
 
         //add Inventory (text area) and subtitle ("Inventory") to Inventory panel
         e.gridx = 0; e.gridy = 0;
         Inventory.add(new JLabel("Inventory"),e);
         e.gridy = 1;
-        Inventory.add(inv, e);
+        Inventory.add(weapInv, e);
+        e.gridy = 2;
+        Inventory.add(equipInv,e);
 
         // add dropdown menus for selecting weapons and add them to the Equip panel
         //Dropdown menu for "Weapons"
         e.gridx = 0; e.gridy = 0;
         e.insets = new Insets(5, 5, 5, 5);
-        Equip.add(createDropdownMenu(new String[]{"Weapon 1", "Weapon 2", "Weapon 3"}, "Weapons", inv), e);
+        Equip.add(createDropdownMenu(new String[]{"Weapon 1", "Weapon 2", "Weapon 3"}, "Weapons", weapInv), e);
 
         //Dropdown menu for "Armor"
         e.gridy = 1;
-        Equip.add(createDropdownMenu(new String[]{"Armor 1", "Armor 2", "Armor 3"}, "Armor", inv), e);
+        Equip.add(createDropdownMenu(new String[]{"Armor 1", "Armor 2", "Armor 3"}, "Armor", equipInv), e);
 
         //add Equip and Inventory panels to the main panel
         c.gridx = 0; c.gridy = 1;
@@ -273,6 +300,31 @@ public class GUI {
         panel.add(Inventory,c);
 
         return panel;
+    }
+
+    private void updateAvailableScores() {
+        HashSet<String> selectedScores = new HashSet<>();
+        for (JComboBox<String> comboBox : comboBoxes) {
+            String selected = (String) comboBox.getSelectedItem();
+            if (selected != null && !selected.isEmpty()) {
+                selectedScores.add(selected);
+            }
+        }
+
+        availableScores = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        availableScores.removeAll(selectedScores);
+
+        for (JComboBox<String> comboBox : comboBoxes) {
+            String currentSelection = (String) comboBox.getSelectedItem();
+            comboBox.removeAllItems();
+            for (String score : availableScores) {
+                comboBox.addItem(score);
+            }
+            if (currentSelection != null && !currentSelection.isEmpty()) {
+                comboBox.addItem(currentSelection);
+            }
+            comboBox.setSelectedItem(currentSelection);
+        }
     }
 
     //function to create the drop-down menus with the check marks for selecting spells and equipment. It adds the selected element to the "spellbook" and removes it if unchecked
