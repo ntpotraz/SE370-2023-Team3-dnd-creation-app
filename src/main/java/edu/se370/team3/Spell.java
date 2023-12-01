@@ -162,27 +162,31 @@ public class Spell {
     }
   }
 
-  @Override
-  public String toString() {
-    String output = "";
-
-    output += "========== " + this.name + " ==========\n";
-    output += "Spell Level: " + this.getLevel();
-    output += "\nRange: " + this.range + " meters";
-    output += "\nDamage Type: " + this.damageType;
-    output += "\nSchool of Magic: " + this.school;
-    if (duration != 0) {
-      output += "\nDuration: This spell lasts for " + duration + " " + durationType;
-      if (duration > 1)
-        output += "s";
-      output += ".";
-    }
-    output += "\nCast time: " + this.time;
-    output += "\n";
-    output += "\nDescription: " + this.description;
-    output += "\n";
-    return output;
+  public String getName() {
+    return this.name;
   }
+
+  // @Override
+  // public String toString() {
+  //   String output = "";
+
+  //   output += "========== " + this.name + " ==========\n";
+  //   output += "Spell Level: " + this.getLevel();
+  //   output += "\nRange: " + this.range + " meters";
+  //   output += "\nDamage Type: " + this.damageType;
+  //   output += "\nSchool of Magic: " + this.school;
+  //   if (duration != 0) {
+  //     output += "\nDuration: This spell lasts for " + duration + " " + durationType;
+  //     if (duration > 1)
+  //       output += "s";
+  //     output += ".";
+  //   }
+  //   output += "\nCast time: " + this.time;
+  //   output += "\n";
+  //   output += "\nDescription: " + this.description;
+  //   output += "\n";
+  //   return output;
+  // }
 
   public static void main(String[] args) {
     Spell testSpell = new Spell();
@@ -215,8 +219,6 @@ class Time {
         break;
       case "bonus":
         this.unit = Unit.BONUS;
-        break;
-      default:
         this.unit = Unit.ACTION;
         break;
     }

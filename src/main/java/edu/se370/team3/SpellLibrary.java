@@ -61,15 +61,34 @@ public class SpellLibrary {
     }
   }
 
+  public Spell getSpell(String name) {
+    name = name.toLowerCase();
+    for (Spell spell : cantripList) {
+      if (spell.getName().toLowerCase().equals(name))
+        return spell;
+    }
+    for (Spell spell : level1SpellList) {
+      if (spell.getName().toLowerCase().equals(name))
+        return spell;
+    }
+    return new Spell();
+  }
+
   public static void main(String[] args) {
 
-    SpellLibrary test = new SpellLibrary();
+    SpellLibrary library = new SpellLibrary();
 
-    System.out.println("Number of cantrips: " + test.cantripList.size());
-    System.out.println("Number of level 1 spells: " + test.level1SpellList.size());
+    // ArrayList<String> test = new ArrayList<String>();
+    // for (Spell spell : library.cantripList) {
+    // test.add(spell.getName());
+    // }
+    // System.out.println(test);
+
+    System.out.println("Number of cantrips: " + library.cantripList.size());
+    System.out.println("Number of level 1 spells: " + library.level1SpellList.size());
     System.out.println();
-    System.out.println(test.cantripList.get(13));
-    System.out.println(test.level1SpellList.get(0));
+    System.out.println(library.getSpell("eldritch blast"));
+    System.out.println(library.getSpell("detect magic"));
 
   }
 }
