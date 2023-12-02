@@ -380,21 +380,51 @@ public class SpellLibrary {
   public ArrayList<String> getJobSpellNames() {
     ArrayList<String> nameList = new ArrayList<String>();
 
+    if (this.jobSpells.size() == 0) {
+      nameList.add("No cantrips available");
+      return nameList;
+    }
+
     for (Spell spell : this.jobSpells) {
       nameList.add(spell.getName());
     }
-
     return nameList;
   }
 
   public ArrayList<String> getJobCantripNames() {
+
     ArrayList<String> nameList = new ArrayList<String>();
+
+    if (this.jobCantrips.size() == 0) {
+      nameList.add("No cantrips available");
+      return nameList;
+    }
 
     for (Spell spell : this.jobCantrips) {
       nameList.add(spell.getName());
     }
-
     return nameList;
+  }
+
+  public void removeSpell(String name) {
+    this.removeJobCantripName(name);
+    this.removeJobSpellsName(name);
+  }
+
+  public void removeJobSpellsName(String name) {
+    name = name.toLowerCase();
+    for (int i = 0; i < this.jobSpells.size(); i++) {
+      if (this.jobSpells.get(i).getName().toLowerCase().equals(name))
+        this.jobSpells.remove(i);
+    }
+  }
+
+  public void removeJobCantripName(String name) {
+    name = name.toLowerCase();
+    for (int i = 0; i < this.jobCantrips.size(); i++) {
+      if (this.jobCantrips.get(i).getName().toLowerCase().equals(name))
+        this.jobCantrips.remove(i);
+    }
   }
 
   public static void main(String[] args) {

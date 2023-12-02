@@ -1,2 +1,2 @@
-target/classes/edu/se370/team3/
-target/test-classes/edu/se370/team3/
+*/.vscode/*
+target/
