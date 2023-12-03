@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class Character {
   private String characterName;
+  private int health;
+  private int ac;
+  private int[] hitDie;
   private Job job;
   private Race race;
   private Stats stats;
@@ -12,6 +15,9 @@ public class Character {
 
   public Character() {
     this.characterName = "";
+    this.health = 0;
+    this.ac = 10;
+    this.hitDie = new int[] { 0, 0 }; // 0: # of dice, 1: # of sides (0d1)
     this.race = new Blank();
     this.job = new Job();
     this.stats = new Stats();
@@ -25,6 +31,30 @@ public class Character {
 
   public String getName() {
     return this.characterName;
+  }
+
+  public void addHealth(int hp) {
+    this.health += hp;
+  }
+
+  public int getHealth() {
+    return this.health;
+  }
+
+  public void addAC(int armor) {
+    this.ac += armor;
+  }
+
+  public int getAC() {
+    return this.ac;
+  }
+
+  public void setHitDie(int[] hd) {
+    this.hitDie = hd;
+  }
+
+  public String getHitDie() {
+    return this.hitDie[0] + "d" + this.hitDie[1];
   }
 
   public Job getJob() {
@@ -81,7 +111,6 @@ public class Character {
 
   public void setRace(String input) {
     String newRace;
-
     switch (input) {
       case "1":
         newRace = "hilldwarf";
@@ -167,6 +196,7 @@ public class Character {
             "14. Tiefling\n>>> ");
     input = kb.nextLine();
     character.setRace(input);
+    character.addHealth(character.getRace().getHealthModifer());
 
     System.out.println("\nPlease choose desired Class from the list below:");
     System.out.println(
@@ -185,6 +215,31 @@ public class Character {
     System.out.print(">>> ");
     input = kb.nextLine();
     character.setJob(input);
+    character.addHealth(character.getJob().getBaseHP());
+    character.setHitDie(character.getJob().getHitDie());
+
+    System.out.println("\nHealth: " + character.getHealth());
+    System.out.println("Hit Dice: " + character.getHitDie());
+
+    System.out.println("\nWould you like to roll for your stats, or use the standard array: { 15, 14, 13, 12, 10, 8 }");
+    System.out.print("1. Roll\n2. Standard Array\n>>> ");
+    input = kb.nextLine();
+
+    if (input.equals("1")) {
+      System.out.println("\nRolling for stats, you will do this a total of 6 times");
+      for (int i = 0; i < 6; i++) {
+        System.out.print("Press 'Enter' to roll\n>>> ");
+        kb.nextLine();
+        System.out.println();
+        character.getStats().rollDice();
+        System.out.println("Stats: " + character.getStats().getStatList() + "\n");
+      }
+
+    } else {
+      character.getStats().useStandardArray();
+    }
+    System.out.println("\nHere are your points to allocate to your stats:");
+    System.out.println(character.getStats().getStatList());
 
     kb.close();
   }

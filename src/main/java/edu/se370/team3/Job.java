@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Job {
   private String jobTitle;
   private int baseHP;
+  private int[] hitDie;
   // to be added to finalHP in character class while calculating final stats
   private ArrayList<String> proficienciesTypes = new ArrayList<>();
   // Arraylist index 0 = armor, 1 = weapons, 2 = tools
@@ -23,6 +24,7 @@ public class Job {
   Job() {
     this.jobTitle = "Jobless";
     this.baseHP = 0;
+    this.hitDie = new int[] { 0, 0 }; // 0: # of dice, 1: # of sides
     this.proficienciesTypes.add("");
     this.proficienciesTypes.add("");
     this.proficienciesTypes.add("");
@@ -100,6 +102,14 @@ public class Job {
     this.baseHP = hp;
   }
 
+  public void setHitDie(int[] hd) {
+    this.hitDie = hd;
+  }
+
+  public int[] getHitDie() {
+    return this.hitDie;
+  }
+
   public boolean getStr() {
     return strengthSV;
   }
@@ -165,6 +175,7 @@ public class Job {
     setStr();
     setCon();
     setBaseHP(12);
+    setHitDie(new int[] { 1, 12 });
     getProficiancy().set(0, "light armor, medium armor, shields");
     getProficiancy().set(1, "simple weapons, martial weapons");
 
@@ -194,24 +205,31 @@ public class Job {
     setDex();
     setCha();
     setBaseHP(8);
+    setHitDie(new int[] { 1, 8 });
     getProficiancy().set(0, "light armor");
     getProficiancy().set(1, "simple weapons, hand crossbows, longswords, rapiers, shortswords");
     getProficiancy().set(2, "Three musical instruments of your choice");
 
     Scanner input = new Scanner(System.in);
-    System.out.printf("The Bard class gives access to any three skills,\n type the first skill :\n");
+    System.out.printf("\nThe Bard class gives access to any three skills,\n type the first skill :\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the third skill:\n");
+    System.out.printf("\nType the third skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("type rapier, longsword, or any simple weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Diplomat’s pack or an entertainer's pack:\n");
+    System.out.printf("\nDiplomat’s pack or an entertainer's pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Lute or any other musical instrument:\n");
+    System.out.printf("\nLute or any other musical instrument:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Leather armor");
     getEquipment().add("Dagger");
@@ -222,25 +240,33 @@ public class Job {
     setWis();
     setCha();
     setBaseHP(8);
+    setHitDie(new int[] { 1, 8 });
     getProficiancy().set(0, "Light armor, medium armor, shields");
     getProficiancy().set(1, "All simple weapons");
 
     Scanner input = new Scanner(System.in);
-    System.out.printf("Type the first of two skills,\nHistory, Insight, Medicine, Persuasion, and Religion:\n");
+    System.out.printf("\nType the first of two skills,\nHistory, Insight, Medicine, Persuasion, and Religion:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type mace, or warhammer (if proficient):\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Scale mail, leather armor, or chain mail (if proficient):\n");
+    System.out.printf("\nScale mail, leather armor, or chain mail (if proficient):\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("light crossbow and 20 bolts or any simple weapon:\n");
+    System.out.printf("\nlight crossbow and 20 bolts or any simple weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Priest’s pack or an explorer’s pack:\n");
+    System.out.printf("\nPriest’s pack or an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Holy symbol:\n");
+    System.out.printf("\nHoly symbol:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Shield");
   }
@@ -250,6 +276,7 @@ public class Job {
     setInt();
     setWis();
     setBaseHP(8);
+    setHitDie(new int[] { 1, 8 });
     getProficiancy().set(0, "light armor, medium armor, shields");
     getProficiancy().set(1,
         "clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears");
@@ -257,15 +284,19 @@ public class Job {
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nArcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival:\n");
+        "\nType the first of two skills,\nArcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type wooden shield or any simple weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Scimitar or any simple melee weapon:\n");
+    System.out.printf("\nScimitar or any simple melee weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Leather armor");
     getEquipment().add("Explorers pack");
@@ -277,33 +308,41 @@ public class Job {
     setStr();
     setCon();
     setBaseHP(10);
+    setHitDie(new int[] { 1, 10 });
     getProficiancy().set(0, "All armor, shields");
     getProficiancy().set(1, "Simple weapons, martial weapons");
     String in = "";
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nAcrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival:\n");
+        "\nType the first of two skills,\nAcrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type chain mail or B for leather armor, longbow, and 20 arrows:\n");
+    System.out.print(">>> ");
     in = input.nextLine();
     if (in == "b") {
       getEquipment().add("leather armor");
       getEquipment().add("long bow");
       getEquipment().add("20 arrows");
     } else {
-      getEquipment().add(input.nextLine());
+      System.out.print(">>> ");
+      getEquipment().add(in);
     }
 
-    System.out.printf("A martial weapon and a shield or two martial weapons:\n");
+    System.out.printf("\nA martial weapon and a shield or two martial weapons:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("A light crossbow and 20 bolts, or two handaxes:\n");
+    System.out.printf("\nA light crossbow and 20 bolts, or two handaxes:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Dungeoneer’s pack or (b) an explorer’s pack:\n");
+    System.out.printf("\nDungeoneer’s pack or (b) an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
   }
 
@@ -312,20 +351,25 @@ public class Job {
     setDex();
     setStr();
     setBaseHP(8);
+    setHitDie(new int[] { 1, 8 });
     getProficiancy().set(1, "simple weapons, shortswords");
     getProficiancy().set(2, "Choose one type of artisan’s tools or one musical instrument");
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nAcrobatics, Athletics, History, Insight, Religion, and Stealth:\n");
+        "\nType the first of two skills,\nAcrobatics, Athletics, History, Insight, Religion, and Stealth:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("type shortsword or any simple weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Dungeoneer’s pack or an explorer’s pack:\n");
+    System.out.printf("\nDungeoneer’s pack or an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("10 Darts");
   }
@@ -335,27 +379,35 @@ public class Job {
     setWis();
     setCha();
     setBaseHP(10);
+    setHitDie(new int[] { 1, 10 });
     getProficiancy().set(0, "all armor, shields");
     getProficiancy().set(1, "simple weapons, martial weapons");
     String in;
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nAthletics, Insight, Intimidation, Medicine, Persuasion, and Religion:\n");
+        "\nType the first of two skills,\nAthletics, Insight, Intimidation, Medicine, Persuasion, and Religion:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type a martial weapon then shield or B for two martial weapons:\n");
+    System.out.print(">>> ");
     in = input.nextLine();
     if (in == "b") {
-      System.out.printf("Martial weapon 1:\n");
+      System.out.printf("\nMartial weapon 1:\n");
+      System.out.print(">>> ");
       getEquipment().add(input.nextLine());
-      System.out.printf("Martial weapon 2:\n");
+      System.out.printf("\nMartial weapon 2:\n");
+      System.out.print(">>> ");
       getEquipment().add(input.nextLine());
     } else {
+      System.out.print(">>> ");
       getEquipment().add(input.nextLine());
+      System.out.print(">>> ");
       getEquipment().add(input.nextLine());
     }
 
@@ -374,6 +426,7 @@ public class Job {
     setDex();
     setStr();
     setBaseHP(10);
+    setHitDie(new int[] { 1, 10 });
     getProficiancy().set(0, "Light armor");
     getProficiancy().set(1, "Simple weapons, martial weapons");
 
@@ -412,6 +465,7 @@ public class Job {
     setDex();
     setInt();
     setBaseHP(8);
+    setHitDie(new int[] { 1, 8 });
     getProficiancy().set(0, "Light armor");
     getProficiancy().set(1, "Simple weapons, hand crossbows, longswords, rapiers, shortswords");
     getProficiancy().set(2, "Thieves’ tools");
@@ -444,6 +498,7 @@ public class Job {
     setDex();
     setCon();
     setBaseHP(6);
+    setHitDie(new int[] { 1, 6 });
     getProficiancy().set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
     Scanner input = new Scanner(System.in);
@@ -476,6 +531,7 @@ public class Job {
     setWis();
     setCha();
     setBaseHP(8);
+    setHitDie(new int[] { 1, 8 });
     getProficiancy().set(0, "Light armor");
     getProficiancy().set(1, "Simple weapons");
 
@@ -510,6 +566,7 @@ public class Job {
     setWis();
     setInt();
     setBaseHP(6);
+    setHitDie(new int[] { 1, 6 });
     getProficiancy().set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
     Scanner input = new Scanner(System.in);

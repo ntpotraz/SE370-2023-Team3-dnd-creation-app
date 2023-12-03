@@ -28,6 +28,7 @@ public class Stats {
     System.out
         .println("Your low roll of " + roll.getLowestDie() + " will be thrown out for a total of " + roll.getTotal());
     this.statList.add(roll.getTotal());
+    this.statList.sort(Collections.reverseOrder());
   }
 
   // Checks to see if the stat has already been entered
@@ -137,6 +138,10 @@ public class Stats {
       newStats[i] += modifier[i];
       setStat(i, newStats[i]);
     }
+  }
+
+  public ArrayList<Integer> getStatList() {
+    return statList;
   }
 
   public int[] getStats() {
