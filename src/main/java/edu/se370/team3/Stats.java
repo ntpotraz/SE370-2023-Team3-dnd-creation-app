@@ -8,102 +8,26 @@ import java.util.Scanner;
 public class Stats {
   private int[] statLevel = new int[6];
   private int[] statModifiers = new int[6];
+  private ArrayList<Integer> statList;
   private Scanner k = new Scanner(System.in);
 
   public Stats() {
-    // Fills Ability Points with all 10s
-    for (int i = 0; i < 6; i++) {
-      setStat(i, 10);
-    }
+    setStat(0, 0);
+    setStat(1, 0);
+    setStat(2, 0);
+    setStat(3, 0);
+    setStat(4, 0);
+    setStat(5, 0);
+    this.statList = new ArrayList<Integer>();
   }
 
-  // Fill Ability Points with a custom number
-  public Stats(int n) {
-    // Fills both arrays with 0's
-    for (int i = 0; i < 6; i++) {
-      setStat(i, n);
-    }
-  }
-
-  // Set Ability Points using a int array
-  public Stats(int[] stats) throws Exception {
-    if (stats.length != 6)
-      throw new Exception("Invalid length int array");
-
-    for (int i = 0; i < 6; i++)
-      setStat(i, stats[i]);
-  }
-
-  public Stats(boolean isStandard) {
-    ArrayList<Integer> statArray = new ArrayList<>();
-    // If player decides to use the standard set of scores
-    if (isStandard) {
-      statArray.add(15);
-      statArray.add(14);
-      statArray.add(13);
-      statArray.add(12);
-      statArray.add(10);
-      statArray.add(8);
-    } else { // If they player decides to role the dice
-      Random rng = new Random();
-      ArrayList<Integer> dice = new ArrayList<>(4);
-
-      // This whole thing mimics how it's done with real dice You role 4, throw
-      // out the lowest role, add the 3 remaining numbers. You do that a total
-      // of 6 times and those are what your stats will be
-      for (int i = 0; i < 6; i++) {
-        for (int j = 0; j < 4; j++) {
-          dice.add(rng.nextInt(6) + 1);
-        }
-        int lowestDie = 7;
-        int lowestDieIndex = -1;
-        for (int index = 0; index < 4; index++) {
-          if (dice.get(index) < lowestDie) {
-            lowestDie = dice.get(index);
-            lowestDieIndex = index;
-          }
-        }
-        dice.remove(lowestDieIndex);
-        statArray.add(dice.get(0) + dice.get(1) + dice.get(2));
-        dice.removeAll(dice);
-      }
-    }
-    // Sorts the stats from highest to lowest
-    Collections.sort(statArray, Collections.reverseOrder());
-
-    // Runs through the rolled stats and lets you set what your character stats
-    // will be
-    while (statArray.size() != 0) {
-      System.out.println("\n=====Current=Roles=====");
-      System.out.println(statArray);
-      System.out.println("=======================\n");
-      setStat(chooseStat(statArray.get(0)), statArray.get(0));
-      statArray.remove(0);
-    }
-  }
-
-  // How the player picks what roles he wants for what stats
-  public int chooseStat(int score) {
-    boolean validInput = false;
-    int index = -1;
-
-    while (!validInput) {
-      System.out.println("Choose what Stat to put " + score + " into: ");
-      System.out.println("1. Stength (" + this.getStr() + ")");
-      System.out.println("2. Dexterity (" + this.getDex() + ")");
-      System.out.println("3. Constitution (" + this.getCon() + ")");
-      System.out.println("4. Intelligence (" + this.getInt() + ")");
-      System.out.println("5. Wisdom (" + this.getWis() + ")");
-      System.out.println("6. Charisma (" + this.getCha() + ")");
-      System.out.print(">>> ");
-      index = k.nextInt() - 1;
-      if (containsValue(index) != 0) {
-        System.out.println("\nStat has already been chosen! Choose again\n");
-      } else {
-        validInput = true;
-      }
-    }
-    return index;
+  public void rollDice() {
+    Roll roll = new Roll();
+    System.out.println("You rolled " + roll.getLowestDie() + ", " + roll.getFirstDice() + ", " + roll.getSecondDice()
+        + ", " + roll.getThirdDice());
+    System.out
+        .println("Your low roll of " + roll.getLowestDie() + " will be thrown out for a total of " + roll.getTotal());
+    this.statList.add(roll.getTotal());
   }
 
   // Checks to see if the stat has already been entered
@@ -129,6 +53,8 @@ public class Stats {
 
   // Sets the character stat
   private void setStat(int stat, int level) {
+    if (level > 25)
+      level = 25;
     this.statLevel[stat] = level;
     setMod(stat);
   }
@@ -193,6 +119,13 @@ public class Stats {
         break;
     }
     this.statModifiers[stat] = level;
+  }
+
+  public void useStandardArray() {
+    int[] stdArray = { 15, 14, 13, 12, 10, 8 };
+    for (int stat : stdArray) {
+      this.statList.add(stat);
+    }
   }
 
   public void modifyStats(int[] modifier) throws Exception {
@@ -266,6 +199,7 @@ public class Stats {
     k.close();
   }
 
+  @Override
   public String toString() {
     String output = "\nStr: " + this.getStr() + " | " + this.getStrMod() +
         "\nDex: " + this.getDex() + " | " + this.getDexMod() +
@@ -278,11 +212,61 @@ public class Stats {
   }
 
   public static void main(String[] args) throws Exception {
-    int stats[] = { 15, 14, 13, 12, 10, 8 };
-    int modifier[] = { 10, 10, 10, 10, 10, 10 };
-    Stats testStats = new Stats(false);
-    System.out.printf("\nStats before modifier: %s", testStats.toString());
-    testStats.modifyStats(modifier);
-    System.out.printf("\nStats after modifier: %s", testStats.toString());
+    Stats test = new Stats();
+    test.rollDice();
+  }
+}
+
+class Roll {
+  private int lowestDice;
+  private int dice1;
+  private int dice2;
+  private int dice3;
+  private int total;
+
+  public Roll() {
+    Random rng = new Random();
+    int roll1 = rng.nextInt(6) + 1;
+    int roll2 = rng.nextInt(6) + 1;
+    int roll3 = rng.nextInt(6) + 1;
+    int roll4 = rng.nextInt(6) + 1;
+
+    ArrayList<Integer> rollSet = new ArrayList<Integer>();
+    rollSet.add(roll1);
+    rollSet.add(roll2);
+    rollSet.add(roll3);
+    rollSet.add(roll4);
+
+    int lowest = 7;
+    for (int roll : rollSet) {
+      if (roll < lowest)
+        lowest = roll;
+    }
+    this.lowestDice = lowest;
+    rollSet.remove(rollSet.indexOf(lowest));
+    this.dice1 = rollSet.remove(0);
+    this.dice2 = rollSet.remove(0);
+    this.dice3 = rollSet.remove(0);
+    this.total = this.dice1 + this.dice2 + this.dice3;
+  }
+
+  public int getLowestDie() {
+    return this.lowestDice;
+  }
+
+  public int getFirstDice() {
+    return this.dice1;
+  }
+
+  public int getSecondDice() {
+    return this.dice2;
+  }
+
+  public int getThirdDice() {
+    return this.dice3;
+  }
+
+  public int getTotal() {
+    return this.total;
   }
 }

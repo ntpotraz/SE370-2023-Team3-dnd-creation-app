@@ -5,8 +5,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 abstract class Race { // TODO decisions that add spells
+    private String raceName;
     private String ageRange;
     private int speed;
+    private int healthModifier;
+    private ArrayList<String> cantrips = new ArrayList<>();
+    private ArrayList<String> spells = new ArrayList<>();
     private ArrayList<String> languages = new ArrayList<>();
     private ArrayList<String> proficiencies = new ArrayList<>(); // Index 0 = Armor, 1 = Weapons, = 2 = Tools
     private int[] statMods = { 0, 0, 0, 0, 0, 0 }; // Index 0 = strength, 1 = dexterity, 2 = constitution, 3 =
@@ -26,13 +30,13 @@ abstract class Race { // TODO decisions that add spells
         proficiencies.add("");
         proficiencies.add("");
         proficiencies.add("");
-        languages.add("Common, ");
+        languages.add("Common");
         setSize("MEDIUM");
         setSpeed(30);
-        this.raceQuestions();
+        setHealthModifier(0);
     }
 
-    public static Race createRace(String type) {
+    public Race createRace(String type) {
         type = type.toLowerCase();
         switch (type) {
             case "hilldwarf":
@@ -69,6 +73,39 @@ abstract class Race { // TODO decisions that add spells
     }
 
     // getters and setters vvv
+
+    public String getRace() {
+        return this.raceName;
+    }
+
+    public void setRace(String race) {
+        this.raceName = race;
+    }
+
+    public ArrayList<String> getSpells() {
+        return this.spells;
+    }
+
+    public void addSpell(String spell) {
+        this.spells.add(spell);
+    }
+
+    public ArrayList<String> getCantrips() {
+        return this.cantrips;
+    }
+
+    public void addCantrip(String cantrip) {
+        this.cantrips.add(cantrip);
+    }
+
+    public int getHealthModifer() {
+        return this.healthModifier;
+    }
+
+    public void setHealthModifier(int mod) {
+        this.healthModifier = mod;
+    }
+
     public String getAgeRange() {
         return ageRange;
     }
@@ -176,12 +213,6 @@ abstract class Race { // TODO decisions that add spells
         }
     }
 
-    // Added this since 'this.raceQuestions()' was throwing an error in the
-    // constructor
-    public void raceQuestions() {
-        System.out.println("Race not selected");
-    }
-
     public static void main(String[] args) throws Exception {
         // Area for testing code
 
@@ -202,8 +233,14 @@ abstract class Race { // TODO decisions that add spells
 
 // Dwarf v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
 
+class Blank extends Race {
+    Blank() {
+    }
+}
+
 abstract class Dwarf extends Race {
     Dwarf() {
+        this.setRace("Dwarf");
         this.setStatMods(2, 2);
         this.setSpeed(25);
         this.setAgeRange("Dwarves mature at 50, and live to around 350.");
@@ -224,6 +261,7 @@ abstract class Dwarf extends Race {
         System.out.println("Choose one tool proficiency in smithing(s), brewing(b), or masonry(m).");
         Boolean correctString = false;
         while (correctString == false) {
+            System.out.print(">>> ");
             String input = scan.nextLine();
             if (Objects.equals(input, "s")) {
                 this.setProficiencies(2, "Smithing Tools");
@@ -238,23 +276,25 @@ abstract class Dwarf extends Race {
                 System.out.println("That isn't an option. Try again.");
             }
         }
-        scan.close();
     }
 
 }
 
 class HillDwarf extends Dwarf {
     HillDwarf() {
+        this.setRace("Hill Dwarf");
         this.setStatMods(4, 1);
+        this.raceQuestions();
+        this.setHealthModifier(1);
     }
-
-    int hillDwarfHP = 1; // Note: hill dwarf is only class that adds 1 to hp
 }
 
 class MountainDwarf extends Dwarf {
     MountainDwarf() {
+        this.setRace("Mountain Dwarf");
         this.setStatMods(0, 2);
         this.setProficiencies(0, "Light armor, medium armor");
+        this.raceQuestions();
     }
 }
 
@@ -262,6 +302,7 @@ class MountainDwarf extends Dwarf {
 
 abstract class Elf extends Race {
     Elf() {
+        this.setRace("Elf");
         this.setStatMods(1, 2);
         this.setAgeRange("Elves mature at 100, and live to around 750.");
         this.setSkills("perception");
@@ -287,25 +328,35 @@ abstract class Elf extends Race {
 
 class HighElf extends Elf {
     HighElf() {
+        this.setRace("High Elf");
         this.setStatMods(3, 1);
         this.setProficiencies(1, "Longsword, Shortsword, Shortbow, Longbow");
+        this.raceQuestions();
 
         // TODO: Cantrip: choose one cantrip from the wizard spell list
     }
 
     public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("What additional language would you like to learn? Pre-existing languages are:");
-        System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
-                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        System.out.println("\nWhat additional language would you like to learn? Pre-existing languages are:");
+        System.out.print("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
+                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.\n>>> ");
         String input = scan.nextLine();
         this.setLanguages(input);
-        scan.close();
+        System.out.println("\nAs a High Elf, you may select one cantrip for the Wizard spell book.");
+        System.out.println("Please enter the name of the cantrip you wish to add from the following list:");
+        System.out.println("Acid Splash, Blade Ward, Chill Touch, Dancing Lights\n" +
+                "Fire Bolt, Friends, Light, Mage Hand, Mending, Message, Minor Illusion\n" +
+                "Poison Spray, Prestidigitation, Ray of Frost, Shocking Grasp, or True Strike");
+        System.out.print(">>> ");
+        input = scan.nextLine();
+        this.addCantrip(input);
     }
 }
 
 class WoodElf extends Elf {
     WoodElf() {
+        this.setRace("Wood Elf");
         this.setStatMods(4, 1);
         this.setSpeed(35);
         this.setProficiencies(1, "Longsword, Shortsword, Shortbow, Longbow");
@@ -318,6 +369,7 @@ class WoodElf extends Elf {
 
 class DarkElf extends Elf {
     DarkElf() {
+        this.setRace("Dark Elf");
         this.setStatMods(5, 1);
         this.setProficiencies(1, "Rapiers, Shortswords, Hand Crossbows");
         this.setTraits("- Superior Darkvision Your darkvision has a\n" +
@@ -339,6 +391,7 @@ class DarkElf extends Elf {
 
 abstract class Halfling extends Race {
     Halfling() {
+        this.setRace("Halfling");
         this.setStatMods(1, 2);
         this.setSpeed(25);
         this.setSize("SMALL");
@@ -356,6 +409,7 @@ abstract class Halfling extends Race {
 
 class Lightfoot extends Halfling {
     Lightfoot() {
+        this.setRace("Lightfoot");
         this.setStatMods(5, 1);
         this.setTraits("Naturally Stealthy. You can attempt to hide even\r\n" + //
                 "when you are obscured only by a creature that is at least\r\n" + //
@@ -365,6 +419,7 @@ class Lightfoot extends Halfling {
 
 class Stout extends Halfling {
     Stout() {
+        this.setRace("Stout");
         this.setStatMods(2, 1);
         this.setTraits("Stout Resilience. You have advantage on saving\r\n" + //
                 "throws against poison, and you have resistance\r\n" + //
@@ -376,20 +431,21 @@ class Stout extends Halfling {
 
 class Human extends Race {
     Human() {
+        this.setRace("Human");
         for (int i = 0; i < 6; i++) {
             this.setStatMods(i, 1);
         }
         this.setAgeRange("Humans mature at 18, and live to around 80.");
+        this.raceQuestions();
     }
 
     public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("What additional language would you like to learn? Pre-existing languages are:");
-        System.out.println("Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
-                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        System.out.println("\nWhat additional language would you like to learn? Pre-existing languages are:");
+        System.out.print("Dwarvish, Elvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
+                "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.\n>>> ");
         String input = scan.nextLine();
         this.setLanguages(input);
-        scan.close();
     }
 }
 
@@ -399,7 +455,7 @@ class Human extends Race {
 
 class Dragonborn extends Race {
     Dragonborn() {
-
+        this.setRace("Dragonborn");
         this.setStatMods(0, 2);
         this.setStatMods(5, 1);
         this.setAgeRange("Dragonborn mature at 15, and live to around 80.");
@@ -418,12 +474,14 @@ class Dragonborn extends Race {
                 "at 16th level");
         this.setTraits("- Damage Resistance: You have resistance to the\r\n" + //
                 "damage type associated with your draconic ancestry.");
+        this.raceQuestions();
 
     }
 
     public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("What is your Draconic Ancestry?"); // Make draconic ancestry matrix
+        System.out.println("What is your Draconic Ancestry? Please input your desired color:"); // Make draconic
+                                                                                                // ancestry matrix
         String[][] rows = { { "Black", "Blue", "Brass", "Bronze", "Copper", "Gold", "Green", "Red", "Silver", "White" },
                 { "Acid", "Lightning", "Fire", "Lightning", "Acid", "Fire", "Poison", "Fire", "Cold", "Cold" },
                 { "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)", "5 by 30ft line (Dex save)",
@@ -433,8 +491,9 @@ class Dragonborn extends Race {
         for (int i = 0; i < 10; i++) {
             System.out.print(rows[0][i] + " | ");
             System.out.print(rows[1][i] + " | ");
-            System.out.print(rows[2][i] + "\n" + "\n");
+            System.out.print(rows[2][i] + "\n");
         }
+        System.out.print(">>> ");
         String input = scan.nextLine();
         input = input.toLowerCase();
         switch (input) {
@@ -471,7 +530,6 @@ class Dragonborn extends Race {
             default:
                 break;
         }
-        scan.close();
     }
 }
 
@@ -479,6 +537,7 @@ class Dragonborn extends Race {
 
 abstract class Gnome extends Race {
     Gnome() {
+        this.setRace("Gnome");
         this.setStatMods(3, 2);
         this.setSpeed(25);
         this.setSize("SMALL");
@@ -497,9 +556,11 @@ abstract class Gnome extends Race {
 
 class ForestGnome extends Gnome {
     ForestGnome() {
+        this.setRace("Forest Gnome");
         this.setStatMods(1, 1);
 
         // TODO: adds minor illusion to spell list
+        this.addCantrip("minor illusion");
 
         this.setTraits("- Speak with Small Beasts: Through sounds and\r\n" + //
                 "gestures, you can communicate simple ideas with Small\r\n" + //
@@ -511,6 +572,7 @@ class ForestGnome extends Gnome {
 
 class RockGnome extends Gnome {
     RockGnome() {
+        this.setRace("Rock Gnome");
         this.setStatMods(2, 1);
         this.setProficiencies(2, "Artisian's tools");
         this.setTraits("- Artificer's Lore: Whenever you make an Intelligence\r\n" + //
@@ -551,6 +613,7 @@ class RockGnome extends Gnome {
 
 class HalfElf extends Race {
     HalfElf() {
+        this.setRace("Half Elf");
         this.setStatMods(5, 2);
         this.setAgeRange("Half Elves mature at 18, and live to around 180.");
         this.setLanguages("Elvish, ");
@@ -561,46 +624,52 @@ class HalfElf extends Race {
                 "discern color in darkness, only shades of gray");
         this.setTraits("- Fey Ancestry: You have advantage on saving throws\r\n" + //
                 "against being charmed, and magic can't put you to sleep");
+        this.raceQuestions();
     }
 
     public void raceQuestions() {
         Scanner scan = new Scanner(System.in);
         // Increases 2 different stats by 1
-        System.out.println("Pick first stat to increase by 1.");
-        int index = scan.nextInt();
+        System.out.println("\nAs a Half Elf, you may increase two of your stats by 1");
+        System.out.println("1. Strength\n2. Dexterity\n3. Constitution\n4. Intelligence\n5. Wisdom\n6. Charisma");
+        System.out.print("Pick first stat to increase by 1.\n>>> ");
+        int index = scan.nextInt() - 1;
         this.chooseStats(index);
-        System.out.println("Pick second stat to increase by 1.");
-        int index2 = scan.nextInt();
+        System.out.print("\nPick second stat to increase by 1.\n>>> ");
+        int index2 = scan.nextInt() - 1;
         while (index == index2) {
-            System.out.println("You cannot pick the same stat twice. Pick again.");
-            index2 = scan.nextInt();
+            System.out.println("\nYou cannot pick the same stat twice. Pick again.");
+            System.out.print(">>> ");
+            index2 = scan.nextInt() - 1;
         }
         this.chooseStats(index2);
 
         // Chooses a language
         scan.nextLine();
-        System.out.println("What additional language would you like to learn? Pre-existing languages are:");
+        System.out.println("\nWhat additional language would you like to learn? Pre-existing languages are:");
         System.out.println("Dwarvish, Giant, Gnomish, Goblin, Halfling, Orc,\n" +
                 "Abyssal, Celestial, Draconic, Deep Speech, Infernal, Primordial, Sylvan, and Undercommon.");
+        System.out.print(">>> ");
         String input = scan.nextLine();
         this.setLanguages(input);
 
         // Chooses 2 skills to become proficient in
-        System.out.println("Possible skills are:");
+        System.out.println("\nPossible skills are:");
         System.out.println("Athletics, Acrobatics, Sleight of Hand, Stealth, Arcana, History, Investigation, Nature,\n"
                 +
                 "Religion, Animal Handling, Insight, Medicine, Perception, Survival, Deception, Intimidation, Performance, and Persuasion.");
         System.out.println("Pick first skill to become proficient in.");
+        System.out.print(">>> ");
         String skill1 = scan.nextLine();
         skill1 = skill1.toLowerCase();
         skill1 = skillUnderline(skill1);
         this.setSkills(skill1);
-        System.out.println("Pick second skill to become proficient in.");
+        System.out.println("\nPick second skill to become proficient in.");
+        System.out.print(">>> ");
         String skill2 = scan.nextLine();
         skill2 = skill2.toLowerCase();
         skill2 = skillUnderline(skill2);
         this.setSkills(skill2);
-        scan.close();
     }
 
     public void chooseStats(int index) {
@@ -626,7 +695,7 @@ class HalfElf extends Race {
 
 class HalfOrc extends Race {
     HalfOrc() {
-
+        this.setRace("Half Orc");
         this.setStatMods(0, 2);
         this.setStatMods(2, 1);
         this.setAgeRange("Half Orcs mature at 14, and live to around 75.");
@@ -652,6 +721,7 @@ class HalfOrc extends Race {
 
 class Tiefling extends Race {
     Tiefling() {
+        this.setRace("Tiefling");
         this.setStatMods(3, 1);
         this.setStatMods(5, 2);
         this.setAgeRange("Tieflings mature at 18, and live to around 90.");
@@ -669,5 +739,6 @@ class Tiefling extends Race {
                 "reach 5th level, you can also cast the darkness spell\r\n" + //
                 "once per day. Charisma is your spellcasting ability for\r\n" + //
                 "these spells");
+        this.addCantrip("thaumaturgy");
     }
 }
