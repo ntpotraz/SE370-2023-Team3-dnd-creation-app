@@ -244,9 +244,8 @@ public class SpellLibrary {
       "unseen servant",
       "witch bolt");
 
-  public SpellLibrary(String job) {
-    this.job = job.toLowerCase();
-
+  public SpellLibrary() {
+    this.job = "Formless";
     String spellFile = "lib/1stspellsCantrips.json";
     ObjectMapper objectMapper = new ObjectMapper();
     this.spellList = new ArrayList<Spell>();
@@ -294,6 +293,10 @@ public class SpellLibrary {
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void setJobLibrary(String job) {
+    this.job = job.toLowerCase();
 
     List<String> tempCantrips;
     List<String> tempSpells;
@@ -349,11 +352,6 @@ public class SpellLibrary {
         this.jobSpells.add(spell);
       }
     }
-
-  }
-
-  public SpellLibrary() {
-    this("bard");
   }
 
   public Spell getSpell(String name) {
@@ -425,25 +423,5 @@ public class SpellLibrary {
       if (this.jobCantrips.get(i).getName().toLowerCase().equals(name))
         this.jobCantrips.remove(i);
     }
-  }
-
-  public static void main(String[] args) {
-
-    SpellLibrary library = new SpellLibrary("sorcerer");
-
-    // ArrayList<String> test = new ArrayList<String>();
-    // for (Spell spell : library.cantripList) {
-    // test.add(spell.getName());
-    // }
-    // System.out.println(test);
-
-    System.out.println("Number of cantrips: " + library.cantripList.size());
-    System.out.println("Number of level 1 spells: " + library.spellList.size());
-    System.out.println();
-    // System.out.println(library.getSpell("eldritch blast"));
-    // System.out.println(library.getSpell("detect magic"));
-
-    System.out.println(library.getJobCantripNames());
-    System.out.println(library.getJobSpellNames());
   }
 }

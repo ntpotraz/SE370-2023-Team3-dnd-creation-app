@@ -12,13 +12,13 @@ public class Stats {
   private Scanner k = new Scanner(System.in);
 
   public Stats() {
+    this.statList = new ArrayList<Integer>();
     setStat(0, 0);
     setStat(1, 0);
     setStat(2, 0);
     setStat(3, 0);
     setStat(4, 0);
     setStat(5, 0);
-    this.statList = new ArrayList<Integer>();
   }
 
   public void rollDice() {
@@ -52,12 +52,47 @@ public class Stats {
     return 0;
   }
 
+  public int getFirstStatInList() {
+    return this.statList.get(0);
+  }
+
+  public void selectStat(int input) {
+    switch (input) {
+      case 0:
+        setStat(0, getFirstStatInList());
+        break;
+      case 1:
+        setStat(1, getFirstStatInList());
+        break;
+      case 2:
+        setStat(2, getFirstStatInList());
+        break;
+      case 3:
+        setStat(3, getFirstStatInList());
+        break;
+      case 4:
+        setStat(4, getFirstStatInList());
+        break;
+      case 5:
+        setStat(5, getFirstStatInList());
+        break;
+
+      default:
+        break;
+    }
+  }
+
   // Sets the character stat
   private void setStat(int stat, int level) {
-    if (level > 25)
-      level = 25;
-    this.statLevel[stat] = level;
-    setMod(stat);
+    if (this.statList.contains(level)) {
+
+      if (level > 25)
+        level = 25;
+      this.statLevel[stat] = level;
+      setMod(stat);
+      this.statList.remove(this.statList.indexOf(level));
+    }
+
   }
 
   // Calculates what the stat modifier will be based on the stat level
@@ -206,7 +241,7 @@ public class Stats {
 
   @Override
   public String toString() {
-    String output = "\nStr: " + this.getStr() + " | " + this.getStrMod() +
+    String output = "Str: " + this.getStr() + " | " + this.getStrMod() +
         "\nDex: " + this.getDex() + " | " + this.getDexMod() +
         "\nCon: " + this.getCon() + " | " + this.getConMod() +
         "\nInt: " + this.getInt() + " | " + this.getIntMod() +
