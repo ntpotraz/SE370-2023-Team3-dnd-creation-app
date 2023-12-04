@@ -411,11 +411,14 @@ public class Job {
       getEquipment().add(input.nextLine());
     }
 
-    System.out.printf("Five javelins or any simple melee weapon:\n");
+    System.out.printf("\nFive javelins or any simple melee weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("A priest’s pack or an explorer’s pack:\n");
+    System.out.printf("\nA priest’s pack or an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Dungeoneer’s pack or (b) an explorer’s pack:\n");
+    System.out.printf("\nDungeoneer’s pack or (b) an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Chainmail");
     getEquipment().add("Holy symbol");
@@ -432,30 +435,38 @@ public class Job {
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of three skills,\nAnimal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival\n");
+        "\nType the first of three skills,\nAnimal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the third skill:\n");
+    System.out.printf("\nType the third skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
     String in;
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type two shortswords or b for two simple melee weapons:\n");
+    System.out.print(">>> ");
     in = input.nextLine();
     if (in == "b") {
-      System.out.printf("Simple weapon 1:\n");
+      System.out.printf("\nSimple weapon 1:\n");
+      System.out.print(">>> ");
       getEquipment().add(input.nextLine());
-      System.out.printf("Simple weapon 2:\n");
+      System.out.printf("\nSimple weapon 2:\n");
+      System.out.print(">>> ");
       getEquipment().add(input.nextLine());
     } else {
       getEquipment().add("Shortsword");
       getEquipment().add("Shortsword");
     }
 
-    System.out.printf("Type scale mail or leather armor:\n");
+    System.out.printf("\nType scale mail or leather armor:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Dungeoneer’s pack or an explorer’s pack:\n");
+    System.out.printf("\nDungeoneer’s pack or an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("longbow + quiver of 20 arrows");
   }
@@ -472,21 +483,28 @@ public class Job {
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of four skills,\nAcrobatics, Athletics, Deception. Insight, Intimidation, Investigation, Perception, Performance. Persuasion, Sleight of Hand, and Stealth\n");
+        "\nType the first of four skills,\nAcrobatics, Athletics, Deception. Insight, Intimidation, Investigation, Perception, Performance. Persuasion, Sleight of Hand, and Stealth\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the third skill:\n");
+    System.out.printf("\nType the third skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the fourth skill:\n");
+    System.out.printf("\nType the fourth skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type rapier or a shortsword:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Shortbow and 20 arrows or a shortsword:\n");
+    System.out.printf("\nShortbow and 20 arrows or a shortsword:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Burglar’s pack, a dungeoneer’s pack, or an explorer’s pack:\n");
+    System.out.printf("\nBurglar’s pack, a dungeoneer’s pack, or an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Leather armor");
     getEquipment().add("Two daggers");
@@ -503,14 +521,17 @@ public class Job {
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nArcana, Deception, Insight, Intimidation, Persuasion, and Religion:\n");
+        "\nType the first of two skills,\nArcana, Deception, Insight, Intimidation, Persuasion, and Religion:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
     String in;
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type any simple weapon or b for a light crossbow and 20 bolts:\n");
+    System.out.print(">>> ");
     in = input.nextLine();
     if (in == "b") {
       getEquipment().add("Light crossbow");
@@ -519,9 +540,11 @@ public class Job {
       getEquipment().add(in);
     }
 
-    System.out.printf("Type component pouch or an arcane focus:\n");
+    System.out.printf("\nType component pouch or an arcane focus:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Dungeoneer’s pack or an explorer’s pack:\n");
+    System.out.printf("\nDungeoneer’s pack or an explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Two daggers");
   }
@@ -537,12 +560,14 @@ public class Job {
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nArcana, Deception, History, Intimidation, Investigation, Nature, and Religion:\n");
+        "\nType the first of two skills,\nArcana, Deception, History, Intimidation, Investigation, Nature, and Religion:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
     String in;
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type any simple weapon or b for a light crossbow and 20 bolts:\n");
+    System.out.print(">>> ");
     in = input.nextLine();
     if (in == "b") {
       getEquipment().add("Light crossbow");
@@ -551,11 +576,14 @@ public class Job {
       getEquipment().add(in);
     }
 
-    System.out.printf("Type component pouch or an arcane focus:\n");
+    System.out.printf("\nType component pouch or an arcane focus:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("scholar’s pack or a dungeoneer’s pack:\n");
+    System.out.printf("\nScholar’s pack or a dungeoneer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Type any simple weapon:\n");
+    System.out.printf("\nType any simple weapon:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Two daggers");
     getEquipment().add("Leather armor");
@@ -571,17 +599,22 @@ public class Job {
 
     Scanner input = new Scanner(System.in);
     System.out.printf(
-        "Type the first of two skills,\nArcana, History, Insight, Investigation, Medicine, and Religion:\n");
+        "\nType the first of two skills,\nArcana, History, Insight, Investigation, Medicine, and Religion:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
-    System.out.printf("Type the second skill:\n");
+    System.out.printf("\nType the second skill:\n");
+    System.out.print(">>> ");
     getSkills().add(input.nextLine());
 
-    System.out.printf("Equipment:\n");
+    System.out.printf("\nEquipment:\n");
     System.out.printf("Type quarterstaff or dagger:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("Type component pouch or an arcane focus:\n");
+    System.out.printf("\nType component pouch or an arcane focus:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
-    System.out.printf("scholar’s pack or a explorer’s pack:\n");
+    System.out.printf("\nScholar’s pack or a explorer’s pack:\n");
+    System.out.print(">>> ");
     getEquipment().add(input.nextLine());
     getEquipment().add("Spellbook");
   }

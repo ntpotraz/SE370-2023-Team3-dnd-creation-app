@@ -1,7 +1,5 @@
 package edu.se370.team3;
 
-import java.util.Scanner;
-
 public class Character {
   private String characterName;
   private int health;
