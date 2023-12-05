@@ -4,13 +4,16 @@ package edu.se370.team3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-abstract class Job {
+class Job {
     private int baseHP;
     // to be added to finalHP in character class while calculating final stats
     private ArrayList<String> proficienciesTypes = new ArrayList<String>();
     // Arraylist index 0 = armor, 1 = weapons, 2 = tools
     private ArrayList<String> skills = new ArrayList<String>();
     private ArrayList<Item> equipment = new ArrayList<Item>();
+    private string getJobTitle;
+    private int spellCount;
+    private int skillCount;
 
     private Boolean strengthSV;
     private Boolean dexteritySV;
@@ -30,40 +33,23 @@ abstract class Job {
         this.intelligenceSV = false;
         this.wisdomSV = false;
         this.charismaSV = false;
+        this.getJobTitle = "";
+        this.spellCount = 0;
+        this.skillCount = 0;
     }
 
-    public static Job createJob(String job) {
-        job = job.toLowerCase();
-        switch (job) {
-            case "barbarian":
-                return new Barbarian();
-            case "bard":
-                return new Bard();
-            case "cleric":
-                return new Cleric();
-            case "druid":
-                return new Druid();
-            case "fighter":
-                return new Fighter();
-            case "monk":
-                return new Monk();
-            case "paladin":
-                return new Paladin();
-            case "ranger":
-                return new Ranger();
-            case "rogue":
-                return new Rogue();
-            case "sorcerer":
-                return new Sorcerer();
-            case "warlock":
-                return new Warlock();
-            case "wizard":
-                return new Wizard();
-            default:
-                return new Barbarian();
-        }
+
+    public int getSpellCount()
+    {
+        return spellCount;
     }
 
+    public int getSkillCount() {
+        return skillCount;
+    }
+    public String getJobTitle() {
+        return jobTitle;
+    }
     public int getBaseHP() {
         return baseHP;
     }
@@ -139,76 +125,81 @@ abstract class Job {
         this.setBaseHP(12);
         this.getProficiancy().set(0, "light armor, medium armor, shields");
         this.getProficiancy().set(1, "simple weapons, martial weapons");
-        String in = "";
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of the following skills that you'd like,\nAnimal Handling, Athletics, Intimidation, Nature, Perception, Survival:\n");
-        this.getSkills().add(input.nextLine());
-        System.out.printf(
-                "Type the second of the following skills that you'd like,\n*Animal Handling, Athletics, Intimidation, Nature, Perception, Survival:\n");
-        this.getSkills().add(input.nextLine());
 
-        switch (x) {
-            case (0):
-                this.getEquipment.add(new Weapon("Greataxe", "", 7, 30, "gp", new int[]{1, 12}, weaponType.SLASHING, "Heavy, two-handed"));
-                break;
-            case (1):
-                this.getEquipment.add(new Weapon("Battleaxe", "", 4, 10, "gp", new int[]{1, 8}, weaponType.SLASHING));
-                break;
-            case (2):
-                this.getEquipment.add(new Weapon("Flail", "", 2, 10, "gp", new int[]{1, 8}, weaponType.BLUDGEONING));
-                break;
-            case (3):
-                this.getEquipment.add(new Weapon("Glaive", "", 6, 20, "gp", new int[]{1, 10}, weaponType.SLASHING));
-                break;
-            case (4):
-                this.getEquipment.add(new Weapon("Greataxe", "", 7, 30, "gp", new int[]{1, 12}, weaponType.SLASHING));
-                break;
-            case (5):
-                this.getEquipment.add(new Weapon("Greatsword", "", 6, 50, "gp", new int[]{2, 6}, weaponType.SLASHING));
-                break;
-            case (6):
-                this.getEquipment.add(new Weapon("Halberd", "", 6, 20, "gp", new int[]{1, 10}, weaponType.SLASHING));
-                break;
-            case (7):
-                this.getEquipment.add(new Weapon("Lance", "", 6, 10, "gp", new int[]{1, 12}, weaponType.PIERCING));
-                break;
-            case (8):
-                this.getEquipment.add(new Weapon("Longsword", "", 3, 15, "gp", new int[]{1, 8}, weaponType.SLASHING));
-                break;
-            case (9):
-                this.getEquipment.add(new Weapon("Maul", "", 10, 10, "gp", new int[]{2, 6}, weaponType.BLUDGEONING));
-                break;
-            case (10):
-                this.getEquipment.add(new Weapon("Morningstar", "", 4, 15, "gp", new int[]{1, 8}, weaponType.PIERCING));
-                break;
-            case (11):
-                this.getEquipment.add(new Weapon("Pike", "", 18, 5, "gp", new int[]{1, 10}, weaponType.PIERCING));
-                break;
-            case (12):
-                this.getEquipment.add(new Weapon("Rapier", "", 2, 25, "gp", new int[]{1, 8}, weaponType.PIERCING));
-                break;
-            case (13):
-                this.getEquipment.add(new Weapon("Scimitar", "", 3, 25, "gp", new int[]{1, 6}, weaponType.SLASHING));
-                break;
-            case (14):
-                this.getEquipment.add(new Weapon("Shortsword", "", 2, 10, "gp", new int[]{1, 6}, weaponType.PIERCING));
-                break;
-            case (15):
-                this.getEquipment.add(new Weapon("Trident", "", 4, 5, "gp", new int[]{1, 6}, weaponType.PIERCING));
-                break;
-            case (16):
-                this.getEquipment.add(new Weapon("War pick", "", 2, 5, "gp", new int[]{1, 8}, weaponType.PIERCING));
-                break;
-            case (17):
-                this.getEquipment.add(new Weapon("Warhammer", "", 2, 15, "gp", new int[]{1, 8}, weaponType.BLUDGEONING));
-                break;
-            case (18):
-                this.getEquipment.add(new Weapon("Whip", "", 3, 2, "gp", new int[]{1, 4}, weaponType.SLASHING));
-                break;
-            default:
-                System.out.println("Invalid input. No equipment added.");
-        }
+
+        this.getSkills.add("Animal Handling");
+        this.getSkills.add("Athletics");
+        this.getSkills.add("Intimidation");
+        this.getSkills.add("Nature");
+        this.getSkills.add("Perception");
+        this.getSkills.add("Survival");
+        this.skillCount = 2;
+
+    switch (x) {
+        case 0:
+            this.getEquipment().add(new Weapon("Club", "A basic wooden club.", 2, 1, "sp",
+                    new int[]{1, 4}, WeaponType.SIMPLE_MELEE, AttackType.BLUDGEONING, "Light"));
+            break;
+        case 1:
+            this.getEquipment().add(new Weapon("Dagger", "A small, easily concealable knife.", 1, 2, "gp",
+                    new int[]{1, 4}, WeaponType.SIMPLE_MELEE, AttackType.PIERCING, "Finesse, Light, Thrown (20/60)"));
+            break;
+        case 2:
+            this.getEquipment().add(new Weapon("Greatclub", "A large, heavy wooden club.", 10, 2, "sp",
+                    new int[]{1, 8}, WeaponType.SIMPLE_MELEE, AttackType.BLUDGEONING, "Two-handed"));
+            break;
+        case 3:
+            this.getEquipment().add(new Weapon("Handaxe", "A small, versatile axe.", 2, 5, "gp",
+                    new int[]{1, 6}, WeaponType.SIMPLE_MELEE, AttackType.SLASHING, "Light, Thrown (20/60)"));
+            break;
+        case 4:
+            this.getEquipment().add(new Weapon("Javelin", "A light spear designed for throwing.", 2, 5, "sp",
+                    new int[]{1, 6}, WeaponType.SIMPLE_MELEE, AttackType.PIERCING, "Thrown (30/120)"));
+            break;
+        case 5:
+            this.getEquipment().add(new Weapon("Light Hammer", "A light throwing hammer.", 2, 2, "gp",
+                    new int[]{1, 4}, WeaponType.SIMPLE_MELEE, AttackType.BLUDGEONING, "Light, Thrown (20/60)"));
+            break;
+        case 6:
+            this.getEquipment().add(new Weapon("Mace", "A simple, effective bludgeoning weapon.", 4, 5, "gp",
+                    new int[]{1, 6}, WeaponType.SIMPLE_MELEE, AttackType.BLUDGEONING, ""));
+            break;
+        case 7:
+            this.getEquipment().add(new Weapon("Quarterstaff", "A versatile, two-handed staff.", 4, 2, "sp",
+                    new int[]{1, 6}, WeaponType.SIMPLE_MELEE, AttackType.BLUDGEONING, "Versatile (1d8)"));
+            break;
+        case 8:
+            this.getEquipment().add(new Weapon("Sickle", "A small, curved blade designed for cutting plants.", 2, 1, "gp",
+                    new int[]{1, 4}, WeaponType.SIMPLE_MELEE, AttackType.SLASHING, "Light"));
+            break;
+        case 9:
+            this.getEquipment().add(new Weapon("Spear", "A simple, versatile weapon.", 3, 1, "gp",
+                    new int[]{1, 6}, WeaponType.SIMPLE_MELEE, AttackType.PIERCING, "Thrown (20/60), Versatile (1d8)"));
+            break;
+        case 10:
+            this.getEquipment().add(new Weapon("Unarmed Strike", "A punch, kick, or other simple unarmed attack.", 0, 0, "",
+                    new int[]{1, 1}, WeaponType.SIMPLE_MELEE, AttackType.BLUDGEONING, ""));
+            break;
+        case 11:
+            this.getEquipment().add(new Weapon("Crossbow, Light", "A small, one-handed crossbow.", 5, 25, "gp",
+                    new int[]{1, 8}, WeaponType.SIMPLE_RANGED, AttackType.PIERCING, "Ammunition (range 80/320), Loading, Two-handed"));
+            break;
+        case 12:
+            this.getEquipment().add(new Weapon("Dart", "A small, throwable projectile.", 0, 5, "cp",
+                    new int[]{1, 4}, WeaponType.SIMPLE_RANGED, AttackType.PIERCING, "Finesse, Thrown (20/60)"));
+            break;
+        case 13:
+            this.getEquipment().add(new Weapon("Shortbow", "A small bow suitable for short-range attacks.", 2, 25, "gp",
+                    new int[]{1, 6}, WeaponType.SIMPLE_RANGED, AttackType.PIERCING, "Ammunition (range 80/320), Two-handed"));
+            break;
+        case 14:
+            this.getEquipment().add(new Weapon("Sling", "A simple leather sling for hurling projectiles.", 0, 1, "sp",
+                    new int[]{1, 4}, WeaponType.SIMPLE_RANGED, AttackType.BLUDGEONING, "Ammunition (range 30/120)"));
+            break;
+        default:
+            System.out.println("Invalid input. No equipment added.");
+    }
+}
 
         switch (y) {
             case (0):
@@ -303,13 +294,25 @@ abstract class Job {
         getProficiancy().set(1, "simple weapons, hand crossbows, longswords, rapiers, shortswords");
         getProficiancy().set(2, "Three musical instruments of your choice");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf("The Bard class gives access to any three skills,\n type the first skill :\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the third skill:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("Athletics");
+this.getSkills().add("Acrobatics");
+this.getSkills().add("Sleight of Hand");
+this.getSkills().add("Stealth");
+this.getSkills().add("Arcana");
+this.getSkills().add("History");
+this.getSkills().add("Investigation");
+this.getSkills().add("Nature");
+this.getSkills().add("Religion");
+this.getSkills().add("Animal Handling");
+this.getSkills().add("Insight");
+this.getSkills().add("Medicine");
+this.getSkills().add("Perception");
+this.getSkills().add("Survival");
+this.getSkills().add("Deception");
+this.getSkills().add("Intimidation");
+this.getSkills().add("Performance");
+this.getSkills().add("Persuasion");
+        this.skillCount = 3;
 
         switch (x) {
             case (0):
@@ -443,11 +446,12 @@ abstract class Job {
         getProficiancy().set(0, "Light armor, medium armor, shields");
         getProficiancy().set(1, "All simple weapons");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf("Type the first of two skills,\nHistory, Insight, Medicine, Persuasion, and Religion:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("History");
+this.getSkills().add("Insight");
+this.getSkills().add("Medicine");
+this.getSkills().add("Persuasion");
+this.getSkills().add("Religion");
+        this.skillCount = 2;
 
         switch (x) {
             case (0):
@@ -580,12 +584,15 @@ abstract class Job {
                 "clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears");
         getProficiancy().set(2, "Herbalism kit");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nArcana, Animal Handling, Insight, Medicine, Nature, Perception, Religion, and Survival:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("Arcana");
+this.getSkills().add("Animal Handling");
+this.getSkills().add("Insight");
+this.getSkills().add("Medicine");
+this.getSkills().add("Nature");
+this.getSkills().add("Perception");
+this.getSkills().add("Religion");
+this.getSkills().add("Survival");
+        this.skillCount = 2;
 
         switch (x) {
             case (0):
@@ -712,16 +719,15 @@ abstract class Job {
         setBaseHP(10);
         getProficiancy().set(0, "All armor, shields");
         getProficiancy().set(1, "Simple weapons, martial weapons");
-        String in = "";
-
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nAcrobatics, Animal Handling, Athletics, History, Insight, Intimidation, Perception, and Survival:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
-
-        System.out.printf("Equipment:\n");
+        this.getSkills().add("Acrobatics");
+this.getSkills().add("Animal Handling");
+this.getSkills().add("Athletics");
+this.getSkills().add("History");
+this.getSkills().add("Insight");
+this.getSkills().add("Intimidation");
+this.getSkills().add("Perception");
+this.getSkills().add("Survival");
+this.getSkillCount = 2;
         switch (armorChoice) {
             case 0:
                 this.getEquipment().add(new Armor("Chainmail",
@@ -862,12 +868,13 @@ abstract class Job {
         getProficiancy().set(1, "simple weapons, shortswords");
         getProficiancy().set(2, "artisan’s tools, musical instruments");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nAcrobatics, Athletics, History, Insight, Religion, and Stealth:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("Acrobatics");
+this.getSkills().add("Athletics");
+this.getSkills().add("History");
+this.getSkills().add("Insight");
+this.getSkills().add("Religion");
+this.getSkills().add("Stealth");
+this.getSkillCount = 2;
 
         System.out.printf("Equipment:\n");
         switch (x) {
@@ -947,15 +954,13 @@ abstract class Job {
         setBaseHP(10);
         getProficiancy().set(0, "all armor, shields");
         getProficiancy().set(1, "simple weapons, martial weapons");
-        String in;
-
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nAthletics, Insight, Intimidation, Medicine, Persuasion, and Religion:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
-        int loopCase;
+        this.getSkills().add("Athletics");
+this.getSkills().add("Insight");
+this.getSkills().add("Intimidation");
+this.getSkills().add("Medicine");
+this.getSkills().add("Persuasion");
+this.getSkills().add("Religion");
+this.skillCount = 2;
         for (int i = 0; i < 2; i++) {
             if (i = 0)
                 loopCase = x;
@@ -1117,15 +1122,15 @@ abstract class Job {
         setBaseHP(10);
         getProficiancy().set(0, "Light armor");
         getProficiancy().set(1, "Simple weapons, martial weapons");
-
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of three skills,\nAnimal Handling, Athletics, Insight, Investigation, Nature, Perception, Stealth, and Survival\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the third skill:\n");
-        getSkills().add(input.nextLine());
+this.getSkills().add("Animal Handling");
+this.getSkills().add("Athletics");
+this.getSkills().add("Insight");
+this.getSkills().add("Investigation");
+this.getSkills().add("Nature");
+this.getSkills().add("Perception");
+this.getSkills().add("Stealth");
+this.getSkills().add("Survival");
+this.skillCount = 3;
 
 
         int loopCase;
@@ -1243,16 +1248,18 @@ abstract class Job {
         getProficiancy().set(1, "Simple weapons, hand crossbows, longswords, rapiers, shortswords");
         getProficiancy().set(2, "Thieves’ tools");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of four skills,\nAcrobatics, Athletics, Deception. Insight, Intimidation, Investigation, Perception, Performance. Persuasion, Sleight of Hand, and Stealth\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the third skill:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the fourth skill:\n");
-        getSkills().add(input.nextLine());
+        Sthis.getSkills().add("Acrobatics");
+this.getSkills().add("Athletics");
+this.getSkills().add("Deception");
+this.getSkills().add("Insight");
+this.getSkills().add("Intimidation");
+this.getSkills().add("Investigation");
+this.getSkills().add("Perception");
+this.getSkills().add("Performance");
+this.getSkills().add("Persuasion");
+this.getSkills().add("Sleight of Hand");
+this.getSkills().add("Stealth");
+this.skillCount = 4;
 
         switch (x) {
             case 0:
@@ -1314,12 +1321,13 @@ abstract class Job {
         setBaseHP(6);
         getProficiancy().set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nArcana, Deception, Insight, Intimidation, Persuasion, and Religion:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("Arcana");
+this.getSkills().add("Deception");
+this.getSkills().add("Insight");
+this.getSkills().add("Intimidation");
+this.getSkills().add("Persuasion");
+this.getSkills().add("Religion");
+this.skillCount = 2;
 
         switch (x) {
             case 0:
@@ -1429,10 +1437,14 @@ abstract class Job {
         getProficiancy().set(0, "Light armor");
         getProficiancy().set(1, "Simple weapons");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nArcana, Deception, History, Intimidation, Investigation, Nature, and Religion:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("Arcana");
+this.getSkills().add("Deception");
+this.getSkills().add("History");
+this.getSkills().add("Intimidation");
+this.getSkills().add("Investigation");
+this.getSkills().add("Nature");
+this.getSkills().add("Religion");
+this.skillCount = 2;
 
         switch (x) {
             case 0:
@@ -1602,12 +1614,13 @@ abstract class Job {
         setBaseHP(6);
         getProficiancy().set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
-        Scanner input = new Scanner(System.in);
-        System.out.printf(
-                "Type the first of two skills,\nArcana, History, Insight, Investigation, Medicine, and Religion:\n");
-        getSkills().add(input.nextLine());
-        System.out.printf("Type the second skill:\n");
-        getSkills().add(input.nextLine());
+        this.getSkills().add("Arcana");
+this.getSkills().add("History");
+this.getSkills().add("Insight");
+this.getSkills().add("Investigation");
+this.getSkills().add("Medicine");
+this.getSkills().add("Religion");
+this.skillCount = 2;
 
         switch (x) {
             case 0:
