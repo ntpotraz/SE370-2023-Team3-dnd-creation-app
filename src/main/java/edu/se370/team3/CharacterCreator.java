@@ -7,33 +7,17 @@ public class CharacterCreator {
     Scanner kb = new Scanner(System.in);
     String input = "";
     Character character = new Character();
+    Race characterRace = character.getRace();
+    Job characterJob = character.getJob();
+    Stats characterStats = character.getStats();
+    Skills characterSkills = character.getSkills();
 
     System.out.println("Welcome the Dungeons and Dragon Character Creator!");
 
-    // race
+    // name
     System.out.print("Enter character name:\n>>> ");
     input = kb.nextLine();
     character.setName(input);
-    System.out.println("\nFrom the list below, please enter a number for your desired race:");
-    System.out.print(
-        "1. Hill Dwarf\n" +
-            "2. Mountain Dwarf\n" +
-            "3. High Elf\n" +
-            "4. Wood Elf\n" +
-            "5. Dark Elf\n" +
-            "6. Lightfoot\n" +
-            "7. Stout\n" +
-            "8. Human\n" +
-            "9. Dragonborn\n" +
-            "10. Forest Gnome\n" +
-            "11. Rock Gnome\n" +
-            "12. Half Elf\n" +
-            "13. Half Orc\n" +
-            "14. Tiefling\n>>> ");
-    input = kb.nextLine();
-    character.setRace(input);
-    character.addHealth(character.getRace().getHealthModifer());
-
     // job
     System.out.println("\nPlease choose desired Class from the list below:");
     System.out.println(
@@ -56,6 +40,27 @@ public class CharacterCreator {
     character.setHitDie(character.getJob().getHitDie());
     System.out.println("\nHealth: " + character.getHealth());
     System.out.println("Hit Dice: " + character.getHitDie());
+
+    // race
+    System.out.println("\nFrom the list below, please enter a number for your desired race:");
+    System.out.print(
+        "1. Hill Dwarf\n" +
+            "2. Mountain Dwarf\n" +
+            "3. High Elf\n" +
+            "4. Wood Elf\n" +
+            "5. Dark Elf\n" +
+            "6. Lightfoot\n" +
+            "7. Stout\n" +
+            "8. Human\n" +
+            "9. Dragonborn\n" +
+            "10. Forest Gnome\n" +
+            "11. Rock Gnome\n" +
+            "12. Half Elf\n" +
+            "13. Half Orc\n" +
+            "14. Tiefling\n>>> ");
+    input = kb.nextLine();
+    character.setRace(input);
+    character.addHealth(character.getRace().getHealthModifer());
 
     // background
     System.out.println("\nPlease choose desired Background from the list below:");

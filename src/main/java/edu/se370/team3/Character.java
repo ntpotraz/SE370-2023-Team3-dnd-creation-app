@@ -1,10 +1,13 @@
 package edu.se370.team3;
 
+import java.util.ArrayList;
+
 public class Character {
   private String characterName;
   private int health;
   private int ac;
   private int[] hitDie;
+  private ArrayList<Item> backpack;
   private Job job;
   private Race race;
   private Background background;
@@ -55,6 +58,18 @@ public class Character {
 
   public String getHitDie() {
     return this.hitDie[0] + "d" + this.hitDie[1];
+  }
+
+  public void addItem(Item item) {
+    this.backpack.add(item);
+  }
+
+  public ArrayList<String> getItemList() {
+    ArrayList<String> itemNames = new ArrayList<String>();
+    for (Item item : this.backpack) {
+      itemNames.add(item.getName());
+    }
+    return itemNames;
   }
 
   public Job getJob() {
