@@ -125,12 +125,12 @@ class Job {
     this.getProficiancy().set(0, "light armor, medium armor, shields");
     this.getProficiancy().set(1, "simple weapons, martial weapons");
 
-    this.getSkills().add("Animal Handling");
-    this.getSkills().add("Athletics");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Nature");
-    this.getSkills().add("Perception");
-    this.getSkills().add("Survival");
+    this.getSkills().add("animal_handling");
+    this.getSkills().add("athletics");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("nature");
+    this.getSkills().add("perception");
+    this.getSkills().add("survival");
     this.skillCount = 2;
 
     switch (x) {
@@ -311,24 +311,24 @@ class Job {
     getProficiancy().set(1, "simple weapons, hand crossbows, longswords, rapiers, shortswords");
     getProficiancy().set(2, "Three musical instruments of your choice");
 
-    this.getSkills().add("Athletics");
-    this.getSkills().add("Acrobatics");
-    this.getSkills().add("Sleight of Hand");
-    this.getSkills().add("Stealth");
-    this.getSkills().add("Arcana");
-    this.getSkills().add("History");
-    this.getSkills().add("Investigation");
-    this.getSkills().add("Nature");
-    this.getSkills().add("Religion");
-    this.getSkills().add("Animal Handling");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Medicine");
-    this.getSkills().add("Perception");
-    this.getSkills().add("Survival");
-    this.getSkills().add("Deception");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Performance");
-    this.getSkills().add("Persuasion");
+    this.getSkills().add("athletics");
+    this.getSkills().add("acrobatics");
+    this.getSkills().add("sleight_of_hand");
+    this.getSkills().add("stealth");
+    this.getSkills().add("arcana");
+    this.getSkills().add("history");
+    this.getSkills().add("investigation");
+    this.getSkills().add("nature");
+    this.getSkills().add("religion");
+    this.getSkills().add("animal_handling");
+    this.getSkills().add("insight");
+    this.getSkills().add("medicine");
+    this.getSkills().add("perception");
+    this.getSkills().add("survival");
+    this.getSkills().add("deception");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("performance");
+    this.getSkills().add("persuasion");
     this.skillCount = 3;
 
     switch (x) {
@@ -472,11 +472,11 @@ class Job {
     getProficiancy().set(0, "Light armor, medium armor, shields");
     getProficiancy().set(1, "All simple weapons");
 
-    this.getSkills().add("History");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Medicine");
-    this.getSkills().add("Persuasion");
-    this.getSkills().add("Religion");
+    this.getSkills().add("history");
+    this.getSkills().add("insight");
+    this.getSkills().add("medicine");
+    this.getSkills().add("persuasion");
+    this.getSkills().add("religion");
     this.skillCount = 2;
 
     switch (x) {
@@ -637,14 +637,14 @@ class Job {
         "clubs, daggers, darts, javelins, maces, quarterstaffs, scimitars, sickles, slings, spears");
     getProficiancy().set(2, "Herbalism kit");
 
-    this.getSkills().add("Arcana");
-    this.getSkills().add("Animal Handling");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Medicine");
-    this.getSkills().add("Nature");
-    this.getSkills().add("Perception");
-    this.getSkills().add("Religion");
-    this.getSkills().add("Survival");
+    this.getSkills().add("arcana");
+    this.getSkills().add("animal_handling");
+    this.getSkills().add("insight");
+    this.getSkills().add("medicine");
+    this.getSkills().add("nature");
+    this.getSkills().add("perception");
+    this.getSkills().add("religion");
+    this.getSkills().add("survival");
     this.skillCount = 2;
 
     switch (x) {
@@ -803,14 +803,14 @@ class Job {
     setBaseHP(10);
     getProficiancy().set(0, "All armor, shields");
     getProficiancy().set(1, "Simple weapons, martial weapons");
-    this.getSkills().add("Acrobatics");
-    this.getSkills().add("Animal Handling");
-    this.getSkills().add("Athletics");
-    this.getSkills().add("History");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Perception");
-    this.getSkills().add("Survival");
+    this.getSkills().add("acrobatics");
+    this.getSkills().add("animal_handling");
+    this.getSkills().add("athletics");
+    this.getSkills().add("history");
+    this.getSkills().add("insight");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("perception");
+    this.getSkills().add("survival");
     this.skillCount = 2;
     switch (x) {
       case 0:
@@ -995,12 +995,12 @@ class Job {
     getProficiancy().set(1, "simple weapons, shortswords");
     getProficiancy().set(2, "artisan’s tools, musical instruments");
 
-    this.getSkills().add("Acrobatics");
-    this.getSkills().add("Athletics");
-    this.getSkills().add("History");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Religion");
-    this.getSkills().add("Stealth");
+    this.getSkills().add("acrobatics");
+    this.getSkills().add("athletics");
+    this.getSkills().add("history");
+    this.getSkills().add("insight");
+    this.getSkills().add("religion");
+    this.getSkills().add("stealth");
     this.skillCount = 2;
 
     System.out.printf("Equipment:\n");
@@ -1101,12 +1101,12 @@ class Job {
     setBaseHP(10);
     getProficiancy().set(0, "all armor, shields");
     getProficiancy().set(1, "simple weapons, martial weapons");
-    this.getSkills().add("Athletics");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Medicine");
-    this.getSkills().add("Persuasion");
-    this.getSkills().add("Religion");
+    this.getSkills().add("athletics");
+    this.getSkills().add("insight");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("medicine");
+    this.getSkills().add("persuasion");
+    this.getSkills().add("religion");
     this.skillCount = 2;
     int loopCase;
     for (int i = 0; i < 2; i++) {
@@ -1327,14 +1327,14 @@ class Job {
     setBaseHP(10);
     getProficiancy().set(0, "Light armor");
     getProficiancy().set(1, "Simple weapons, martial weapons");
-    this.getSkills().add("Animal Handling");
-    this.getSkills().add("Athletics");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Investigation");
-    this.getSkills().add("Nature");
-    this.getSkills().add("Perception");
-    this.getSkills().add("Stealth");
-    this.getSkills().add("Survival");
+    this.getSkills().add("animal_handling");
+    this.getSkills().add("athletics");
+    this.getSkills().add("insight");
+    this.getSkills().add("investigation");
+    this.getSkills().add("nature");
+    this.getSkills().add("perception");
+    this.getSkills().add("stealth");
+    this.getSkills().add("survival");
     this.skillCount = 3;
 
     int loopCase;
@@ -1462,17 +1462,17 @@ class Job {
     getProficiancy().set(1, "Simple weapons, hand crossbows, longswords, rapiers, shortswords");
     getProficiancy().set(2, "Thieves’ tools");
 
-    this.getSkills().add("Acrobatics");
-    this.getSkills().add("Athletics");
-    this.getSkills().add("Deception");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Investigation");
-    this.getSkills().add("Perception");
-    this.getSkills().add("Performance");
-    this.getSkills().add("Persuasion");
-    this.getSkills().add("Sleight of Hand");
-    this.getSkills().add("Stealth");
+    this.getSkills().add("acrobatics");
+    this.getSkills().add("athletics");
+    this.getSkills().add("deception");
+    this.getSkills().add("insight");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("investigation");
+    this.getSkills().add("perception");
+    this.getSkills().add("performance");
+    this.getSkills().add("persuasion");
+    this.getSkills().add("sleight_of_hand");
+    this.getSkills().add("stealth");
     this.skillCount = 4;
 
     switch (x) {
@@ -1541,12 +1541,12 @@ class Job {
     setBaseHP(6);
     getProficiancy().set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
-    this.getSkills().add("Arcana");
-    this.getSkills().add("Deception");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Persuasion");
-    this.getSkills().add("Religion");
+    this.getSkills().add("arcana");
+    this.getSkills().add("deception");
+    this.getSkills().add("insight");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("persuasion");
+    this.getSkills().add("religion");
     this.skillCount = 2;
 
     switch (x) {
@@ -1668,13 +1668,13 @@ class Job {
     getProficiancy().set(0, "Light armor");
     getProficiancy().set(1, "Simple weapons");
 
-    this.getSkills().add("Arcana");
-    this.getSkills().add("Deception");
-    this.getSkills().add("History");
-    this.getSkills().add("Intimidation");
-    this.getSkills().add("Investigation");
-    this.getSkills().add("Nature");
-    this.getSkills().add("Religion");
+    this.getSkills().add("arcana");
+    this.getSkills().add("deception");
+    this.getSkills().add("history");
+    this.getSkills().add("intimidation");
+    this.getSkills().add("investigation");
+    this.getSkills().add("nature");
+    this.getSkills().add("religion");
     this.skillCount = 2;
 
     switch (x) {
@@ -1866,12 +1866,12 @@ class Job {
     setBaseHP(6);
     getProficiancy().set(1, "Daggers, darts, slings, quarterstaffs, light crossbows");
 
-    this.getSkills().add("Arcana");
-    this.getSkills().add("History");
-    this.getSkills().add("Insight");
-    this.getSkills().add("Investigation");
-    this.getSkills().add("Medicine");
-    this.getSkills().add("Religion");
+    this.getSkills().add("arcana");
+    this.getSkills().add("history");
+    this.getSkills().add("insight");
+    this.getSkills().add("investigation");
+    this.getSkills().add("medicine");
+    this.getSkills().add("religion");
     this.skillCount = 2;
 
     switch (x) {

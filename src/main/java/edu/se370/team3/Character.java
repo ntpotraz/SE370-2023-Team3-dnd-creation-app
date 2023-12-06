@@ -8,6 +8,7 @@ public class Character {
   private int ac;
   private int[] hitDie;
   private ArrayList<Item> backpack;
+  private ArrayList<String> chosenSkills;
   private Job job;
   private Race race;
   private Background background;
@@ -19,7 +20,9 @@ public class Character {
     this.characterName = "";
     this.health = 0;
     this.ac = 10;
-    this.hitDie = new int[] { 0, 0 }; // 0: # of dice, 1: # of sides (0d1)
+    this.hitDie = new int[] { 1, this.health }; // 0: # of dice, 1: # of sides (0d1)
+    this.backpack = new ArrayList<Item>();
+    this.chosenSkills = new ArrayList<String>();
     this.race = new Blank();
     this.job = new Job();
     this.background = new Clean();
@@ -44,6 +47,10 @@ public class Character {
     return this.health;
   }
 
+  public String getHitDie() {
+    return this.hitDie[0] + "d" + this.hitDie[1];
+  }
+
   public void addAC(int armor) {
     this.ac += armor;
   }
@@ -52,16 +59,24 @@ public class Character {
     return this.ac;
   }
 
-  public void setHitDie(int[] hd) {
-    this.hitDie = hd;
-  }
-
-  public String getHitDie() {
-    return this.hitDie[0] + "d" + this.hitDie[1];
-  }
-
   public void addItem(Item item) {
     this.backpack.add(item);
+  }
+
+  // This takes skills from Background and Race and adds it to Skills as well
+  // as returns the list of the skills
+
+  public ArrayList<String> getGivenSkills() {
+    ArrayList<String> givenSkills = new ArrayList<String>();
+    givenSkills.addAll(this.race.getSkills());
+
+    for (String skill : this.background.getSkills()) {
+      if (!givenSkills.contains(skill))
+        givenSkills.add(skill);
+    }
+    this.skills.addProficiency(givenSkills);
+
+    return givenSkills;
   }
 
   public ArrayList<String> getItemList() {
