@@ -135,7 +135,6 @@ public class Spell {
         this.school = School.NONE;
         break;
     }
-
   }
 
   public Spell() {
@@ -151,27 +150,28 @@ public class Spell {
         "Eldritch blast paaaawnch");
   }
 
-  public String getLevel() {
-    switch (this.level) {
-      case 0:
-        return "Cantrip";
-      case 1:
-        return "Level 1 Spell";
-      default:
-        return "Level -1 Spell";
-    }
+  public int getLevel() {
+    return this.level;
   }
 
   public String getName() {
     return this.name;
   }
 
-  @Override
-  public String toString() {
+  public String printSpellInfo() {
     String output = "";
+    String levelString = "";
+    switch (this.level) {
+      case 0:
+        levelString = "Cantrip";
+      case 1:
+        levelString = "Level 1 Spell";
+      default:
+        levelString = "Level -1 Spell";
+    }
 
     output += "========== " + this.name + " ==========\n";
-    output += "Spell Level: " + this.getLevel();
+    output += "Spell Level: " + levelString;
     output += "\nRange: " + this.range + " meters";
     output += "\nDamage Type: " + this.damageType;
     output += "\nSchool of Magic: " + this.school;
@@ -186,12 +186,6 @@ public class Spell {
     output += "\nDescription: " + this.description;
     output += "\n";
     return output;
-  }
-
-  public static void main(String[] args) {
-    Spell testSpell = new Spell();
-
-    System.out.println(testSpell);
   }
 }
 

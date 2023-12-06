@@ -3,16 +3,16 @@ package edu.se370.team3;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Stats {
   private int[] statLevel = new int[6];
   private int[] statModifiers = new int[6];
   private ArrayList<Integer> statList;
-  private Scanner k = new Scanner(System.in);
+  private ArrayList<Roll> rolls;
 
   public Stats() {
     this.statList = new ArrayList<Integer>();
+    this.rolls = new ArrayList<Roll>();
     setStat(0, 0);
     setStat(1, 0);
     setStat(2, 0);
@@ -23,10 +23,13 @@ public class Stats {
 
   public void rollDice() {
     Roll roll = new Roll();
-    System.out.println("You rolled " + roll.getLowestDie() + ", " + roll.getFirstDice() + ", " + roll.getSecondDice()
-        + ", " + roll.getThirdDice());
-    System.out
-        .println("Your low roll of " + roll.getLowestDie() + " will be thrown out for a total of " + roll.getTotal());
+    // System.out.println("You rolled " + roll.getLowestDie() + ", " +
+    // roll.getFirstDice() + ", " + roll.getSecondDice()
+    // + ", " + roll.getThirdDice());
+    // System.out
+    // .println("Your low roll of " + roll.getLowestDie() + " will be thrown out for
+    // a total of " + roll.getTotal());
+    this.rolls.add(roll);
     this.statList.add(roll.getTotal());
     this.statList.sort(Collections.reverseOrder());
   }
@@ -233,10 +236,6 @@ public class Stats {
 
   public int getChaMod() {
     return this.statModifiers[5];
-  }
-
-  public void closeScanner() {
-    k.close();
   }
 
   @Override
