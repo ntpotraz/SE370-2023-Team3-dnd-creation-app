@@ -34,6 +34,10 @@ public class Stats {
     this.statList.sort(Collections.reverseOrder());
   }
 
+  public ArrayList<Roll> getRolls() {
+    return this.rolls;
+  }
+
   // Checks to see if the stat has already been entered
   public int containsValue(int index) {
     switch (index) {
