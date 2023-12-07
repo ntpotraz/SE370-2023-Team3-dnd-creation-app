@@ -1,5 +1,6 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.debug.settings.onBuildFailureProceed": true,
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
+  "FSharp.suggestGitignore": false
 }
