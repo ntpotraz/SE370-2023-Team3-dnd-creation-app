@@ -183,8 +183,7 @@ class Job {
 
                 this.getEquipment().add(new Weapon("Shortsword", "A versatile, one-handed sword.", 2, 10, "gp",
                         new int[]{1, 6}, Weapon.WeaponType.MARTIAL_MELEE, Weapon.AttackType.PIERCING, ""));
-        break;
-        case 14:
+
         this.getEquipment().add(new Weapon("Trident", "A three-pronged spear.", 4, 5, "gp",
                 new int[]{1, 6}, Weapon.WeaponType.MARTIAL_MELEE, Weapon.AttackType.PIERCING, "Thrown (20/60)"));
 
