@@ -484,7 +484,7 @@ class Job {
                 6, 10, "gp", 2, ArmorType.NONE, false));
     }
 
-    void Druid(int x, int y) {
+    void Druid() {
         setInt();
         setWis();
         setBaseHP(8);
