@@ -179,9 +179,7 @@ class Job {
         this.getEquipment().add(new Weapon("Rapier", "A slender, piercing sword.", 2, 25, "gp",
                 new int[]{1, 8}, Weapon.WeaponType.MARTIAL_MELEE, Weapon.AttackType.PIERCING, ""));
 
-        this.getEquipment().add(new Weapon("Scimitar", "A curved, slashing sword.", 3, 25, "gp",
-
-                this.getEquipment().add(new Weapon("Shortsword", "A versatile, one-handed sword.", 2, 10, "gp",
+        this.getEquipment().add(new Weapon("Shortsword", "A versatile, one-handed sword.", 2, 10, "gp",
                         new int[]{1, 6}, Weapon.WeaponType.MARTIAL_MELEE, Weapon.AttackType.PIERCING, ""));
 
         this.getEquipment().add(new Weapon("Trident", "A three-pronged spear.", 4, 5, "gp",
