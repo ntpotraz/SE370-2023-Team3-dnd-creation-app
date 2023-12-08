@@ -394,6 +394,7 @@ class Job {
         this.getSkills().add("persuasion");
         this.getSkills().add("religion");
         this.skillCount = 2;
+        this.cantripCount = 3;
 
         this.equipmentString = "Pick a mace or a warhammer (if proficient), and scale mail, leather armor, or chain mail (if proficient), then a light crossbow or any simple weapon, finally pick a priest’s pack or an explorer’s pack.";
 
@@ -502,6 +503,8 @@ class Job {
         this.getSkills().add("religion");
         this.getSkills().add("survival");
         this.skillCount = 2;
+        this.cantripCount = 2;
+        this.spellCount = 2;
 
         this.equipmentString = "Pick either a shield and one weapon, or two weapons.";
         this.getEquipment().add(new Armor("Shield",
@@ -805,7 +808,7 @@ class Job {
         this.getSkills().add("persuasion");
         this.getSkills().add("religion");
         this.skillCount = 2;
-        int loopCase;
+
 
         this.equipmentString = "Pick a martial weapon and a shield or two martial weapons,\n" +
                 "then five javelins or any simple melee weapon, also a priest’s pack or an explorer’s pack";
@@ -958,6 +961,7 @@ class Job {
         this.getSkills().add("stealth");
         this.getSkills().add("survival");
         this.skillCount = 3;
+        this.spellCount = 2;
 
 
         this.equipmentString = "Pick scale mail or leather armor,\n" +
