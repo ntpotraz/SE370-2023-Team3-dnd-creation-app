@@ -345,9 +345,9 @@ class Job {
                 "Includes a backpack, a bedroll, 2 costumes, 5 candles, 5 days of rations, a waterskin, and a disguise kit.",
                 32, 40, "gp"));
 
-        new Misc("Diplomat's pack",
+        this.getEquipment().add(new Misc("Diplomat's pack",
                 "Includes a chest, two cases for maps and scrolls, a set of fine clothes, a bottle of ink, an ink pen, a lamp, two flasks of oil, a sheet of paper, a vial of perfume, sealing wax, and soap.",
-                39, 39, "gp");
+                39, 39, "gp"));
 
 
         this.getEquipment().add(new Misc("Lute", "A stringed musical instrument.", 2, 35, "gp"));
@@ -590,7 +590,7 @@ class Job {
         this.getSkills().add("survival");
         this.skillCount = 2;
 
-        this. equipmentString = "Pick chain mail or leather armor, a longbow, and 20 arrows, then a martial weapon and a shield or two martial weapons\n" +
+        this.equipmentString = "Pick chain mail or leather armor, a longbow, and 20 arrows, then a martial weapon and a shield or two martial weapons\n" +
                 "also a light crossbow and 20 bolts or two handaxes, finally a dungeoneer’s pack or an explorer’s pack";
         this.getEquipment().add(new Armor("Chainmail",
                 "A flexible type of armor made of interlocking metal rings.",
@@ -1115,7 +1115,7 @@ class Job {
         this.cantripCount = 4;
         this.spellCount = 2;
 
-    this.equipmentString = "Pick a light crossbow or any simple weapon,\n" +
+        this.equipmentString = "Pick a light crossbow or any simple weapon,\n" +
             "then a component pouch or an arcane focus,\n" +
             "also a dungeoneer’s pack or an explorer’s pack.";
         this.getEquipment().add(new Weapon("Light Crossbow", "A small, one-handed crossbow with 20 bolts.", 5, 25, "gp",
@@ -1362,12 +1362,12 @@ class Job {
         this.cantripCount = 3;
         this.spellCount = 2;
 
-        his.equipmentString = "Pick a quarterstaff or a dagger,\n" +
+        this.equipmentString = "Pick a quarterstaff or a dagger,\n" +
                 "then a component pouch or an arcane focus, also a scholar’s pack or an explorer’s pack";
         this.getEquipment().add(new Weapon("Quarterstaff", "A versatile, two-handed staff.", 4, 2, "sp",
                 new int[]{1, 6}, Weapon.WeaponType.SIMPLE_MELEE, Weapon.AttackType.BLUDGEONING, "Versatile (1d8)"));
 
-            .add(new Weapon("Dagger", "A small, easily concealable knife.", 1, 2, "gp", new int[]{1, 4},
+        this.getEquipment().add(new Weapon("Dagger", "A small, easily concealable knife.", 1, 2, "gp", new int[]{1, 4},
                 Weapon.WeaponType.SIMPLE_MELEE, Weapon.AttackType.PIERCING, "Finesse, Light, Thrown (20/60)"));
 
 
