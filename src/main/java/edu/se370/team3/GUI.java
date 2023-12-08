@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.List;
 
 public class GUI {
 
@@ -17,11 +19,19 @@ public class GUI {
     private JPanel characterPanel, abilitiesPanel, proficiencyPanel, spellsPanel, equipmentPanel, summaryPanel;
     private JPanel[] panels;
     private int currentPanelIndex;
+    private Stats stats; // Add this line to create a Stats instance
+    Character character = new Character();
+    private int rollCount = 0;
+    private int[] selectedScores;
+    private String characterName;
+    private String characterClass;
+    private String characterRace;
+    private String characterBackground;
 
-    private ArrayList<String> availableScores = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+    private ArrayList<String> availableScores = new ArrayList<>(Arrays.asList());
     private ArrayList<JComboBox<String>> comboBoxes = new ArrayList<>();
 
-    public GUI() {
+    public GUI() throws IOException {
         frame = new JFrame(); // create initial panel
 
         // comboBoxes = new JComboBox[6]; // Initialize the array for 6 abilities
@@ -51,9 +61,6 @@ public class GUI {
     private JPanel createCharacterPanel() {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
-        // JPanel panel = new JPanel(new GridBagLayout());
-        // GridBagConstraints c = new GridBagConstraints();
 
         // Increased font sizes
         Font labelFont = new Font("Serif", Font.PLAIN, 18); // Larger font for labels
@@ -135,14 +142,41 @@ public class GUI {
         c.anchor = GridBagConstraints.CENTER;
         c.insets = new Insets(200, 0, 0, 0);
 
-        createNextButton(panel, c);
+        JButton btnNext = new JButton("Next");
+        btnNext.setPreferredSize(new Dimension(120, 30)); // Set larger size
+        btnNext.setFont(new Font("Serif", Font.PLAIN, 16));
+        btnNext.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                character.setName(txtName.getText());
+                character.setJob((String) cbClass.getSelectedItem());
+                character.addHealth(character.getJob().getBaseHP());
+                character.setRace((String) cbRace.getSelectedItem());
+                character.addHealth(character.getRace().getHealthModifer());
+                character.setBackground((String) cbBackground.getSelectedItem());
+
+                /*
+                 * System.out.println(character.getRace().getRace());
+                 * System.out.println(character.getJob().getJobTitle());
+                 * System.out.println(character.getName());
+                 * System.out.println(character.getBackground().getBackgroundTitle());
+                 */
+
+                // System.out.println(character.getRace().getRace());
+
+                switchPanel();
+            }
+        });
+        panel.add(btnNext, c);
         return panel;
     }
 
     private JPanel createAbilitiesPanel() {
+        stats = new Stats();
+
         JPanel panel = new JPanel(new GridBagLayout()); // main panel
         JPanel abilitiesPanel = new JPanel(new GridBagLayout()); // abilities panel, will hold all the abilities with
-                                                                 // their drop-down menus for results from rolling dices
+        // their drop-down menus for results from rolling dices
 
         GridBagConstraints c = new GridBagConstraints(); // grid for main panel
         GridBagConstraints abi = new GridBagConstraints(); // grid for all abilities panels
@@ -157,14 +191,6 @@ public class GUI {
         JLabel lblTitle = new JLabel("Calculate Abilities Score");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 26));
         panel.add(lblTitle, c);
-
-        // add next button at the bottom of the panel
-        c.insets = new Insets(0, 0, 100, 0);
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = GridBagConstraints.REMAINDER; // This will span the title across all columns
-        c.anchor = GridBagConstraints.CENTER; // Center align
-        createNextButton(panel, c);
 
         // List of abilities
         String[] abilities = { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma" };
@@ -205,6 +231,7 @@ public class GUI {
         clearButton.setFont(new Font("Serif", Font.PLAIN, 16)); // Set larger font
         clearButton.setPreferredSize(new Dimension(150, 30)); // Set larger size
         clearButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearSelections();
@@ -220,13 +247,12 @@ public class GUI {
         abilitiesPanel.add(clearButton, abi);
 
         // add abilities panel to main panel
-        c.insets = new Insets(0, 0, 0, 0); // Add padding
+        c.insets = new Insets(100, 0, 0, 0); // Add padding
         c.gridx = 0;
         c.gridy = 1;
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.gridwidth = 1;
-        c.fill = GridBagConstraints.BOTH; // Fill behavior
         panel.add(abilitiesPanel, c);
 
         // Panel for dices and dice roll button
@@ -235,12 +261,18 @@ public class GUI {
 
         d.insets = new Insets(10, 10, 10, 10);
         JPanel[] dicePanels = new JPanel[4];
+        JLabel[] diceLabels = new JLabel[4]; // Array to store labels for dice results
 
         // create a panel for each individual dice to hold the result of the dices
         for (int i = 0; i < dicePanels.length; i++) {
             dicePanels[i] = new JPanel(new GridBagLayout());
             dicePanels[i].setPreferredSize(new Dimension(100, 100));
             dicePanels[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+            // Create and add a label to each dice panel
+            diceLabels[i] = new JLabel("0"); // Initial value
+            diceLabels[i].setFont(new Font("Serif", Font.BOLD, 24)); // Example styling
+            dicePanels[i].add(diceLabels[i]);
 
             // Position each panel in a 2x2 grid
             d.gridx = i % 2;
@@ -257,14 +289,68 @@ public class GUI {
         roll.setPreferredSize(new Dimension(150, 30)); // Set larger size
         dicesPanel.add(roll, d);
 
+        roll.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                stats.rollDice();
+                Roll lastRoll = stats.getRolls().get(stats.getRolls().size() - 1); // Get the latest roll
+
+                // Draw dice faces based on the roll results
+                drawDiceFace(dicePanels[0], lastRoll.getFirstDice());
+                drawDiceFace(dicePanels[1], lastRoll.getSecondDice());
+                drawDiceFace(dicePanels[2], lastRoll.getThirdDice());
+                drawDiceFace(dicePanels[3], lastRoll.getLowestDie());
+
+                // Optionally, update the available scores
+                availableScores.add(Integer.toString(lastRoll.getTotal()));
+                updateAvailableScores();
+
+                rollCount++;
+                if (rollCount >= 6) {
+                    roll.setEnabled(false); // Disables the button
+                    roll.setOpaque(true); // Makes the button opaque
+                }
+
+            }
+        });
+
         // add dice panel to main panel
         c.gridx = 3;
         c.gridy = 1;
         c.weightx = 1.0;
         c.weighty = 1.0;
-        c.insets = new Insets(0, 300, 0, 0);
-        c.fill = GridBagConstraints.BOTH; // Fill behavior
+        c.insets = new Insets(100, 300, 0, 0);
         panel.add(dicesPanel, c);
+
+        // add next button at the bottom of the panel
+        c.insets = new Insets(0, 0, 100, 0);
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = GridBagConstraints.REMAINDER; // This will span the title across all columns
+        c.anchor = GridBagConstraints.CENTER; // Center align
+        JButton nextButton = new JButton("Next");
+        nextButton.setFont(new Font("Serif", Font.PLAIN, 16)); // Set larger font
+        nextButton.setPreferredSize(new Dimension(120, 30)); // Set larger size
+
+        selectedScores = new int[comboBoxes.size()];
+
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (int i = 0; i < comboBoxes.size(); i++) {
+                    JComboBox<String> comboBox = comboBoxes.get(i);
+                    selectedScores[i] = Integer.parseInt((String) comboBox.getSelectedItem());
+                }
+                // Assuming you have a method in Character or Stats class to handle int array
+                try {
+                    character.getStats().modifyStats(selectedScores);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+                switchPanel();
+            }
+        });
+        panel.add(nextButton, c);
 
         return panel;
     }
@@ -274,6 +360,10 @@ public class GUI {
         JPanel proficiency = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints(); // Grid for main panel
         GridBagConstraints p = new GridBagConstraints();
+
+        character.getSkills().insertModifiers(character.getStats().getMods());
+        character.getSkills().addProficiency(character.getJob().getSkills());
+        character.getSkills().addProficiency(character.getBackground().getSkills());
 
         // Add the title of the panel
         c.gridx = 0;
@@ -286,6 +376,9 @@ public class GUI {
         panel.add(lblTitle, c);
 
         // Skills
+        // ArrayList<String> givenSkillsList = character.getGivenSkills();
+        // String[] skills = givenSkillsList.toArray(new String[0]);
+
         String[] skills = { "Athletics", "Acrobatics", "Sleight of Hand", "Stealth",
                 "Arcana", "History", "Investigation", "Nature", "Religion",
                 "Animal Handling", "Insight", "Medicine", "Perception",
@@ -334,7 +427,7 @@ public class GUI {
         return panel;
     }
 
-    private JPanel createSpellsPanel() {
+    private JPanel createSpellsPanel() throws IOException {
         JPanel panel = new JPanel(new GridBagLayout()); // Main panel
         JPanel Book = new JPanel(new GridBagLayout()); // Book panel (Used for spellbook)
         JPanel Spells = new JPanel(new GridBagLayout()); // Spells panel
@@ -382,12 +475,19 @@ public class GUI {
         s.gridy = 2;
         Book.add(spellBook, s);
 
+        character.getSpellbook().setJob(character.getJob().getJobTitle());
+        // character.getSpellbook().addSpells(character.getRace().getSpells());
+
+        List<String> cantripsD = character.getSpellbook().getCantrips();
+        String cantripsDString = String.join(", ", cantripsD);
+        System.out.println(cantripsDString);
+
         // add dropdown menus for selecting spells and add them to the Spell panel
         // Dropdown menu for "Cantrips"
         s.gridx = 0;
         s.gridy = 0;
         s.insets = new Insets(5, 20, 5, 20);
-        Spells.add(createDropdownMenu(new String[] { "Option 1", "Option 2", "Option 3" }, "Cantrips", cantripSB), s);
+        Spells.add(createDropdownMenu(new String[] { cantripsDString }, "Cantrips", cantripSB), s);
 
         // Dropdown menu for "Lvl 1 Spells"
         s.gridy = 1;
@@ -414,7 +514,7 @@ public class GUI {
         JPanel panel = new JPanel(new GridBagLayout()); // Main panel
         JPanel Equip = new JPanel(new GridBagLayout()); // Equipment panel -- used for weapons and armor
         JPanel Inventory = new JPanel(new GridBagLayout()); // Inventory panel -- used for displaying selected weapons
-                                                            // and armor
+        // and armor
 
         GridBagConstraints c = new GridBagConstraints(); // Grid for main panel
         GridBagConstraints e = new GridBagConstraints(); // grid for Equipment panel and Weapons panels
@@ -507,18 +607,62 @@ public class GUI {
         return panel;
     }
 
+    private void drawDiceFace(JPanel panel, int number) {
+        panel.removeAll(); // Clear previous drawings or components
+        panel.setLayout(new GridLayout(3, 3)); // Dice faces have 3x3 grid layout
+
+        // Define positions for dots in a 3x3 grid, depending on the number
+        boolean[] dots = new boolean[9];
+        switch (number) {
+            case 1:
+                dots[4] = true;
+                break;
+            case 2:
+                dots[0] = dots[8] = true;
+                break;
+            case 3:
+                dots[0] = dots[4] = dots[8] = true;
+                break;
+            case 4:
+                dots[0] = dots[2] = dots[6] = dots[8] = true;
+                break;
+            case 5:
+                dots[0] = dots[2] = dots[4] = dots[6] = dots[8] = true;
+                break;
+            case 6:
+                dots[0] = dots[2] = dots[3] = dots[5] = dots[6] = dots[8] = true;
+                break;
+        }
+
+        // Add labels (dots) to the panel
+        for (boolean dot : dots) {
+            JLabel label = new JLabel();
+            label.setOpaque(dot);
+            label.setBackground(Color.BLACK); // Dot color
+            panel.add(label);
+        }
+
+        panel.revalidate();
+        panel.repaint();
+    }
+
     private void updateAvailableScores() {
-        HashSet<String> selectedScores = new HashSet<>();
+        HashMap<String, Integer> scoreOccurrences = new HashMap<>();
         for (JComboBox<String> comboBox : comboBoxes) {
             String selected = (String) comboBox.getSelectedItem(); // Explicit cast to String
             if (selected != null && !selected.isEmpty()) {
-                selectedScores.add(selected);
+                scoreOccurrences.put(selected, scoreOccurrences.getOrDefault(selected, 0) + 1);
             }
         }
 
         // Create a new list of available scores
-        ArrayList<String> newAvailableScores = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        newAvailableScores.removeAll(selectedScores);
+        ArrayList<String> newAvailableScores = new ArrayList<>(availableScores);
+        for (String score : scoreOccurrences.keySet()) {
+            int count = scoreOccurrences.get(score);
+            for (int i = 0; i < count; i++) {
+                newAvailableScores.remove(score); // Remove only the first occurrence each time
+            }
+        }
 
         for (JComboBox<String> comboBox : comboBoxes) {
             String currentSelection = (String) comboBox.getSelectedItem();
@@ -619,9 +763,6 @@ public class GUI {
         panel.add(nextButton, constraints);
     }
 
-    // function for the dice roll -- needs to be implemented if we decide to do it
-    // in here instead of the back-end
-
     // function that switches panels once the "next" button is clicked
     private void switchPanel() {
         frame.getContentPane().remove(panels[currentPanelIndex]);
@@ -636,7 +777,11 @@ public class GUI {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new GUI();
+                try {
+                    new GUI();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
