@@ -50,4 +50,12 @@ public class Spellbook {
     }
     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
+
+  public String getSpellbookAsString() {
+    StringBuilder sb = new StringBuilder();
+    for (Spell spell : this.spellBook) {
+      sb.append(spell.getLevel()).append(" | ").append(spell.getName()).append("\n");
+    }
+    return sb.toString();
+  }
 }

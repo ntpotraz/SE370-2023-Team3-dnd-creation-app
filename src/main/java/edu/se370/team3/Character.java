@@ -93,40 +93,40 @@ public class Character {
 
   public void setJob(String input) {
     switch (input) {
-      case "1":
+      case "Barbarian":
         this.job.Barbarian();
         break;
-      case "2":
+      case "Bard":
         this.job.Bard();
         break;
-      case "3":
+      case "Cleric":
         this.job.Cleric();
         break;
-      case "4":
+      case "Druid":
         this.job.Druid();
         break;
-      case "5":
+      case "Fighter":
         this.job.Fighter();
         break;
-      case "6":
+      case "Monk":
         this.job.Monk();
         break;
-      case "7":
+      case "Paladin":
         this.job.Paladin();
         break;
-      case "8":
+      case "Ranger":
         this.job.Ranger();
         break;
-      case "9":
+      case "Rogue":
         this.job.Rogue();
         break;
-      case "10":
+      case "Sorcerer":
         this.job.Sorcerer();
         break;
-      case "11":
+      case "Warlock":
         this.job.Warlock();
         break;
-      case "12":
+      case "Wizard":
         this.job.Wizard();
         break;
       default:
@@ -142,43 +142,43 @@ public class Character {
   public void setBackground(String input) {
     String newBackground;
     switch (input) {
-      case "1":
+      case "Acolyte":
         newBackground = "acolyte";
         break;
-      case "2":
+      case "Charlatan":
         newBackground = "charlatan";
         break;
-      case "3":
+      case "Criminal":
         newBackground = "criminal";
         break;
-      case "4":
+      case "Entertainer":
         newBackground = "entertainer";
         break;
-      case "5":
+      case "Folkhero":
         newBackground = "folkhero";
         break;
-      case "6":
+      case "Guildartisan":
         newBackground = "guildartisan";
         break;
-      case "7":
+      case "Hermit":
         newBackground = "hermit";
         break;
-      case "8":
+      case "Noble":
         newBackground = "noble";
         break;
-      case "9":
+      case "Outlander":
         newBackground = "outlander";
         break;
-      case "10":
+      case "Sage":
         newBackground = "sage";
         break;
-      case "11":
+      case "Sailor":
         newBackground = "sailor";
         break;
-      case "12":
+      case "Soldier":
         newBackground = "soldier";
         break;
-      case "13":
+      case "Urchin":
         newBackground = "urchin";
         break;
       default:
@@ -195,46 +195,46 @@ public class Character {
   public void setRace(String input) {
     String newRace;
     switch (input) {
-      case "1":
+      case "Hill Dwarf":
         newRace = "hilldwarf";
         break;
-      case "2":
+      case "Mountain Dwarf":
         newRace = "mountaindwarf";
         break;
-      case "3":
+      case "High Elf":
         newRace = "highelf";
         break;
-      case "4":
+      case "Wood Elf":
         newRace = "woodelf";
         break;
-      case "5":
+      case "Dark Elf":
         newRace = "darkelf";
         break;
-      case "6":
+      case "Lightfoot":
         newRace = "lightfoot";
         break;
-      case "7":
+      case "Stout":
         newRace = "stout";
         break;
-      case "8":
+      case "Human":
         newRace = "human";
         break;
-      case "9":
+      case "Dragonborn":
         newRace = "dragonborn";
         break;
-      case "10":
+      case "Forest Gnome":
         newRace = "forestgnome";
         break;
-      case "11":
+      case "Rock Gnome":
         newRace = "rockgnome";
         break;
-      case "12":
+      case "Half Elf":
         newRace = "halfelf";
         break;
-      case "13":
+      case "Half Orc":
         newRace = "halforc";
         break;
-      case "14":
+      case "Tiefling":
         newRace = "tiefling";
         break;
       default:

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GUI {
 
@@ -23,10 +24,6 @@ public class GUI {
     Character character = new Character();
     private int rollCount = 0;
     private int[] selectedScores;
-    private String characterName;
-    private String characterClass;
-    private String characterRace;
-    private String characterBackground;
 
     private ArrayList<String> availableScores = new ArrayList<>(Arrays.asList());
     private ArrayList<JComboBox<String>> comboBoxes = new ArrayList<>();
@@ -34,27 +31,19 @@ public class GUI {
     public GUI() throws IOException {
         frame = new JFrame(); // create initial panel
 
-        // comboBoxes = new JComboBox[6]; // Initialize the array for 6 abilities
-
         // Get the screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         frame.setSize(screenSize.width, screenSize.height);
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // declare all panel to be used
         characterPanel = createCharacterPanel();
-        abilitiesPanel = createAbilitiesPanel();
-        proficiencyPanel = createProficiencyPanel();
-        spellsPanel = createSpellsPanel();
-        equipmentPanel = createEquipmentPanel();
-        summaryPanel = createSummaryPanel();
+        panels = new JPanel[6]; // Initialize the array but don't create all panels yet
+        panels[0] = characterPanel; // Only add the first panel
 
-        panels = new JPanel[] { characterPanel, abilitiesPanel, proficiencyPanel, spellsPanel, equipmentPanel,
-                summaryPanel }; // array to switch panels
         currentPanelIndex = 0;
 
-        frame.add(panels[currentPanelIndex]); // add current panel to initial panel
+        frame.add(panels[currentPanelIndex]); // add current panel to frame
         frame.setVisible(true); // display panel
     }
 
@@ -88,7 +77,7 @@ public class GUI {
         cbRace.setFont(comboBoxFont); // Set font for combo box
 
         JComboBox<String> cbBackground = new JComboBox<>(new String[] {
-                "Acolyte", "Charlatan", "Criminal/Spy", "Entertainer",
+                "Acolyte", "Charlatan", "Criminal", "Entertainer",
                 "Folk Hero", "Guild Artisan", "Hermit", "Noble",
                 "Outlander", "Sage", "Sailor", "Soldier", "Urchin"
         });
@@ -149,20 +138,14 @@ public class GUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 character.setName(txtName.getText());
+
                 character.setJob((String) cbClass.getSelectedItem());
                 character.addHealth(character.getJob().getBaseHP());
+
                 character.setRace((String) cbRace.getSelectedItem());
                 character.addHealth(character.getRace().getHealthModifer());
+
                 character.setBackground((String) cbBackground.getSelectedItem());
-
-                /*
-                 * System.out.println(character.getRace().getRace());
-                 * System.out.println(character.getJob().getJobTitle());
-                 * System.out.println(character.getName());
-                 * System.out.println(character.getBackground().getBackgroundTitle());
-                 */
-
-                // System.out.println(character.getRace().getRace());
 
                 switchPanel();
             }
@@ -176,7 +159,7 @@ public class GUI {
 
         JPanel panel = new JPanel(new GridBagLayout()); // main panel
         JPanel abilitiesPanel = new JPanel(new GridBagLayout()); // abilities panel, will hold all the abilities with
-        // their drop-down menus for results from rolling dices
+                                                                 // their drop-down menus for results from rolling dices
 
         GridBagConstraints c = new GridBagConstraints(); // grid for main panel
         GridBagConstraints abi = new GridBagConstraints(); // grid for all abilities panels
@@ -185,12 +168,19 @@ public class GUI {
         // Center the title at the top of the panel
         c.gridx = 0;
         c.gridy = 0;
-        c.gridwidth = GridBagConstraints.REMAINDER; // This will span the title across all columns
+        c.gridwidth = GridBagConstraints.REMAINDER;
         c.insets = new Insets(100, 0, 0, 0);
         c.anchor = GridBagConstraints.CENTER; // Center align
         JLabel lblTitle = new JLabel("Calculate Abilities Score");
         lblTitle.setFont(new Font("Serif", Font.BOLD, 26));
         panel.add(lblTitle, c);
+
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.SOUTH; // Center align
+        JLabel lblInst = new JLabel("Roll the dices 6 times. Then, select the desire score for each ability");
+        lblInst.setFont(new Font("Serif", Font.PLAIN, 18));
+        panel.add(lblInst, c);
+        c.anchor = GridBagConstraints.CENTER;
 
         // List of abilities
         String[] abilities = { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma" };
@@ -249,7 +239,7 @@ public class GUI {
         // add abilities panel to main panel
         c.insets = new Insets(100, 0, 0, 0); // Add padding
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.gridwidth = 1;
@@ -301,7 +291,7 @@ public class GUI {
                 drawDiceFace(dicePanels[2], lastRoll.getThirdDice());
                 drawDiceFace(dicePanels[3], lastRoll.getLowestDie());
 
-                // Optionally, update the available scores
+                // Update the available scores
                 availableScores.add(Integer.toString(lastRoll.getTotal()));
                 updateAvailableScores();
 
@@ -316,7 +306,7 @@ public class GUI {
 
         // add dice panel to main panel
         c.gridx = 3;
-        c.gridy = 1;
+        c.gridy = 2;
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.insets = new Insets(100, 300, 0, 0);
@@ -325,12 +315,12 @@ public class GUI {
         // add next button at the bottom of the panel
         c.insets = new Insets(0, 0, 100, 0);
         c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = GridBagConstraints.REMAINDER; // This will span the title across all columns
-        c.anchor = GridBagConstraints.CENTER; // Center align
+        c.gridy = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
         JButton nextButton = new JButton("Next");
-        nextButton.setFont(new Font("Serif", Font.PLAIN, 16)); // Set larger font
-        nextButton.setPreferredSize(new Dimension(120, 30)); // Set larger size
+        nextButton.setFont(new Font("Serif", Font.PLAIN, 16));
+        nextButton.setPreferredSize(new Dimension(120, 30));
 
         selectedScores = new int[comboBoxes.size()];
 
@@ -341,9 +331,11 @@ public class GUI {
                     JComboBox<String> comboBox = comboBoxes.get(i);
                     selectedScores[i] = Integer.parseInt((String) comboBox.getSelectedItem());
                 }
-                // Assuming you have a method in Character or Stats class to handle int array
+                // modify stats based on the selections
                 try {
                     character.getStats().modifyStats(selectedScores);
+                    character.getStats().modifyStats(character.getRace().getStatMods());
+                    character.addHealth(character.getStats().getDexMod());
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
@@ -356,9 +348,10 @@ public class GUI {
     }
 
     private JPanel createProficiencyPanel() {
+
         JPanel panel = new JPanel(new GridBagLayout()); // Main panel
         JPanel proficiency = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints(); // Grid for main panel
+        GridBagConstraints c = new GridBagConstraints();
         GridBagConstraints p = new GridBagConstraints();
 
         character.getSkills().insertModifiers(character.getStats().getMods());
@@ -375,16 +368,21 @@ public class GUI {
         lblTitle.setFont(new Font("Serif", Font.BOLD, 26));
         panel.add(lblTitle, c);
 
-        // Skills
-        // ArrayList<String> givenSkillsList = character.getGivenSkills();
-        // String[] skills = givenSkillsList.toArray(new String[0]);
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.SOUTH; // Center align
+        JLabel lblInst = new JLabel("Choose those skills you want to be proficient in");
+        lblInst.setFont(new Font("Serif", Font.PLAIN, 18));
+        panel.add(lblInst, c);
+        c.anchor = GridBagConstraints.CENTER;
 
-        String[] skills = { "Athletics", "Acrobatics", "Sleight of Hand", "Stealth",
-                "Arcana", "History", "Investigation", "Nature", "Religion",
-                "Animal Handling", "Insight", "Medicine", "Perception",
-                "Survival", "Deception", "Intimidation", "Performance", "Persuasion" };
+        // Skills
+        ArrayList<String> givenSkillsList = character.getGivenSkills();
+        String[] skills = givenSkillsList.toArray(new String[0]);
 
         p.insets = new Insets(10, 10, 10, 10);
+
+        int maxSkills = character.getJob().getSkillCount(); // Maximum number of skills to select
+        AtomicInteger selectedSkillsCount = new AtomicInteger(0);
 
         for (int i = 0; i < skills.length; i++) {
             p.gridx = 2 * (i % 5); // Arrange in 5 columns, leaving space for text fields
@@ -398,30 +396,43 @@ public class GUI {
             textField.setEditable(false);
             textField.setFont(new Font("Serif", Font.PLAIN, 18)); // Set font for text fields
 
-            // Add listener to checkbox
             checkBox.addItemListener(e -> {
                 if (checkBox.isSelected()) {
                     textField.setText("  +2");
+                    character.getSkills().addProficiency(checkBox.getText());
+                    if (selectedSkillsCount.incrementAndGet() == maxSkills) {
+                        // Disable all unselected checkboxes
+                        for (Component comp : proficiency.getComponents()) {
+                            if (comp instanceof JCheckBox && !((JCheckBox) comp).isSelected()) {
+                                comp.setEnabled(false);
+                            }
+                        }
+                    }
                 } else {
                     textField.setText("");
+                    if (selectedSkillsCount.decrementAndGet() < maxSkills) {
+                        // Re-enable all checkboxes
+                        for (Component comp : proficiency.getComponents()) {
+                            comp.setEnabled(true);
+                        }
+                    }
                 }
             });
 
-            // Increment gridx for text field
             p.gridx++;
             proficiency.add(textField, p);
         }
 
         // Add Next button
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridwidth = GridBagConstraints.REMAINDER;
-        c.insets = new Insets(20, 0, 100, 0); // Adjust the inset for the button
+        c.insets = new Insets(20, 0, 100, 0);
         c.anchor = GridBagConstraints.CENTER;
         createNextButton(panel, c);
 
-        c.insets = new Insets(20, 0, 20, 0); // Adjust the inset for the button
-        c.gridy = 1;
+        c.insets = new Insets(20, 0, 20, 0);
+        c.gridy = 2;
         panel.add(proficiency, c);
 
         return panel;
@@ -445,9 +456,16 @@ public class GUI {
         lblTitle.setFont(new Font("Serif", Font.BOLD, 26));
         panel.add(lblTitle, c);
 
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.SOUTH; // Center align
+        JLabel lblInst = new JLabel("Choose your cantrips and spells");
+        lblInst.setFont(new Font("Serif", Font.PLAIN, 18));
+        panel.add(lblInst, c);
+        c.anchor = GridBagConstraints.CENTER;
+
         // add next button
         c.insets = new Insets(0, 0, 100, 0);
-        c.gridy = 2;
+        c.gridy = 3;
         createNextButton(panel, c);
 
         c.gridwidth = 1;
@@ -476,11 +494,11 @@ public class GUI {
         Book.add(spellBook, s);
 
         character.getSpellbook().setJob(character.getJob().getJobTitle());
-        // character.getSpellbook().addSpells(character.getRace().getSpells());
+        character.getSpellbook().addSpells(character.getRace().getCantrips());
 
-        List<String> cantripsD = character.getSpellbook().getCantrips();
+        List<String> cantripsD = character.getSpellbook().getAvailableCantrips();
         String cantripsDString = String.join(", ", cantripsD);
-        System.out.println(cantripsDString);
+        // System.out.println(cantripsDString);
 
         // add dropdown menus for selecting spells and add them to the Spell panel
         // Dropdown menu for "Cantrips"
@@ -495,14 +513,14 @@ public class GUI {
 
         // add Book and Spells panels to the main panel
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         c.insets = new Insets(20, 0, 0, 0);
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.fill = GridBagConstraints.BOTH;
         panel.add(Spells, c);
         c.gridx = 2;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridheight = 2;
         c.insets = new Insets(0, 0, 0, 0);
         panel.add(Book, c);
@@ -512,14 +530,12 @@ public class GUI {
 
     private JPanel createEquipmentPanel() {
         JPanel panel = new JPanel(new GridBagLayout()); // Main panel
-        JPanel Equip = new JPanel(new GridBagLayout()); // Equipment panel -- used for weapons and armor
-        JPanel Inventory = new JPanel(new GridBagLayout()); // Inventory panel -- used for displaying selected weapons
-        // and armor
+        JPanel Equip = new JPanel(new GridBagLayout()); // Equipment panel
 
         GridBagConstraints c = new GridBagConstraints(); // Grid for main panel
-        GridBagConstraints e = new GridBagConstraints(); // grid for Equipment panel and Weapons panels
+        GridBagConstraints e = new GridBagConstraints(); // Grid for Equipment panel
 
-        // Add the title of the panel
+        // Title setup
         c.gridx = 0;
         c.gridy = 0;
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -529,58 +545,48 @@ public class GUI {
         lblTitle.setFont(new Font("Serif", Font.BOLD, 24));
         panel.add(lblTitle, c);
 
-        // add next button
+        // Next button setup
         c.insets = new Insets(0, 0, 100, 0);
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         createNextButton(panel, c);
 
-        c.gridwidth = 1;
+        // Equipment list setup
+        ArrayList<Item> equipmentList = character.getJob().getEquipment();
 
-        // JTextArea to display selected options
-        JTextArea weapInv = new JTextArea(12, 25); // inv (inventory) will display all the armor and weapons selected
-        weapInv.setEditable(false);
-        Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
-        weapInv.setBorder(border);
-
-        JTextArea equipInv = new JTextArea(12, 25); // inv (inventory) will display all the armor and weapons selected
-        equipInv.setEditable(false);
-        equipInv.setBorder(border);
-
-        // add Inventory (text area) and subtitle ("Inventory") to Inventory panel
-        e.gridx = 0;
-        e.gridy = 0;
-        JLabel txtTitle = new JLabel("Inventory");
-        txtTitle.setFont(new Font("Serif", Font.PLAIN, 26));
-        Inventory.add(txtTitle, e);
-
-        e.gridy = 1;
-        Inventory.add(weapInv, e);
-        e.gridy = 2;
-        Inventory.add(equipInv, e);
-
-        // add dropdown menus for selecting weapons and add them to the Equip panel
-        // Dropdown menu for "Weapons"
-        e.gridx = 0;
-        e.gridy = 0;
-        e.insets = new Insets(5, 5, 5, 5);
-        Equip.add(createDropdownMenu(new String[] { "Weapon 1", "Weapon 2", "Weapon 3" }, "Weapons", weapInv), e);
-
-        // Dropdown menu for "Armor"
-        e.gridy = 1;
-        Equip.add(createDropdownMenu(new String[] { "Armor 1", "Armor 2", "Armor 3" }, "Armor", equipInv), e);
-
-        // add Equip and Inventory panels to the main panel
-        c.gridx = 0;
+        String prompt = character.getJob().getEquipmentString();
         c.gridy = 1;
+        c.insets = new Insets(130, 0, 0, 0);
+        JLabel promptLabel = new JLabel(prompt);
+        promptLabel.setFont(new Font("Serif", Font.PLAIN, 19));
+        panel.add(promptLabel, c);
+
+        e.insets = new Insets(10, 10, 10, 10);
+        int i = 0;
+        for (Item item : equipmentList) {
+            e.gridx = 2 * (i % 5); // Arrange in 5 columns
+            e.gridy = i / 5; // Increment rows after every 5 skills
+
+            JCheckBox checkBox = new JCheckBox(item.getName());
+            checkBox.setFont(new Font("Serif", Font.PLAIN, 19));
+            checkBox.addItemListener(event -> {
+                if (checkBox.isSelected()) {
+                    character.addItem(item);
+                }
+            });
+            Equip.add(checkBox, e);
+            i++;
+            e.gridy++;
+        }
+
+        // Panel assembly
+        c.gridx = 0;
+        c.gridy = 2;
+        c.insets = new Insets(0, 0, 0, 0);
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.fill = GridBagConstraints.BOTH;
         panel.add(Equip, c);
-        c.gridx = 2;
-        c.gridy = 1;
-        c.gridheight = 2;
-        panel.add(Inventory, c);
 
         return panel;
     }
@@ -588,6 +594,11 @@ public class GUI {
     private JPanel createSummaryPanel() {
         JPanel panel = new JPanel(new GridBagLayout()); // Main panel
         GridBagConstraints c = new GridBagConstraints(); // Grid for main panel
+
+        JPanel Lpanel = new JPanel(new GridBagLayout()); // Left panel
+        JPanel Rpanel = new JPanel(new GridBagLayout()); // Right panel
+        GridBagConstraints r = new GridBagConstraints(); // Grid for main panel
+        GridBagConstraints l = new GridBagConstraints(); // Grid for main panel
 
         // Add the title of the panel
         c.gridx = 0;
@@ -599,12 +610,169 @@ public class GUI {
         lblTitle.setFont(new Font("Serif", Font.BOLD, 26));
         panel.add(lblTitle, c);
 
-        // add next button
+        // add done button
         c.insets = new Insets(0, 0, 100, 0);
-        c.gridy = 2;
-        createNextButton(panel, c);
+        c.gridy = 3;
+        JButton doneButton = new JButton("Done");
+        doneButton.setFont(new Font("Serif", Font.BOLD, 18));
+        panel.add(doneButton, c);
+
+        // Add action listener to close the program
+        doneButton.addActionListener(e -> System.exit(0));
+
+        c.gridwidth = 1;
+
+        // Font for labels
+        Font labelFont = new Font("Serif", Font.PLAIN, 20);
+
+        // Creating and setting up labels
+        JLabel nameLabel = new JLabel("Name: " + character.getName());
+        nameLabel.setFont(labelFont);
+        JLabel classLabel = new JLabel("Class: " + character.getJob().getJobTitle());
+        classLabel.setFont(labelFont);
+        JLabel raceLabel = new JLabel("Race: " + character.getRace().getRace());
+        raceLabel.setFont(labelFont);
+        JLabel backgroundLabel = new JLabel("Background: " + character.getBackground().getBackgroundTitle());
+        backgroundLabel.setFont(labelFont);
+        JLabel hpLabel = new JLabel("HP: " + character.getHealth());
+        hpLabel.setFont(labelFont);
+
+        l.gridx = 0;
+        l.insets = new Insets(15, 15, 15, 15);
+        l.gridy = 0;
+        l.anchor = GridBagConstraints.WEST;
+        Lpanel.add(nameLabel, l);
+        l.gridy++;
+        Lpanel.add(classLabel, l);
+        l.gridy++;
+        Lpanel.add(raceLabel, l);
+        l.gridy++;
+        Lpanel.add(backgroundLabel, l);
+        l.gridy++;
+        Lpanel.add(hpLabel, l);
+
+        // Additional panel for stats
+        JPanel statsPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints sp = new GridBagConstraints();
+
+        sp.gridx = 0;
+        sp.gridy = 0;
+        sp.anchor = GridBagConstraints.WEST;
+        sp.insets = new Insets(15, 15, 15, 15);
+
+        String statsString = character.getStats().toString();
+        String[] stats = statsString.split("\n"); // Splitting stats based on new lines
+        Font statsFont = new Font("Serif", Font.PLAIN, 24);
+
+        for (String stat : stats) {
+            JLabel statLabel = new JLabel(stat);
+            statLabel.setFont(statsFont);
+            statsPanel.add(statLabel, sp);
+            sp.gridx++;
+            if (sp.gridx % 3 == 0) { // New row after every 3 stats
+                sp.gridx = 0;
+                sp.gridy++;
+            }
+        }
+        l.gridy++;
+        Lpanel.add(statsPanel, l);
+
+        // items text area
+        JTextArea itemsTextArea = new JTextArea(15, 20);
+        itemsTextArea.setEditable(false);
+        itemsTextArea.setFont(new Font("Serif", Font.PLAIN, 18));
+        itemsTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        ArrayList<String> itemsList = character.getItemList();
+        if (itemsList.isEmpty()) {
+            itemsTextArea.setText("No Items");
+        } else {
+            itemsTextArea.append("Equipment: \n\n");
+            for (String item : itemsList) {
+                itemsTextArea.append(item + "\n");
+            }
+        }
+
+        // spells text area
+        JTextArea spellsTextArea = new JTextArea(15, 20);
+        spellsTextArea.setEditable(false);
+        spellsTextArea.setFont(new Font("Serif", Font.PLAIN, 18));
+        spellsTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        String spellsString = character.getSpellbook().getSpellbookAsString();
+        String[] spells = spellsString.split("\n");
+
+        if (spells.length == '0') {
+            spellsTextArea.setText("No Spells");
+        } else {
+            spellsTextArea.append("Spellbook:\n\n");
+            for (String spell : spells) {
+                spellsTextArea.append(spell + "\n");
+            }
+        }
+
+        // skills text area
+        JTextArea skillsTextArea = new JTextArea(10, 40);
+        skillsTextArea.setEditable(false);
+        skillsTextArea.setFont(new Font("Serif", Font.PLAIN, 18));
+        skillsTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+        if (spells.length == '0') {
+            spellsTextArea.setText("No Spells");
+        } else {
+            displayProficientSkills(character.getSkills().getSkills(), skillsTextArea);
+        }
+
+        r.fill = GridBagConstraints.BOTH;
+        r.gridx = 0;
+        r.gridy = 0;
+        r.insets = new Insets(20, 20, 20, 20);
+        Rpanel.add(itemsTextArea, r);
+        r.gridx = 1;
+        Rpanel.add(spellsTextArea, r);
+        r.gridx = 0;
+        r.gridy = 1;
+        r.gridwidth = 2; // Span across two columns
+        Rpanel.add(skillsTextArea, r);
+
+        // Add Lpanel and Rpanel to main panel
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(10, 10, 10, 10);
+        panel.add(Lpanel, c);
+
+        c.gridx = 1;
+        panel.add(Rpanel, c);
 
         return panel;
+    }
+
+    class DotPanel extends JPanel {
+        private boolean dot;
+
+        public DotPanel(boolean dot) {
+            this.dot = dot;
+            this.setBackground(Color.WHITE);
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            if (dot) {
+                int diameter = Math.min(getWidth(), getHeight()) - 10; // Calculate the diameter
+                int x = (getWidth() - diameter) / 2;
+                int y = (getHeight() - diameter) / 2;
+                g.setColor(Color.BLACK); // Dot color
+                g.fillOval(x, y, diameter, diameter); // Draw the circle
+            }
+        }
+
+        public void setDot(boolean dot) {
+            this.dot = dot;
+        }
     }
 
     private void drawDiceFace(JPanel panel, int number) {
@@ -636,10 +804,8 @@ public class GUI {
 
         // Add labels (dots) to the panel
         for (boolean dot : dots) {
-            JLabel label = new JLabel();
-            label.setOpaque(dot);
-            label.setBackground(Color.BLACK); // Dot color
-            panel.add(label);
+            DotPanel dotPanel = new DotPanel(dot);
+            panel.add(dotPanel);
         }
 
         panel.revalidate();
@@ -767,9 +933,51 @@ public class GUI {
     private void switchPanel() {
         frame.getContentPane().remove(panels[currentPanelIndex]);
         currentPanelIndex = (currentPanelIndex + 1) % panels.length;
+
+        // Create the next panel if it doesn't exist
+        if (panels[currentPanelIndex] == null) {
+            switch (currentPanelIndex) {
+                case 1:
+                    panels[currentPanelIndex] = createAbilitiesPanel();
+                    break;
+                case 2:
+                    panels[currentPanelIndex] = createProficiencyPanel();
+                    break;
+                case 3:
+                    try {
+                        panels[currentPanelIndex] = createSpellsPanel();
+                    } catch (IOException e) {
+                        e.printStackTrace(); // Handle IOException appropriately
+                    }
+                    break;
+                case 4:
+                    panels[currentPanelIndex] = createEquipmentPanel();
+                    break;
+                case 5:
+                    panels[currentPanelIndex] = createSummaryPanel();
+                    break;
+            }
+        }
+
         frame.getContentPane().add(panels[currentPanelIndex]);
         frame.revalidate();
         frame.repaint();
+    }
+
+    private void displayProficientSkills(ArrayList<Skill> skills, JTextArea textArea) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Skills List \n\n");
+
+        for (Skill skill : skills) {
+            if (skill.isProficient()) {
+                sb.append(skill.getName())
+                        .append(" | Mod: ")
+                        .append(skill.getModifier())
+                        .append("\n");
+            }
+        }
+
+        textArea.setText(sb.toString());
     }
 
     // main
