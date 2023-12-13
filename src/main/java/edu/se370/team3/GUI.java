@@ -501,21 +501,27 @@ public class GUI {
 
         List<String> cantripsD = character.getSpellbook().getAvailableCantrips();
         String cantripsDString = String.join(", ", cantripsD);
+        String[] cantripsList = cantripsD.toArray(new String[cantripsD.size()]);
 
         // add dropdown menus for selecting spells and add them to the Spell panel
         // Dropdown menu for "Cantrips"
         s.gridx = 0;
         s.gridy = 0;
         s.insets = new Insets(5, 20, 5, 20);
-        Spells.add(createDropdownMenu(new String[] { cantripsDString }, "Cantrips", cantripSB), s);
+        // Spells.add(createDropdownMenu(new String[] { cantripsDString }, "Cantrips",
+        // cantripSB), s);
+        Spells.add(createDropdownMenu(cantripsList, "Cantrips", cantripSB), s);
 
         // Dropdown menu for "Lvl 1 Spells"
 
         List<String> spellsD = character.getSpellbook().getAvailableSpells();
         String spellsDString = String.join(", ", spellsD);
+        String[] spellList = spellsD.toArray(new String[spellsD.size()]);
 
         s.gridy = 1;
-        Spells.add(createDropdownMenu(new String[] { spellsDString }, "Lvl 1 Spells", spellBook), s);
+        // Spells.add(createDropdownMenu(new String[] { spellsDString }, "Lvl 1 Spells",
+        // spellBook), s);
+        Spells.add(createDropdownMenu(spellList, "Lvl 1 Spells", spellBook), s);
         // Spells.add(createDropdownMenu(new String[] { "Spell 1", "Spell 2", "Spell 3"
         // }, "Lvl 1 Spells", spellBook), s);
 
@@ -707,6 +713,7 @@ public class GUI {
         spellsTextArea.setFont(new Font("Serif", Font.PLAIN, 18));
         spellsTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+        System.out.println("SpellBookAsString: " + character.getSpellbook().getSpellbookAsString());
         String spellsString = character.getSpellbook().getSpellbookAsString();
         String[] spells = spellsString.split("\n");
 

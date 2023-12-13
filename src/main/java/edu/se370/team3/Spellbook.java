@@ -44,11 +44,9 @@ public class Spellbook {
   }
 
   public void printSpellbook() {
-    System.out.println("~~~~~~~~~ Spellbook ~~~~~~~~~");
     for (Spell spell : this.spellBook) {
       System.out.println(spell.getLevel() + " | " + spell.getName());
     }
-    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
 
   public String getSpellbookAsString() {
