@@ -37,17 +37,16 @@ abstract class Race { // TODO decisions that add spells
   }
 
   public Race createRace(String type) {
-    type = type.toLowerCase();
     switch (type) {
-      case "hill dwarf":
+      case "hilldwarf":
         return new HillDwarf();
-      case "mountain dwarf":
+      case "mountaindwarf":
         return new MountainDwarf();
-      case "high elf":
+      case "highelf":
         return new HighElf();
-      case "wood elf":
+      case "woodelf":
         return new WoodElf();
-      case "dark elf":
+      case "darkelf":
         return new DarkElf();
       case "lightfoot":
         return new Lightfoot();
@@ -57,17 +56,18 @@ abstract class Race { // TODO decisions that add spells
         return new Human();
       case "dragonborn":
         return new Dragonborn();
-      case "forest gnome":
+      case "forestgnome":
         return new ForestGnome();
-      case "rock gnome":
+      case "rockgnome":
         return new RockGnome();
-      case "half elf":
+      case "halfelf":
         return new HalfElf();
-      case "half orc":
+      case "halforc":
         return new HalfOrc();
       case "tiefling":
         return new Tiefling();
       default:
+        System.out.println("DEFAULT IN RACE");
         return new Human();
     }
   }
