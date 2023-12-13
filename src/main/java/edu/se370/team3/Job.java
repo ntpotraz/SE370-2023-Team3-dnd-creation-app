@@ -46,6 +46,10 @@ class Job {
                 return spellCount;
         }
 
+        public int getCantripCount() {
+                return cantripCount;
+        }
+
         public int getSkillCount() {
                 return skillCount;
         }
@@ -304,6 +308,7 @@ class Job {
                 this.getSkills().add("performance");
                 this.getSkills().add("persuasion");
                 this.skillCount = 3;
+                this.cantripCount = 2;
 
                 this.equipmentString = "Pick a rapier, a longsword, or any simple weapon, then a diplomat’s pack or an entertainer's pack, and any musical instrument";
                 this.getEquipment().add(new Weapon("Longsword", "A versatile, one-handed sword.", 3, 15, "gp",

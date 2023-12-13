@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.border.Border;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,11 +11,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.awt.event.ItemEvent;
 
 public class GUI {
 
     private JFrame frame;
-    private JPanel characterPanel, abilitiesPanel, proficiencyPanel, spellsPanel, equipmentPanel, summaryPanel;
+    private JPanel characterPanel, abilitiesPanel, proficiencyPanel, spellsPanel,
+            equipmentPanel, summaryPanel;
     private JPanel[] panels;
     private int currentPanelIndex;
     private Stats stats; // Add this line to create a Stats instance
@@ -29,7 +29,7 @@ public class GUI {
     private ArrayList<JComboBox<String>> comboBoxes = new ArrayList<>();
 
     public GUI() throws IOException {
-        frame = new JFrame(); // create initial panel
+        frame = new JFrame(); // create initial frame
 
         // Get the screen size
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -44,7 +44,7 @@ public class GUI {
         currentPanelIndex = 0;
 
         frame.add(panels[currentPanelIndex]); // add current panel to frame
-        frame.setVisible(true); // display panel
+        frame.setVisible(true); // display frame
     }
 
     private JPanel createCharacterPanel() {
@@ -449,6 +449,9 @@ public class GUI {
         GridBagConstraints c = new GridBagConstraints(); // Grid for main panel
         GridBagConstraints s = new GridBagConstraints(); // grid for spellBook panel and spells panel
 
+        int cantripLimit = character.getJob().getCantripCount();
+        int spellsLimit = character.getJob().getSpellCount();
+
         // Add the title of the panel
         c.gridx = 0;
         c.gridy = 0;
@@ -461,15 +464,10 @@ public class GUI {
 
         c.gridy = 1;
         c.anchor = GridBagConstraints.SOUTH; // Center align
-        JLabel lblInst = new JLabel("Choose your cantrips and spells");
+        JLabel lblInst = new JLabel("Choose " + cantripLimit + " cantrips and " + spellsLimit + " spells");
         lblInst.setFont(new Font("Serif", Font.PLAIN, 18));
         panel.add(lblInst, c);
         c.anchor = GridBagConstraints.CENTER;
-
-        // add next button
-        c.insets = new Insets(0, 0, 100, 0);
-        c.gridy = 3;
-        createNextButton(panel, c);
 
         c.gridwidth = 1;
 
@@ -508,22 +506,15 @@ public class GUI {
         s.gridx = 0;
         s.gridy = 0;
         s.insets = new Insets(5, 20, 5, 20);
-        // Spells.add(createDropdownMenu(new String[] { cantripsDString }, "Cantrips",
-        // cantripSB), s);
-        Spells.add(createDropdownMenu(cantripsList, "Cantrips", cantripSB), s);
+        Spells.add(createDropdownMenu(cantripsList, "Cantrips", cantripSB, cantripLimit), s);
 
         // Dropdown menu for "Lvl 1 Spells"
-
         List<String> spellsD = character.getSpellbook().getAvailableSpells();
         String spellsDString = String.join(", ", spellsD);
         String[] spellList = spellsD.toArray(new String[spellsD.size()]);
 
         s.gridy = 1;
-        // Spells.add(createDropdownMenu(new String[] { spellsDString }, "Lvl 1 Spells",
-        // spellBook), s);
-        Spells.add(createDropdownMenu(spellList, "Lvl 1 Spells", spellBook), s);
-        // Spells.add(createDropdownMenu(new String[] { "Spell 1", "Spell 2", "Spell 3"
-        // }, "Lvl 1 Spells", spellBook), s);
+        Spells.add(createDropdownMenu(spellList, "Lvl 1 Spells", spellBook, spellsLimit), s);
 
         // add Book and Spells panels to the main panel
         c.gridx = 0;
@@ -531,13 +522,52 @@ public class GUI {
         c.insets = new Insets(20, 0, 0, 0);
         c.weightx = 1.0;
         c.weighty = 1.0;
-        c.fill = GridBagConstraints.BOTH;
         panel.add(Spells, c);
         c.gridx = 2;
         c.gridy = 2;
         c.gridheight = 2;
         c.insets = new Insets(0, 0, 0, 0);
         panel.add(Book, c);
+
+        JButton nextButton = new JButton("Next");
+        nextButton.setFont(new Font("Serif", Font.PLAIN, 16)); // Set larger font
+        nextButton.setPreferredSize(new Dimension(120, 30)); // Set larger size
+
+        nextButton.addActionListener(e -> {
+            // Extract spells and cantrips from the text areas
+            String[] cantrips = cantripSB.getText().split("\n");
+            String[] spells = spellBook.getText().split("\n");
+
+            // Add them to the character's spellbook
+            for (String cantrip : cantrips) {
+                if (!cantrip.isEmpty()) {
+                    try {
+                        character.getSpellbook().addSpell(spellsDString);
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
+            }
+            for (String spell : spells) {
+                if (!spell.isEmpty()) {
+                    try {
+                        character.getSpellbook().addSpell(spell);
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                }
+            }
+            switchPanel();
+        });
+        // add next button
+        c.insets = new Insets(0, 0, 100, 0);
+        c.gridy = 3;
+        c.gridx = 0;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
+        panel.add(nextButton, c);
 
         return panel;//
     }
@@ -625,10 +655,11 @@ public class GUI {
         panel.add(lblTitle, c);
 
         // add done button
-        c.insets = new Insets(0, 0, 100, 0);
+        c.insets = new Insets(0, 0, 50, 0);
         c.gridy = 3;
         JButton doneButton = new JButton("Done");
-        doneButton.setFont(new Font("Serif", Font.BOLD, 18));
+        doneButton.setFont(new Font("Serif", Font.PLAIN, 16)); // Set larger font
+        doneButton.setPreferredSize(new Dimension(120, 30)); // Set larger size
         panel.add(doneButton, c);
 
         // Add action listener to close the program
@@ -878,7 +909,7 @@ public class GUI {
     // function to create the drop-down menus with the check marks for selecting
     // spells and equipment. It adds the selected element to the "spellbook" and
     // removes it if unchecked
-    private JPanel createDropdownMenu(String[] options, String label, JTextArea textArea) {
+    private JPanel createDropdownMenu(String[] options, String label, JTextArea textArea, int limit) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel lbl = new JLabel(label);
         lbl.setFont(new Font("Serif", Font.PLAIN, 18)); // Larger font for label
@@ -894,6 +925,8 @@ public class GUI {
         Font textAreaFont = new Font("Serif", Font.PLAIN, 18); // Larger font for text area
         textArea.setFont(textAreaFont); // Set the larger font for the text area
 
+        AtomicInteger selectedCount = new AtomicInteger(0); // Counter for selected items
+
         for (String option : options) {
             JCheckBoxMenuItem item = new JCheckBoxMenuItem(option);
             item.setFont(menuItemFont); // Set larger font for menu item
@@ -901,8 +934,19 @@ public class GUI {
 
             // Listener to update the JTextArea on item state change
             item.addItemListener(e -> {
-                StringBuilder selectedText = new StringBuilder();
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    if (selectedCount.get() < limit) {
+                        selectedCount.incrementAndGet();
+                    } else {
+                        // If limit is reached, deselect the new item and return
+                        item.setSelected(false);
+                        return;
+                    }
+                } else if (e.getStateChange() == ItemEvent.DESELECTED) {
+                    selectedCount.decrementAndGet();
+                }
 
+                StringBuilder selectedText = new StringBuilder();
                 for (Component component : menu.getComponents()) {
                     if (component instanceof JCheckBoxMenuItem) {
                         JCheckBoxMenuItem checkBox = (JCheckBoxMenuItem) component;
@@ -916,12 +960,7 @@ public class GUI {
             });
         }
 
-        button.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                menu.show(button, 0, button.getHeight());
-            }
-        });
-
+        button.addActionListener(e -> menu.show(button, 0, button.getHeight()));
         panel.add(lbl);
         panel.add(button);
 
