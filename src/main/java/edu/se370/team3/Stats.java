@@ -91,15 +91,10 @@ public class Stats {
 
   // Sets the character stat
   private void setStat(int stat, int level) {
-    if (this.statList.contains(level)) {
-
-      if (level > 25)
-        level = 25;
-      this.statLevel[stat] = level;
-      setMod(stat);
-      this.statList.remove(this.statList.indexOf(level));
-    }
-
+    if (level > 25)
+      level = 25;
+    this.statLevel[stat] = level;
+    setMod(stat);
   }
 
   // Calculates what the stat modifier will be based on the stat level

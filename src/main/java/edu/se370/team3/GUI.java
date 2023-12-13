@@ -282,8 +282,11 @@ public class GUI {
         roll.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                stats.rollDice();
-                Roll lastRoll = stats.getRolls().get(stats.getRolls().size() - 1); // Get the latest roll
+                character.getStats().rollDice();
+                Roll lastRoll = character.getStats().getRolls().get(character.getStats().getRolls().size() - 1); // Get
+                                                                                                                 // the
+                                                                                                                 // latest
+                                                                                                                 // roll
 
                 // Draw dice faces based on the roll results
                 drawDiceFace(dicePanels[0], lastRoll.getFirstDice());
@@ -498,7 +501,6 @@ public class GUI {
 
         List<String> cantripsD = character.getSpellbook().getAvailableCantrips();
         String cantripsDString = String.join(", ", cantripsD);
-        // System.out.println(cantripsDString);
 
         // add dropdown menus for selecting spells and add them to the Spell panel
         // Dropdown menu for "Cantrips"
@@ -508,8 +510,14 @@ public class GUI {
         Spells.add(createDropdownMenu(new String[] { cantripsDString }, "Cantrips", cantripSB), s);
 
         // Dropdown menu for "Lvl 1 Spells"
+
+        List<String> spellsD = character.getSpellbook().getAvailableSpells();
+        String spellsDString = String.join(", ", spellsD);
+
         s.gridy = 1;
-        Spells.add(createDropdownMenu(new String[] { "Spell 1", "Spell 2", "Spell 3" }, "Lvl 1 Spells", spellBook), s);
+        Spells.add(createDropdownMenu(new String[] { spellsDString }, "Lvl 1 Spells", spellBook), s);
+        // Spells.add(createDropdownMenu(new String[] { "Spell 1", "Spell 2", "Spell 3"
+        // }, "Lvl 1 Spells", spellBook), s);
 
         // add Book and Spells panels to the main panel
         c.gridx = 0;
@@ -525,7 +533,7 @@ public class GUI {
         c.insets = new Insets(0, 0, 0, 0);
         panel.add(Book, c);
 
-        return panel;
+        return panel;//
     }
 
     private JPanel createEquipmentPanel() {
