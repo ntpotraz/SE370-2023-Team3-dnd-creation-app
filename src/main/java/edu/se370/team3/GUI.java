@@ -542,7 +542,7 @@ public class GUI {
             for (String cantrip : cantrips) {
                 if (!cantrip.isEmpty()) {
                     try {
-                        character.getSpellbook().addSpell(spellsDString);
+                        character.getSpellbook().addSpell(cantrip);
                     } catch (IOException e1) {
                         // TODO Auto-generated catch block
                         e1.printStackTrace();
@@ -744,7 +744,6 @@ public class GUI {
         spellsTextArea.setFont(new Font("Serif", Font.PLAIN, 18));
         spellsTextArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        System.out.println("SpellBookAsString: " + character.getSpellbook().getSpellbookAsString());
         String spellsString = character.getSpellbook().getSpellbookAsString();
         String[] spells = spellsString.split("\n");
 

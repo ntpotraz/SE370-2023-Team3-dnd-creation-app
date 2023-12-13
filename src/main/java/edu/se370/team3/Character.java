@@ -193,7 +193,6 @@ public class Character {
   }
 
   public void setRace(String input) {
-    System.out.println("Race Input: " + input);
     String newRace;
     switch (input) {
       case "Hill Dwarf":
@@ -239,7 +238,6 @@ public class Character {
         newRace = "tiefling";
         break;
       default:
-        System.out.println("DEFAULT");
         newRace = "human";
         break;
     }
